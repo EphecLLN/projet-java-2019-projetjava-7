@@ -12,12 +12,11 @@ public class Personnage {
 	 * @param coordY
 	 * @param nom
 	 */
-	public Personnage(String nom) {
-		super();
-		this.vie = 100;
-		this.coordX = 0;
-		this.coordY = 0;
+	public Personnage(String nom, int vie, int coordX, int coordY) {
 		this.nom = nom;
+		this.vie = vie;
+		this.coordX = coordX;
+		this.coordY = coordY;
 	}
 	public int getVie() {
 		return vie;
