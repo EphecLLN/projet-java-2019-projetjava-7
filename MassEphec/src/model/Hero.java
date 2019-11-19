@@ -2,13 +2,13 @@ package model;
 public class Hero extends Personnage{
 	
 	private int credit; 
-	//private Arme arme;
+	private Arme arme;
 	private String classe;// IT compta ou market
 	
-	public Hero(String nom, int vie, int x, int y, String classe) {//+Arme arme
+	public Hero(String nom, int vie, int x, int y, Arme arme, String classe) {
 		super(nom,vie,x,y);
 		this.credit=0;
-		//this.arme=arme;
+		this.arme=arme;
 		this.classe=classe;
 	}
 	
