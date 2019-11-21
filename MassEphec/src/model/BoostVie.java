@@ -12,7 +12,7 @@ public class BoostVie extends Consommables{
 	/*
 	 * Cette methode rend de la vie à un hero
 	 */
-	public void donneExp(Hero joueur) {
+	public void donneVie(Hero joueur) {
 		joueur.setVie(montantVie);
 	}
 }

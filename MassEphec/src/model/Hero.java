@@ -34,6 +34,13 @@ public class Hero extends Personnage{
 		return this.classe;
 	}
 	/*
+	 * Fournit l'arme que l'etudiant possede
+	 * @return {Arme} 
+	 */
+	public Arme getArme() {
+		return this.arme;
+	}
+	/*
 	 * Fait bouger l'etudiant d'une case vers la droite
 	 */
 	public void bougerDroite() {

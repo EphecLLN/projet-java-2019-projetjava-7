@@ -6,13 +6,13 @@ public class BoostArme extends Consommables{
 	
 	public BoostArme(int coordX, int coordY) {
 		super("RedBull",coordX, coordY);
-		this.montantExp=100;
+		this.montantExp=99;
 	}
 	
 	/*
 	 * Cette methode attribue de l'exp a une arme 
 	 */
-	public void donneExp(Arme arme) {
-		arme.setExperience(this.montantExp);
+	public void donneExp(Hero er) {
+		er.getArme().setExperience(this.montantExp);
 	}
 }
