@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD:MassEphec/src/JunitTest/HeroTest.java
+=======
 import model.Arme;
+>>>>>>> 6842f1643b4c36c9499bed5d29a7df0ff086b4c8:MassEphec/src/model/HeroTest.java
 import model.Hero;
 
 class HeroTest {
