@@ -4,8 +4,7 @@
 package model;
 
 /**
- * @author emman
- *
+ * @author Emmanuel Foureau
  */
 public class Pc extends Arme {
 	
