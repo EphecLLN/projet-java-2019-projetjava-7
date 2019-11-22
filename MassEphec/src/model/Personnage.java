@@ -39,9 +39,7 @@ public class Personnage {
 	public String getNom() {
 		return nom;
 	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+	
 	public boolean enVie(int vie) {
 		return vie > 0;
 	}

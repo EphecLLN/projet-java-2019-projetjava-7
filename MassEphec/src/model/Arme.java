@@ -10,8 +10,15 @@ package model;
 public class Arme {
 	// Variables d'instance 
 	private String nomArme;
-	private int experience, niveau, degat;
+	private int experience, degat;
+	private int niveau = 1;
 	private final int experienceMax = 100;
+	
+	public Arme(String nomArme, int experience, int degat) {
+		this.nomArme = nomArme;
+		this.experience = experience;
+		this.degat = degat;
+	}
 	
 	/**
 	 * Setter de la variable "nomArme"
