@@ -21,7 +21,7 @@ class TestBoostVie {
 	@Test
 	void testDonneVie() {
 		BoostVie b= new BoostVie(2,4);
-		Arme arm= new Arme();
+		Arme arm= new Arme("PC",0,0);
 		Hero nv = new Hero("maxime",50,0,0,arm,"IT");
 		b.donneVie(nv);
 		assertEquals(100,nv.getVie());

@@ -4,14 +4,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import model.Monstre;
+import model.*;
 
 class MonstreTest {
 
 	@Test
 	void testAttaque() {
-		Hero testHero = new Hero("Test", 100, 0, 0,"IT");
-		Monstre testMonstre = new Monstre("Boss1", 100, 0, 0, 30);
+		Arme arm= new Arme("PC",0,0);
+		Hero testHero = new Hero("Test", 100, 0, 0, arm,"IT");
+		Monstre testMonstre = new Monstre(30, "Boss1", 100, 0, 0);
 		assertEquals(100,testHero.getVie());
 		testMonstre.attaque(testHero);
 		assertEquals(70, testHero.getVie());
