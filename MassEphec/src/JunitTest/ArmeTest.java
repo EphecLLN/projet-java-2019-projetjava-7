@@ -22,7 +22,7 @@ class ArmeTest {
 	 */
 	@Test
 	void testSetExperience() {
-		Arme test = new Arme();
+		Arme test = new Arme("Test", 0, 30);
 		test.setExperience(101);
 		assertEquals(1, test.getExperience());
 		test.setExperience(-1);
@@ -36,7 +36,7 @@ class ArmeTest {
 	 */
 	
 	void testAjouterExp() {
-		Arme test = new Arme();
+		Arme test = new Arme("Test", 0, 30);
 		test.setNiveau(1);
 		test.niveauSuperieur();
 		assertEquals(2, test.getNiveau());
