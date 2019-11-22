@@ -4,18 +4,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
 import model.*;
-=======
-import model.Arme;
-import model.Hero;
->>>>>>> d51345a160d82ea6e9eb79474bf8df77d71f3618
 
 class BossTest {
 
 	@Test
 	void testDonneCreditJoueur() {
-<<<<<<< HEAD
 		Arme arm = new Arme("bg",0,0);
 		Hero joueur = new Hero("maxime",100,0,0,arm,"IT");
 		Boss bossy = new Boss(3, "nom", 1, 1, 1, 5, "Speech");
@@ -35,11 +29,5 @@ class BossTest {
 		bossy.mauvaiseNote(joueur);
 		assertEquals(0, joueur.getVie());
 	}
-=======
-		Arme arm = new Arme();
-		Hero joueur = new Hero("maxime",100,0,0,arm,"IT");
-		
-	}
 
->>>>>>> d51345a160d82ea6e9eb79474bf8df77d71f3618
 }

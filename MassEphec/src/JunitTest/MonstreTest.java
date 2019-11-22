@@ -4,12 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
-import model.Hero;
-import model.Monstre;
-=======
 import model.*;
->>>>>>> d51345a160d82ea6e9eb79474bf8df77d71f3618
 
 class MonstreTest {
 
