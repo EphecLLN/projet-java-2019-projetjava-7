@@ -12,9 +12,6 @@ public class Monstre extends Personnage {
 		return degats;
 	}
 
-	public void setDegats(int degats) {
-		this.degats = degats;
-	}
 	public void attaque(Hero hero1) {
 		hero1.setVie(hero1.getVie() - getDegats());
 	}
