@@ -7,15 +7,16 @@ package model;
  * @author emman
  *
  */
-public class Arme {
+public abstract class Arme {
 	// Variables d'instance 
 	private String nomArme;
 	private int experience, degat;
 	private int niveau = 1;
+	private Hero hero;
 	private final int experienceMax = 100;
 	
-	public Arme(String nomArme, int experience, int degat) {
-		this.nomArme = nomArme;
+	public Arme(String nomArme, int experience, int degat, Hero hero) {
+		this.setArme(nomArme);
 		this.experience = experience;
 		this.degat = degat;
 	}
@@ -124,5 +125,7 @@ public class Arme {
 		this.setNiveau(this.getNiveau() + 1);
 		this.setDegat(degat + ((this.getNiveau() / 10) * degat));
 	}
+	
+	public abstract void attaqueSpeciale(Monstre ennemi);
 	
 }
