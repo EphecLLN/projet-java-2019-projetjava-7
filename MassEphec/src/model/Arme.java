@@ -15,10 +15,10 @@ public abstract class Arme {
 	private Hero hero;
 	private final int experienceMax = 100;
 	
-	public Arme(String nomArme, int experience, int degat, Hero hero) {
-		this.setArme(nomArme);
-		this.experience = experience;
-		this.degat = degat;
+	public Arme(String nomArme, int experience, int degat) {
+		this.setNomArme(nomArme);
+		this.setExperience(experience);
+		this.setDegat(degat);
 	}
 	
 	/**
@@ -26,7 +26,7 @@ public abstract class Arme {
 	 * @param nomArme : La nouvelle valeur de "nomArme" pour l'objet courant
 	 */
 	
-	public void setNomArme (String nomArme) {
+	public void setNomArme(String nomArme) {
 		this.nomArme = nomArme;
 	}
 	
@@ -96,6 +96,23 @@ public abstract class Arme {
 	
 	public int getDegat () {
 		return this.degat;
+	}
+	
+	/**
+	 * Setter donnant un hero à l'arme courante
+	 * @param hero : Le nouvel hero
+	 */
+	
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+	
+	/**
+	 * Getter de la variable "hero"
+	 */
+	
+	public Hero getHero () {
+		return this.hero;
 	}
 	
 	/**

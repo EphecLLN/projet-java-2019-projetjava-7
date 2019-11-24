@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import model.Arme;
+import model.Pc;
 import model.Personnage;
 
 /**
