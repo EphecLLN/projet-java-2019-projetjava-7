@@ -10,22 +10,22 @@ class HeroTest {
 
 	@Test
 	void testConstructeur() {//test constructeur avec maxime et IT
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",100,0,0,arm,"IT");
+		Pc arm= new Pc();
+		IT nv = new IT();
 		assertEquals(0,nv.getCredit());
-		assertEquals("IT",nv.getClasse());
+		assertEquals("IT",nv.getClass().getSimpleName());
 	}
 	@Test
 	void testSetCredit() {//test de setCredit en ajoutant 60 credits
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",100,0,0,arm,"IT");
+		Pc arm= new Pc();
+		IT nv = new IT();
 		nv.setCredit(60);
 		assertEquals(60,nv.getCredit());
 	}
 	@Test
 	void testBougerDroite() {//test de la methode bougerDroite, on test lorsque la coord x vaut 0 et vaut 15(cas critique)
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",100,0,0,arm,"IT");
+		Pc arm= new Pc();
+		IT nv = new IT();
 		nv.bougerDroite();
 		assertEquals(1,nv.getCoordX());
 		nv.setCoordX(15);
@@ -34,8 +34,8 @@ class HeroTest {
 	}
 	@Test
 	void testBougerGauche() {//test de la methode bougerGauche, on test lorsque la coord x vaut 0(cas critique) et vaut 15
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",100,0,0,arm,"IT");
+		Pc arm= new Pc();
+		IT nv = new IT();
 		nv.bougerGauche();
 		assertEquals(0,nv.getCoordX());
 		nv.setCoordX(15);
@@ -44,8 +44,8 @@ class HeroTest {
 	}
 	@Test
 	void testBougerHaut() {//test de la methode bougerHaut, on test lorsque la coord Y vaut 0(cas critique) et vaut 15
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",100,0,0,arm,"IT");
+		Pc arm= new Pc();
+		IT nv = new IT();
 		nv.bougerHaut();
 		assertEquals(0,nv.getCoordY());
 		nv.setCoordY(15);
@@ -54,8 +54,8 @@ class HeroTest {
 	}
 	@Test
 	void testBougerBas() {//test de la methode bougerBas, on test lorsque la coord Y vaut 0 et vaut 15(cas critique)
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",100,0,0,arm,"IT");
+		Pc arm= new Pc();
+		IT nv = new IT();
 		nv.bougerBas();
 		assertEquals(1,nv.getCoordY());
 		nv.setCoordY(15);

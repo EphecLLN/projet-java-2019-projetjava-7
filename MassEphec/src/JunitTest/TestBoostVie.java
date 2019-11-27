@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import model.Arme;
 import model.BoostVie;
 import model.Hero;
+import model.IT;
+import model.Pc;
 
 class TestBoostVie {
 
@@ -21,8 +23,8 @@ class TestBoostVie {
 	@Test
 	void testDonneVie() {
 		BoostVie b= new BoostVie(2,4);
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",50,0,0,arm,"IT");
+		Pc arm = new Pc();
+		IT nv = new IT();
 		b.donneVie(nv);
 		assertEquals(100,nv.getVie());
 	}

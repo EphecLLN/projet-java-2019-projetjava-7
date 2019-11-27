@@ -19,8 +19,8 @@ class TestBoostArme {
 	@Test
 	void testDonneExp() {
 		BoostArme b= new BoostArme(2,4);
-		Arme arm= new Arme("PC",0,0);
-		Hero nv = new Hero("maxime",50,0,0,arm,"IT");
+		Pc amr = new Pc();
+		IT nv = new IT(); 
 		b.donneExp(nv);
 		assertEquals(99,nv.getArme().getExperience());
 	}

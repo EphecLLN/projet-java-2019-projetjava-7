@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import model.Arme;
 import model.Costard;
 import model.Hero;
+import model.Marketing;
 import model.Monstre;
 
 /**
@@ -20,8 +21,8 @@ class CostardTest {
 
 	@Test
 	void test() {
-		Arme test = new Arme("test", 0, 0);
-		Hero heroTest = new Hero("test",100,0,0,test,"market");
+		Costard test = new Costard();
+		Marketing heroTest = new Marketing();
 		Monstre testMonstre = new Monstre(0, "test", 100, 0, 0);
 		test.setHero(heroTest);
 		test.attaqueSpeciale(testMonstre);

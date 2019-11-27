@@ -10,8 +10,8 @@ class MonstreTest {
 
 	@Test
 	void testAttaque() {
-		Arme arm= new Arme("PC",0,0);
-		Hero testHero = new Hero("Test", 100, 0, 0, arm,"IT");
+		Pc arm = new Pc();
+		IT testHero = new IT();
 		Monstre testMonstre = new Monstre(30, "Boss1", 100, 0, 0);
 		assertEquals(100,testHero.getVie());
 		testMonstre.attaque(testHero);

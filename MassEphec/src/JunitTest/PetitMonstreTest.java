@@ -10,7 +10,7 @@ class PetitMonstreTest {
 
 	@Test
 	void testDonneExpArme() {
-		Arme arm = new Arme("bg",0,0);
+		Pc arm = new Pc();
 		PetitMonstre petitMons = new PetitMonstre(5, "conn", 5, 0, 0, 0, 5);
 		petitMons.donneExpArme(arm);
 		assertEquals(5, arm.getExperience());

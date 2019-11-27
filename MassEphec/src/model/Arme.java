@@ -10,7 +10,8 @@ package model;
 public abstract class Arme {
 	// Variables d'instance 
 	private String nomArme;
-	private int experience, degat;
+	private int experience = 0;
+	private int degat;
 	private int niveau = 1;
 	private Hero hero;
 	private final int experienceMax = 100;
@@ -122,8 +123,8 @@ public abstract class Arme {
 	 */
 	
 	public void ajouterExp(int experience) {
-		if ((this.experience + experience) >= experienceMax) {
-			this.setExperience(this.experience + experience - experienceMax);
+		if ((this.getExperience() + experience) >= experienceMax) {
+			this.setExperience(this.getExperience() + experience - experienceMax);
 			this.niveauSuperieur();
 		}
 		else if (this.experience >= 0){

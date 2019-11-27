@@ -22,22 +22,18 @@ class ArmeTest {
 	 * Classe test pour la classe "setExperience"
 	 */
 	@Test
-	void testSetExperience() {
-		Arme test = new Arme("Test", 0, 30);
-		test.setExperience(101);
-		assertEquals(1, test.getExperience());
-		test.setExperience(-1);
-		assertEquals(0, test.getExperience());
-		test.setExperience(1);
+	void testAjouterExp() {
+		Pc test = new Pc();
+		test.ajouterExp(101);
 		assertEquals(1, test.getExperience());
 	}
 	
 	/**
 	 * Classe test pour la classe "niveauSperieur"
 	 */
-	
-	void testAjouterExp() {
-		Arme test = new Arme("Test", 0, 30);
+	@Test
+	void testNiveauSuperieur() {
+		Pc test = new Pc();
 		test.setNiveau(1);
 		test.niveauSuperieur();
 		assertEquals(2, test.getNiveau());

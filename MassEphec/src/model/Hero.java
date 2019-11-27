@@ -5,11 +5,9 @@ public class Hero extends Personnage{
 	private Arme arme;
 	private String classe;// IT compta ou market
 	
-	public Hero(String nom, int vie, int x, int y, Arme arme, String classe) {
+	public Hero(String nom, int vie, int x, int y) {
 		super(nom,vie,x,y);
 		this.credit=0;
-		this.arme=arme;
-		this.classe=classe;
 	}
 	
 	/*
@@ -27,12 +25,7 @@ public class Hero extends Personnage{
 		this.credit=creds;
 	}
 	/*
-	 * Fournit la classe du hero
-	 * @return {String} sa classe
-	 */
-	public String getClasse() {
-		return this.classe;
-	}
+	
 	/*
 	 * Fournit l'arme que l'etudiant possede
 	 * @return {Arme} 
