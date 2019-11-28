@@ -1,5 +1,6 @@
 package model;
-public class Hero extends Personnage{
+
+public class Hero extends Personnage {
 	
 	private int credit; 
 	private Arme arme;
@@ -23,6 +24,8 @@ public class Hero extends Personnage{
 	 */
 	public void setCredit(int creds) {
 		this.credit=creds;
+		setChanged();
+		notifyObservers();
 	}
 	/*
 	

@@ -2,12 +2,13 @@
  * 
  */
 package model;
+import java.util.Observable;
 
 /**
  * @author emman
  *
  */
-public abstract class Arme {
+public abstract class Arme extends Observable{
 	// Variables d'instance 
 	private String nomArme;
 	private int experience = 0;
@@ -17,7 +18,7 @@ public abstract class Arme {
 	private final int experienceMax = 100;
 	
 	public Arme(String nomArme, int experience, int degat) {
-		this.setNomArme(nomArme);
+		this.nomArme = nomArme;
 		this.setExperience(experience);
 		this.setDegat(degat);
 	}
@@ -27,14 +28,6 @@ public abstract class Arme {
 	 * @param nomArme : La nouvelle valeur de "nomArme" pour l'objet courant
 	 */
 	
-	public void setNomArme(String nomArme) {
-		this.nomArme = nomArme;
-	}
-	
-	/**
-	 * Getter de la variable "nomArme"
-	 * @return nomArme : La valeur de la variable "nomArme" de l'objet courant
-	 */
 	
 	public String getNomArme () {
 		return this.nomArme;
@@ -69,6 +62,8 @@ public abstract class Arme {
 	public void setNiveau (int niveau) {
 		if (niveau > 0) {
 			this.niveau = niveau;
+			setChanged();
+			notifyObservers();
 	}
 }
 	/**
@@ -99,14 +94,6 @@ public abstract class Arme {
 		return this.degat;
 	}
 	
-	/**
-	 * Setter donnant un hero à l'arme courante
-	 * @param hero : Le nouvel hero
-	 */
-	
-	public void setHero(Hero hero) {
-		this.hero = hero;
-	}
 	
 	/**
 	 * Getter de la variable "hero"
