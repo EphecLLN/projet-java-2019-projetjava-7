@@ -16,8 +16,8 @@ public class Main {
 			h=new Comptabilite(n);
 		}
 		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonjour messieurs");
-		CombatController c=new CombatController(h,prof);
-		CombatVueConsole cv= new CombatVueConsole(h,c);
+		CombatController c =new CombatController(h,prof);
+		CombatVueConsole cv = new CombatVueConsole(h, prof, c);
 		c.addView(cv);
 	}
 	public static void main(String args[]) {
