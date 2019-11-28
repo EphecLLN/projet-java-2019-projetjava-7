@@ -22,4 +22,8 @@ public class Pc extends Arme {
 		int totalDegat = (int) (this.getDegat() * 1.5);
 		ennemi.setVie(ennemi.getVie() - totalDegat);
 	}
+	public String toString() {
+		return "Vous avez choisi la classe IT et vous maniez le Pc! Vos dégats sont de " + this.getDegat()
+	+ "!\n Et votre attaque spéciale vous permet d'écraser votre adversaire avec votre Pc et d'infliger 150% de dégats"; 
+	}
 }

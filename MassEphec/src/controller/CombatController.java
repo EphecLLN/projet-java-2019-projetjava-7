@@ -16,16 +16,17 @@ public class CombatController {
 	
 	public void attaqueBoss() {
 		hero.getArme().attaque(boss);
+		attaqueHero();
 		control();
 	}
 	
 	public void attaqueHero() {
 		boss.attaque(hero);
-		control();
 	}
 	
 	public void attaqueSpe() {
 		hero.getArme().attaqueSpeciale(boss);
+		attaqueHero();
 		control();
 	}
 	

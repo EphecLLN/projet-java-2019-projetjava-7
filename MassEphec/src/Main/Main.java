@@ -14,8 +14,8 @@ public class Main {
 			h=new Marketing(n);
 		}else {
 			h=new Comptabilite(n);
-		}
-		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonjour messieurs");
+		}System.out.println(h.getArme());
+		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il était... Intéressant.");
 		CombatController c =new CombatController(h,prof);
 		CombatVueConsole cv = new CombatVueConsole(h, prof, c);
 		c.addView(cv);
@@ -24,9 +24,26 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez moi votre nom");
 		String nom=sc.nextLine();
-		System.out.println("Donnez moi votre classe (IT, Compta ou Marketing");
-		String classe=sc.nextLine();
-		System.out.println("Bonjour Ã  toi "+nom+" Ã©tudiant en "+classe);
+		System.out.println("Donnez moi votre classe (IT, Compta ou Marketing)");
+		String classe = sc.nextLine();
+		
+	/*	while (true) {
+			switch(sc.nextLine().toLowerCase()) {
+				case "it" : 
+					classe = "IT";
+					break;
+				case "compta" :
+					classe = "Comptabilite";
+					break;
+				case "marketing" :
+					classe = "Marketing";
+					break;
+				default :
+					System.out.println("Ceci n'est pas une classe valide, réessayez!");
+			}
+		}*/
+		
+		System.out.println("Bonjour à toi "+ nom +" étudiant en "+ classe);
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

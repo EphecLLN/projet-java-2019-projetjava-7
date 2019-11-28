@@ -15,4 +15,7 @@ public class Monstre extends Personnage {
 	public void attaque(Hero hero1) {
 		hero1.setVie(hero1.getVie() - getDegats());
 	}
+	public String toString() {
+		return "Le grand " + this.getNom() + " possède encore " + this.getVie() + " points de vie, ATTENTION!";
+	}
 }

@@ -30,12 +30,14 @@ public class CombatVueConsole extends CombatVue implements Observer {
 	}
 	
 	public void update(Observable o, Object arg) {
-		System.out.println("test");
+		System.out.println(heroModel);
+		System.out.println(bossModel);
 	}
 	
 	private class ReadInput implements Runnable {
 		public void run() {
-			
+			System.out.println("\n \nAujourd'hui vous allez vous battre contre... " + bossModel.getNom() + "\n Il arrive! \n \n"
+					+ bossModel.getNom()+": \n" + bossModel.getSpeech() + "\n");
 			while(!fin) {
 				System.out.println("Ecrivez Attaque ou AttaqueSpe !");
 				while(true) {
@@ -47,9 +49,9 @@ public class CombatVueConsole extends CombatVue implements Observer {
 							controller.attaqueSpe();
 							break;
 						default :
-							System.out.println("Entrée incorrecte, veuillez réessayer");
+							System.out.println("Donnée entrée incorrecte, veuillez réessayer");
 							break;
-					}	
+					}
 				}
 			}
 		}

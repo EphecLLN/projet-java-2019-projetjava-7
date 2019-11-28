@@ -41,6 +41,10 @@ public class Hero extends Personnage {
 	public void setArme(Arme arm) {
 		this.arme = arm;
 	}
+	
+	public String toString() {
+		return this.getNom() + " vous avez encore " + this.getVie() + " points de vies.";
+	}
 	/*
 	 * Fait bouger l'etudiant d'une case vers la droite
 	 */
