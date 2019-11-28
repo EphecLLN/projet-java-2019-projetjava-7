@@ -29,6 +29,11 @@ public class CombatController {
 		control();
 	}
 	
+	public void ajouterCredit(int credit) {
+		hero.setCredit(hero.getCredit() + credit);
+		System.out.println("Vous avez gagné " + credit + " crédits !");
+	}
+	
 	public void control() {
 		if (view != null) {
 			if (hero.enVie() && boss.enVie()) {
