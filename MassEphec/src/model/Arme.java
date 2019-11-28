@@ -94,6 +94,10 @@ public abstract class Arme extends Observable{
 		return this.degat;
 	}
 	
+	public void setHero(Hero hero) {
+		this.hero = hero;
+	}
+	
 	
 	/**
 	 * Getter de la variable "hero"
