@@ -47,8 +47,8 @@ public class Personnage extends Observable {
 		return nom;
 	}
 	
-	public boolean enVie(int vie) {
-		return vie > 0;
+	public boolean enVie() {
+		return this.vie > 0;
 	}
 	
 	

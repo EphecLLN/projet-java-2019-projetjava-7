@@ -43,6 +43,8 @@ public class Hero extends Personnage {
 		if(this.getCoordX()<15) {
 			this.setCoordX(this.getCoordX()+1);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	/*
 	 * Fait bouger l'etudiant d'une case vers la gauche
@@ -51,6 +53,8 @@ public class Hero extends Personnage {
 		if(this.getCoordX()>0) {
 			this.setCoordX(this.getCoordX()-1);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	/*
 	 * Fait bouger l'etudiant d'une case vers le haut
@@ -59,6 +63,8 @@ public class Hero extends Personnage {
 		if(this.getCoordY()>0) {
 			this.setCoordY(this.getCoordY()-1);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	/*
 	 * Fait bouger l'etudiant d'une case vers le bas
@@ -67,6 +73,8 @@ public class Hero extends Personnage {
 		if(this.getCoordY()<15) {
 			this.setCoordY(this.getCoordY()+1);
 		}
+		setChanged();
+		notifyObservers();
 	}
 	/*
 	 * attaque un monstre en lui enlevant de la vie;

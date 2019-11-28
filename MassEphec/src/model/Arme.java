@@ -33,7 +33,7 @@ public abstract class Arme extends Observable{
 		return this.nomArme;
 	}
 	
-	public void setHero (Hero hero) {
+	public void setHero(Hero hero) {
 		this.hero = hero;
 		
 	}
@@ -99,11 +99,6 @@ public abstract class Arme extends Observable{
 		return this.degat;
 	}
 	
-	public void setHero(Hero hero) {
-		this.hero = hero;
-	}
-	
-	
 	/**
 	 * Getter de la variable "hero"
 	 */
@@ -113,7 +108,7 @@ public abstract class Arme extends Observable{
 	}
 	
 	/**
-	 * Cette classe permet d'ajouter de l'exp à l'arme
+	 * Cette classe permet d'ajouter de l'exp ï¿½ l'arme
 	 * Si experience >= experienceMax alors arme.niveauSuperieur()
 	 * @param experience
 	 */
@@ -130,8 +125,8 @@ public abstract class Arme extends Observable{
 	
 	/**
 	 * Cette classe permet l'augmentation du niveau 
-	 * de l'arme après avoir atteint l'exp requis
-	 * Niveau + 1 et augmentation des dégats
+	 * de l'arme aprï¿½s avoir atteint l'exp requis
+	 * Niveau + 1 et augmentation des dï¿½gats
 	 */
 	
 	public void niveauSuperieur() {

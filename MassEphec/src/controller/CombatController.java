@@ -8,13 +8,11 @@ public class CombatController {
 	private Boss boss;
 	private CombatVueConsole view = null;
 	
-	public CombatController(Hero model) {
+	public CombatController(Hero model, Boss boss) {
 		this.hero = model;
-	}
-	
-	public CombatController(Boss boss) {
 		this.boss = boss;
 	}
+	
 	
 	public void attaqueBoss(Boss boss) {
 		hero.getArme().attaque(boss);
@@ -33,7 +31,7 @@ public class CombatController {
 	
 	public void control() {
 		if (view != null) {
-			if (hero.enVie(hero.getVie()) || boss.enVie(boss.getVie())) {
+			if (hero.enVie() && boss.enVie()) {
 				view.disableWarning();
 			}
 			else  {
