@@ -21,6 +21,16 @@ public class CombatController {
 		control();
 	}
 	
+	public void attaqueHero(Hero hero) {
+		boss.attaque(hero);
+		control();
+	}
+	
+	public void attaqueSpe(Boss boss) {
+		hero.getArme().attaqueSpeciale(boss);
+		control();
+	}
+	
 	public void control() {
 		if (view != null) {
 			if (hero.enVie(hero.getVie()) || boss.enVie(boss.getVie())) {
