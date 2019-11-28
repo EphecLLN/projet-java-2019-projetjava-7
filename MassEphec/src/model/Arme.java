@@ -144,6 +144,10 @@ public abstract class Arme {
 		this.setDegat(degat + ((this.getNiveau() / 10) * degat));
 	}
 	
+	public void attaque(Monstre monstre) {
+		monstre.setVie(monstre.getVie() - this.getDegat());
+	}
+	
 	public abstract void attaqueSpeciale(Monstre ennemi);
 	
 }
