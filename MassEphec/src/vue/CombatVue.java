@@ -1,6 +1,7 @@
 package vue;
 
 import model.*;
+import controller.*;
 import java.util.Observer;
 
 public abstract class CombatVue implements Observer{
@@ -9,7 +10,7 @@ public abstract class CombatVue implements Observer{
 	protected Boss bossModel;
 	protected CombatController controller;
 	
-	CombatVue(Hero heroModel, Boss bossModel, combatController controller) {
+	CombatVue(Hero heroModel, Boss bossModel, CombatController controller) {
 		this.heroModel = heroModel;
 		this.bossModel = bossModel;
 		this.controller = controller;
