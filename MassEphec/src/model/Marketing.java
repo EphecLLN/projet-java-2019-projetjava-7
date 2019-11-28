@@ -12,8 +12,8 @@ public class Marketing extends Hero {
 	
 	Costard costard;
 	
-	public Marketing() {
-		super("Market", 100,0,0);
+	public Marketing(String name) {
+		super(name, 100,0,0);
 		this.costard = new Costard();
 	}
 

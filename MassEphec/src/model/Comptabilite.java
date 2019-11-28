@@ -12,8 +12,8 @@ public class Comptabilite extends Hero{
 
 	Calculette calculette;
 	
-	public Comptabilite() {
-		super("Comptable", 100, 0,0);
+	public Comptabilite(String n) {
+		super(n, 100, 0,0);
 		this.calculette = new Calculette();
 	}
 }
