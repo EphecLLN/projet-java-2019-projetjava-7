@@ -33,6 +33,11 @@ public abstract class Arme extends Observable{
 		return this.nomArme;
 	}
 	
+	public void setHero (Hero hero) {
+		this.hero = hero;
+		
+	}
+	
 	/**
 	 * Setter de la variable "experience"
 	 * experience < experienceMax && experience => 0
