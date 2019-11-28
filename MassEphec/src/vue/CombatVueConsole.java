@@ -30,8 +30,7 @@ public class CombatVueConsole extends CombatVue implements Observer {
 	}
 	
 	public void update(Observable o, Object arg) {
-		System.out.println(o);
-		System.out.println(arg);
+		System.out.println("test");
 	}
 	
 	private class ReadInput implements Runnable {
@@ -42,10 +41,10 @@ public class CombatVueConsole extends CombatVue implements Observer {
 				while(true) {
 					switch (sc.nextLine().toLowerCase()) {
 						case "attaque" :  
-							controller.attaqueBoss(bossModel);
+							controller.attaqueBoss();
 							break;
 						case "attaquespe" :
-							controller.attaqueSpe(bossModel);
+							controller.attaqueSpe();
 							break;
 						default :
 							System.out.println("Entrée incorrecte, veuillez réessayer");

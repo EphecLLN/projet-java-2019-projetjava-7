@@ -6,9 +6,10 @@ public class Hero extends Personnage {
 	private Arme arme;
 	private String classe;// IT compta ou market
 	
-	public Hero(String nom, int vie, int x, int y) {
+	public Hero(String nom, int vie, int x, int y, Arme arme) {
 		super(nom,vie,x,y);
 		this.credit=0;
+		this.arme = arme;
 	}
 	
 	/*
@@ -35,6 +36,10 @@ public class Hero extends Personnage {
 	 */
 	public Arme getArme() {
 		return this.arme;
+	}
+	
+	public void setArme(Arme arm) {
+		this.arme = arm;
 	}
 	/*
 	 * Fait bouger l'etudiant d'une case vers la droite

@@ -24,7 +24,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez moi votre nom");
 		String nom=sc.nextLine();
-		System.out.println("Donnez moi votre classe");
+		System.out.println("Donnez moi votre classe (IT, Compta ou Marketing");
 		String classe=sc.nextLine();
 		System.out.println("Bonjour à toi "+nom+" étudiant en "+classe);
 		

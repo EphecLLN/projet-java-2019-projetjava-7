@@ -33,7 +33,7 @@ class ArmeTest {
 	 */
 	@Test
 	void testNiveauSuperieur() {
-		Pc test = new Pc();
+		Arme test = new Pc();
 		test.setNiveau(1);
 		test.niveauSuperieur();
 		assertEquals(2, test.getNiveau());

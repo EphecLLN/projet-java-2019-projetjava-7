@@ -14,24 +14,24 @@ public class CombatController {
 	}
 	
 	
-	public void attaqueBoss(Boss boss) {
+	public void attaqueBoss() {
 		hero.getArme().attaque(boss);
 		control();
 	}
 	
-	public void attaqueHero(Hero hero) {
+	public void attaqueHero() {
 		boss.attaque(hero);
 		control();
 	}
 	
-	public void attaqueSpe(Boss boss) {
+	public void attaqueSpe() {
 		hero.getArme().attaqueSpeciale(boss);
 		control();
 	}
 	
-	public void ajouterCredit(int credit) {
-		hero.setCredit(hero.getCredit() + credit);
-		System.out.println("Vous avez gagné " + credit + " crédits !");
+	public void ajouterCredit() {
+		hero.setCredit(hero.getCredit() + boss.getCredit());
+		System.out.println("Vous avez gagné " + boss.getCredit() + " crédits !");
 	}
 	
 	public void control() {
