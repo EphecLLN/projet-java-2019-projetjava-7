@@ -136,6 +136,10 @@ public abstract class Arme extends Observable{
 		this.setDegat(degat + ((this.getNiveau() / 10) * degat));
 	}
 	
+	public void attaque(Monstre monstre) {
+		monstre.setVie(monstre.getVie() - this.getDegat());
+	}
+	
 	public abstract void attaqueSpeciale(Monstre ennemi);
 	
 }

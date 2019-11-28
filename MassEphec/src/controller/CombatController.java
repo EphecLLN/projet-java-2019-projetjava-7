@@ -1,25 +1,33 @@
 package controller;
 
-import model.Personnage;
+import model.*;
 import vue.CombatVueConsole;
 
 public class CombatController {
-	private Personnage model;
+	private Hero hero;
+	private Boss boss;
 	private CombatVueConsole view = null;
 	
-	public CombatController(Personnage model) {
-		this.model = model;
+	public CombatController(Hero model) {
+		this.hero = model;
 	}
 	
-	public void diminuerVie(int degat) {
-		model.setVie(model.getVie() - degat);
+	public CombatController(Boss boss) {
+		this.boss = boss;
+	}
+	
+	public void attaqueBoss(Boss boss) {
+		hero.getArme().attaque(boss);
 		control();
 	}
 	
 	public void control() {
 		if (view != null) {
-			if (model.enVie(model.getVie())) {
-			
+			if (hero.enVie(hero.getVie()) || boss.enVie(boss.getVie())) {
+				view.disableWarning();
+			}
+			else  {
+				view.enableWarning();
 			}
 		}
 	}
