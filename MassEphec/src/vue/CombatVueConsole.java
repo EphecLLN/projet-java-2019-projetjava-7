@@ -30,8 +30,7 @@ public class CombatVueConsole extends CombatVue implements Observer {
 	}
 	
 	public void update(Observable o, Object arg) {
-		System.out.println(heroModel);
-		System.out.println(bossModel);
+		System.out.println(arg);
 	}
 	
 	private class ReadInput implements Runnable {
@@ -40,7 +39,6 @@ public class CombatVueConsole extends CombatVue implements Observer {
 					+ bossModel.getNom()+": \n" + bossModel.getSpeech() + "\n");
 			while(!fin) {
 				System.out.println("Ecrivez Attaque ou AttaqueSpe !");
-				while(true) {
 					switch (sc.nextLine().toLowerCase()) {
 						case "attaque" :  
 							controller.attaqueBoss();
@@ -53,7 +51,8 @@ public class CombatVueConsole extends CombatVue implements Observer {
 							break;
 					}
 				}
+			sc.close();
 			}
-		}
+		
 	}
 }

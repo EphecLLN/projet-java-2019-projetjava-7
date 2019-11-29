@@ -25,7 +25,7 @@ public class Personnage extends Observable {
 	public void setVie(int vie) {
 		this.vie = vie;
 		setChanged();
-		notifyObservers();
+		notifyObservers(this);
 	}
 	public int getCoordX() {
 		return coordX;
