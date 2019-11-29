@@ -15,7 +15,7 @@ public class Main {
 		}else {
 			h=new Comptabilite(n);
 		}System.out.println(h.getArme());
-		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il était... Intéressant.");
+		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il ï¿½tait... Intï¿½ressant.");
 		CombatController c =new CombatController(h,prof);
 		CombatVueConsole cv = new CombatVueConsole(h, prof, c);
 		c.addView(cv);
@@ -24,30 +24,24 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez moi votre nom");
 		String nom=sc.nextLine();
-		System.out.println("Donnez moi votre classe (IT, Compta ou Marketing)");
-		String classe = sc.nextLine();
-		
-	/*	while (true) {
-			switch(sc.nextLine().toLowerCase()) {
-				case "it" : 
-					classe = "IT";
-					break;
-				case "compta" :
-					classe = "Comptabilite";
-					break;
-				case "marketing" :
-					classe = "Marketing";
-					break;
-				default :
-					System.out.println("Ceci n'est pas une classe valide, réessayez!");
+		String classe="";
+		boolean bonneEntree=true;
+		while(bonneEntree) {
+			System.out.println("Donnez moi votre classe (IT, Comptabilite ou Marketing)");
+			classe = sc.nextLine();
+			if(classe.equals("IT") || classe.equals("Marketing") || classe.equals("Comptabilite")) {
+				bonneEntree=false;
 			}
-		}*/
+			else {
+				System.out.println("Mauvaise entrÃ©e");
+			}
+		}
+		String classes=classe;
+		System.out.println("Bonjour ï¿½toi "+ nom +" ï¿½tudiant en "+ classes);
 		
-		System.out.println("Bonjour à toi "+ nom +" étudiant en "+ classe);
-		
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
-				new Main(nom,classe);
+				new Main(nom,classes);
 			}
 		});
 	}
