@@ -8,12 +8,14 @@ public abstract class CombatVue implements Observer{
 
 	protected Hero heroModel;
 	protected Boss bossModel;
-	protected CombatController controller;
+	protected CombatController combat;
+	protected MapController map;
 	
-	CombatVue(Hero heroModel, Boss bossModel, CombatController controller) {
+	public CombatVue(Hero heroModel, Boss bossModel, CombatController combat) {
 		this.heroModel = heroModel;
 		this.bossModel = bossModel;
-		this.controller = controller;
+		this.combat = combat;
+		this.map = map;
 		heroModel.addObserver(this);
 		bossModel.addObserver(this);
 		

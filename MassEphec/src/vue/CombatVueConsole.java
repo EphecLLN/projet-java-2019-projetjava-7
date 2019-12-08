@@ -41,10 +41,10 @@ public class CombatVueConsole extends CombatVue implements Observer {
 				System.out.println("Ecrivez Attaque ou AttaqueSpe !");
 					switch (sc.nextLine().toLowerCase()) {
 						case "attaque" :  
-							controller.attaqueBoss();
+							combat.attaqueBoss();
 							break;
 						case "attaquespe" :
-							controller.attaqueSpe();
+							combat.attaqueSpe();
 							break;
 						default :
 							System.out.println("Donnée entrée incorrecte, veuillez réessayer");
