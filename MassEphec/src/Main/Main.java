@@ -5,6 +5,9 @@ import controller.*;
 import vue.*;
 import java.util.Scanner;
 
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
 public class Main {
 	public Main(String n, String classe) {
 		Hero h;
@@ -21,7 +24,7 @@ public class Main {
 		c.addView(cv);
 	}
 	public static void main(String args[]) {
-		Scanner sc = new Scanner(System.in);
+		/*Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez moi votre nom");
 		String nom=sc.nextLine();
 		String classe="";
@@ -43,7 +46,16 @@ public class Main {
 			public void run() {
 				new Main(nom,classes);
 			}
-		});
+		});¨
+		*/
+		
+		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		
+		config.width = 600;
+		config.height = 400;
+		config.vSyncEnabled = true;
+		
+		new LwjglApplication(new MassEphec(), config);
 	}
 
 }

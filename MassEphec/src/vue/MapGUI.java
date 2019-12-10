@@ -7,15 +7,17 @@ import java.util.Scanner;
 import controller.MapController;
 import model.*;
 import controller.*;
+import Main.MassEphec;
 
-public class MapGUI implements Observer {
+public class MapGUI extends AbstractScreen implements Observer {
 	
 	protected Scanner sc;
 	private Hero heroModel;
 	private MapController controller;
 	
 	
-	public MapGUI(Hero heroModel, MapController controller) {
+	public MapGUI(Hero heroModel, MapController controller, MassEphec app) {
+		super(app);
 		this.heroModel = heroModel;
 		this.controller = controller;
 	}
@@ -32,6 +34,48 @@ public class MapGUI implements Observer {
 	}
 	
 	public void update(Observable o, Object arg) {
+		
+	}
+
+	@Override
+	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void hide() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void pause() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void render(float delta) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resize(int width, int heigth) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void resume() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void show() {
+		// TODO Auto-generated method stub
 		
 	}
 }
