@@ -18,7 +18,7 @@ public class Main {
 			h=new Comptabilite(n);
 		}System.out.println(h.getArme());
 		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il �tait... Int�ressant.");
-		CombatController c =new CombatController(h,prof);
+		CombatControllerConsole c =new CombatControllerConsole(h,prof);
 		CombatVueConsole cv = new CombatVueConsole(h, prof, c);
 		c.addView(cv);
 	}

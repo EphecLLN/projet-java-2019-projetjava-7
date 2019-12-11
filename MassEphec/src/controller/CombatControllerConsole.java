@@ -3,12 +3,12 @@ package controller;
 import model.*;
 import vue.CombatVueConsole;
 
-public class CombatController {
+public class CombatControllerConsole {
 	private Hero hero;
 	private Boss boss;
 	private CombatVueConsole view = null;
 	
-	public CombatController(Hero model, Boss boss) {
+	public CombatControllerConsole(Hero model, Boss boss) {
 		this.hero = model;
 		this.boss = boss;
 	}
