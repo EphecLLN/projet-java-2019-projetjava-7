@@ -10,4 +10,8 @@ public class MapLauncher {
 	public MapLauncher() {
 		new Window();
 	}
+	
+	public static void main (String [] args) {
+		new MapLauncher();
+	}
 }
