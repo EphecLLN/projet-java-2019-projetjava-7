@@ -11,10 +11,20 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JavaFx">
+=======
+<<<<<<< HEAD
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx">
+>>>>>>> 28c8a20b34b9d0ba6537ffcc938f7c28031bd6b0
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b14eeb87d439aa09bc26fc1b19ebf1dd6330746c
+>>>>>>> 28c8a20b34b9d0ba6537ffcc938f7c28031bd6b0
 	<classpathentry kind="output" path="bin"/>
 </classpath>
