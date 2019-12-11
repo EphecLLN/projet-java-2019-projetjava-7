@@ -7,7 +7,6 @@ import java.util.Scanner;
 import controller.MapController;
 import model.*;
 import controller.*;
-import Main.MassEphec;
 
 public class MapGUI implements Observer {
 	
@@ -19,6 +18,7 @@ public class MapGUI implements Observer {
 	public MapGUI(Hero heroModel, MapController controller) {
 		this.heroModel = heroModel;
 		this.controller = controller;
+		
 	}
 	
 	public void affiche(String s) {
