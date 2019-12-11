@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 
 
-public class Main {
-	public Main(String n, String classe) {
+public class MainConsole {
+	public MainConsole(String n, String classe) {
 		Hero h;
 		if(classe.equals("IT")) {
 			h=new IT(n);
