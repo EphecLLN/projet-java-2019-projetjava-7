@@ -9,15 +9,14 @@ import model.*;
 import controller.*;
 import Main.MassEphec;
 
-public class MapGUI extends AbstractScreen implements Observer {
+public class MapGUI implements Observer {
 	
 	protected Scanner sc;
 	private Hero heroModel;
 	private MapController controller;
 	
 	
-	public MapGUI(Hero heroModel, MapController controller, MassEphec app) {
-		super(app);
+	public MapGUI(Hero heroModel, MapController controller) {
 		this.heroModel = heroModel;
 		this.controller = controller;
 	}

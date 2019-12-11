@@ -5,8 +5,7 @@ import controller.*;
 import vue.*;
 import java.util.Scanner;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
 
 public class Main {
 	public Main(String n, String classe) {
@@ -49,13 +48,6 @@ public class Main {
 		});¨
 		*/
 		
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		
-		config.width = 600;
-		config.height = 400;
-		config.vSyncEnabled = true;
-		
-		new LwjglApplication(new MassEphec(), config);
 	}
 
 }

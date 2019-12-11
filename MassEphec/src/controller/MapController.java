@@ -1,6 +1,7 @@
 package controller;
 
 import model.*;
+import vue.MapGUI;
 
 public class MapController {
 	private Hero hero;
