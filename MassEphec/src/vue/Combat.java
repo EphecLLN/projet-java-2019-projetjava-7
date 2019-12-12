@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JTextArea;
 
 import controller.*;
 import model.Boss;
@@ -30,10 +31,14 @@ public class Combat extends CombatVue {
 	private JFrame window;
 	private Container con;
 	private JPanel buttonPanel, textPanel, bossHealth, heroHealth;
-	private JButton atkButton, atkSpeButton;
+	private JButton atkButton, atkSpeButton, consomButton;
 	private JLabel imageHero, imageBoss, attaque;
-	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,30);
+
 	private JProgressBar heroHealthBar, bossHealthBar;
+	private JTextArea msgAtk, msgAtkSpe;
+	
+	private Font policeBoutton = new Font ("Times New Roman", Font.PLAIN,30);
+	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
 	
 	private ImageIcon heros = new ImageIcon("res/heros.png");
@@ -50,6 +55,7 @@ public class Combat extends CombatVue {
 		window.setSize(1280,720);    
 		window.setLayout(null);
 		window.setVisible(true);
+		window.setBackground(Color.white);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screenSetup();
 	
@@ -60,11 +66,19 @@ public class Combat extends CombatVue {
 		buttonPanel = new JPanel();
 		buttonPanel.setBounds(410, 460, 320, 200);
 		buttonPanel.setBackground(Color.blue);
-		buttonPanel.setLayout(new GridLayout(2,1));
+		buttonPanel.setLayout(new GridLayout(3,1));
 		window.add(buttonPanel);
 		
 		textPanel = new JPanel();
-		//textPanel.setBounds(410, )
+		textPanel.setBounds(80, 450,320,200);
+		window.add(textPanel);
+		
+		msgAtk = new JTextArea();
+		msgAtk.setBounds(80, 450, 320, 200);
+		msgAtk.setLineWrap(true);
+		msgAtk.setEditable(false);
+		msgAtk.setFont(policeNormale);
+		textPanel.add(msgAtk);
 		
 		attaque = new JLabel(imgIcon);
 		attaque.setBounds(410, 150, 90, 200); 
@@ -72,7 +86,7 @@ public class Combat extends CombatVue {
 		atkButton = new JButton("Attaque basique");
 		atkButton.setBackground(Color.white);
 		atkButton.setForeground(Color.black);
-		atkButton.setFont(policeNormale);
+		atkButton.setFont(policeBoutton);
 		atkButton.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
 		             click(e);
@@ -84,7 +98,7 @@ public class Combat extends CombatVue {
 		atkSpeButton = new JButton("Attaque Spéciale");
 		atkSpeButton.setBackground(Color.white);
 		atkSpeButton.setForeground(Color.black);
-		atkSpeButton.setFont(policeNormale);
+		atkSpeButton.setFont(policeBoutton);
 		atkSpeButton.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
 		             click(e);
@@ -92,6 +106,18 @@ public class Combat extends CombatVue {
 		});  
 		atkSpeButton.setActionCommand("atkSpe");
 		buttonPanel.add(atkSpeButton);
+		
+		consomButton = new JButton("Consommable");
+		consomButton.setBackground(Color.black);
+		consomButton.setForeground(Color.white);
+		consomButton.setFont(policeBoutton);
+		consomButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				click(e);
+			}
+		});
+		consomButton.setActionCommand("Consommable");
+		buttonPanel.add(consomButton);
 		
 		heroHealth = new JPanel();
 		heroHealth.setBounds(100, 410, 300, 20);
@@ -133,11 +159,17 @@ public class Combat extends CombatVue {
 		case "atk":
 			combat.attaqueHero();
 			window.add(attaque);
+			msgAtk.setText("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!");
 			refresh();
+			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
+			msgAtk.setText("Vous venez de faire votre attaque spéciale sur " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!");
 			refresh();
-			
+			window.setVisible(false);
+			break;
+		case "Consommable":
+			break;
 		}	
 		
 	}
