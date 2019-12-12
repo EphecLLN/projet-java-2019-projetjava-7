@@ -14,12 +14,10 @@ public class Map {
 	private int [][] tileMap;
 	private int height;
 	private int width;
-	private Image textureGrass, textureMur;
+	
 	
 	public Map (String mapFile){
 		
-		textureGrass = new ImageIcon("res/Grass.jpg").getImage();
-		textureMur = new ImageIcon("res/Mur.jpg").getImage();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(mapFile));
 			tileMap = new int[16][16];
@@ -38,25 +36,8 @@ public class Map {
 		
 	}
 	
-	public void draw(Graphics g) {
-		int x = 0;
-		int y = 0;
-		for (int row = 0; row < 16; row++) {
-			x = 0;
-			for (int col = 0; col < 16; col++) {
-				switch(tileMap[row][col]) {
-				case 0 :
-					g.drawImage(textureGrass, x, y,null);
-					x += 50;
-					break;
-				case 1 : 
-					g.drawImage(textureMur, x, y, null);
-					x += 50;
-					break;
-				}
-			}
-			y += 40;
-		}
-		
+	public int [][] getTileMap() {
+		return this.tileMap;
 	}
+	
 }

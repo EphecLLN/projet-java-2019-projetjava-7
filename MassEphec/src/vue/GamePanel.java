@@ -1,80 +1,75 @@
 package vue;
 
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 
 
-public class GamePanel extends JPanel implements ActionListener, KeyListener{
-	
-	private static int width, height; 
-	
-	private Thread thread;
-	private boolean running = false;
-	
-	private BufferedImage img;
-	private Graphics2D g;
+public class GamePanel extends JFrame{
 	
 	Map map;
+	Image grass;
+	Image mur;
+	
+	protected int [][] tileMap;
 
 	public GamePanel(int width, int height) {
 		map = new Map("map.txt");
-		this.width = width;
-		this.height = height;
-		setPreferredSize(new Dimension(width, height));
-		setFocusable(true);
-		requestFocus();
-	
-	}
-	
-	
-	public void init() {
-		running = true;
-		img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		g = (Graphics2D) img.getGraphics();
-	}
-	
-	public void update() { 
-	}
+		grass = Toolkit.getDefaultToolkit().createImage("res/test1.jpg");
+		mur = Toolkit.getDefaultToolkit().createImage("res/test2.png");
 		
+		this.setSize(new Dimension(width, height));
+		this.setTitle("MassEphec");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.add(new drawMap());
+		this.setVisible(true);
 		
+	}
 
-	public void keyPressed(KeyEvent key) {
-		System.out.println("lol");
-	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (!running) {
-			init();
+	protected class drawMap extends JComponent {
+		
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			
+			Graphics g2d = (Graphics2D) g;
+			drawMap(g);
 		}
-		repaint();
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
+	
+	public void drawMap(Graphics g) {
 		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
+		System.out.println("Drawmap");
+		this.tileMap = map.getTileMap();
+		int x = 0;
+		int y = 0;
+		for (int row = 0; row < 16; row++) {
+			x = 0;
+			for (int col = 0; col < 16; col++) {
+				switch(tileMap[row][col]) {
+				case 0 :
+					g.drawImage(grass, x, y,null);
+					x += 50;
+					break;
+				case 1 : 
+					g.drawImage(mur, x, y, null);
+					x += 50;
+					break;
+				}
+			}
+			y += 40;
+		}
+		
 		
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		
-		map.draw(g);
-		g.setColor(Color.WHITE);
-		g.fillRect(800, 0, 400, 900);
-		g.fillRect(0, 640, 800,260 );
-		
-	}
-	
+
 }
