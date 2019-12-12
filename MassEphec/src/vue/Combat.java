@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,14 +31,16 @@ public class Combat extends CombatVue {
 	private Container con;
 	private JPanel buttonPanel, textPanel, bossHealth, heroHealth;
 	private JButton atkButton, atkSpeButton;
-	private JLabel imageHero, imageBoss;
+	private JLabel imageHero, imageBoss, attaque;
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,30);
 	private JProgressBar heroHealthBar, bossHealthBar;
 	
-	private GestionChoix listener = new GestionChoix();
 	
 	private ImageIcon heros = new ImageIcon("res/heros.png");
 	private ImageIcon boss = new ImageIcon("res/monstre.jpg");
+	private Icon imgIcon = new ImageIcon("res/attaque.gif");
+	
+
 
 	
 	public Combat(Hero heroModel, Boss bossModel, CombatControllerConsole combat) {
@@ -63,13 +66,16 @@ public class Combat extends CombatVue {
 		textPanel = new JPanel();
 		//textPanel.setBounds(410, )
 		
+		attaque = new JLabel(imgIcon);
+		attaque.setBounds(410, 150, 90, 200); 
+		
 		atkButton = new JButton("Attaque basique");
 		atkButton.setBackground(Color.white);
 		atkButton.setForeground(Color.black);
 		atkButton.setFont(policeNormale);
 		atkButton.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
-		             combat.attaqueHero();
+		             click(e);
 			}
 		});  
 		atkButton.setActionCommand("atk");
@@ -81,7 +87,7 @@ public class Combat extends CombatVue {
 		atkSpeButton.setFont(policeNormale);
 		atkSpeButton.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
-		             combat.attaqueSpe();
+		             click(e);
 			}  
 		});  
 		atkSpeButton.setActionCommand("atkSpe");
@@ -119,6 +125,26 @@ public class Combat extends CombatVue {
 		window.add(imageBoss);
 		
 		
+	}
+	
+	public void click(ActionEvent e) {
+		String choix = e.getActionCommand();
+		switch(choix) {
+		case "atk":
+			combat.attaqueHero();
+			window.add(attaque);
+			refresh();
+		case "atkSpe" :
+			combat.attaqueSpe();
+			refresh();
+			
+		}	
+		
+	}
+	
+	public void refresh() {
+		heroHealthBar.setValue(heroModel.getVie());
+		bossHealthBar.setValue(bossModel.getVie());
 	}
 	@Override
 	public void update(Observable o, Object arg) {
