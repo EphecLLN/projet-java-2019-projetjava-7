@@ -2,12 +2,13 @@ package model;
 
 public class Hero extends Personnage {
 	
-	private int credit; 
+	private int credit, vieMax; 
 	private Arme arme;
 	private String classe;// IT compta ou market
 	
 	public Hero(String nom, int vie, int x, int y, Arme arme) {
 		super(nom,vie,x,y);
+		this.vieMax = vie;
 		this.credit=0;
 		this.arme = arme;
 	}
@@ -18,6 +19,9 @@ public class Hero extends Personnage {
 	 */
 	public int getCredit() {
 		return this.credit;
+	}
+	public int getVieMax() {
+		return this.vieMax;
 	}
 	/*
 	 * Modifie le nombre de credits que l'etudiant possede

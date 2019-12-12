@@ -14,19 +14,19 @@ public class CombatControllerConsole {
 	}
 	
 	
-	public void attaqueBoss() {
+	public void attaqueHero() {
 		hero.getArme().attaque(boss);
-		attaqueHero();
+		attaqueBoss();
 		control();
 	}
 	
-	public void attaqueHero() {
+	public void attaqueBoss() {
 		boss.attaque(hero);
 	}
 	
 	public void attaqueSpe() {
 		hero.getArme().attaqueSpeciale(boss);
-		attaqueHero();
+		attaqueBoss();
 		control();
 	}
 	
@@ -42,6 +42,7 @@ public class CombatControllerConsole {
 			}
 			else  {
 				view.enableWarning();
+				ajouterCredit();
 			}
 		}
 	}

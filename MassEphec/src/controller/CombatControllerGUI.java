@@ -17,15 +17,11 @@ public class CombatControllerGUI {
 		//private Combat vue = null;
 	}
 	
-	public void attaquerBoss(JFrame frame) {
-		JLabel label = new JLabel();
-		label.setText("Vous attaquez le boss");
-		frame.add(label);
-		label.setBounds(100, 100, 380, 20);
-		frame.repaint();
+	public void attaquerBoss() {
+		
 	}
 	
-	public void attaqueSpecialeBoss(JFrame frame) {
+	public void attaqueSpecialeBoss() {
 		
 	}
 	
