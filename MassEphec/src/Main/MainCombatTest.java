@@ -3,6 +3,7 @@ import vue.*;
 import model.*;
 import controller.*;
 
+
 public class MainCombatTest {
 
 	public MainCombatTest() {

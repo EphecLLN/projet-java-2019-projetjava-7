@@ -22,8 +22,8 @@ public class GamePanel extends JFrame{
 
 	public GamePanel(int width, int height) {
 		map = new Map("map.txt");
-		grass = Toolkit.getDefaultToolkit().createImage("res/test1.jpg");
-		mur = Toolkit.getDefaultToolkit().createImage("res/test2.png");
+		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
+		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
 		
 		this.setSize(new Dimension(width, height));
 		this.setTitle("MassEphec");
