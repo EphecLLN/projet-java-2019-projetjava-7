@@ -76,10 +76,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 				}
 			}
 			y += 50;
-<<<<<<< HEAD
-=======
 
->>>>>>> 222fc704f6410a118e3c761680f4e450ef54b5a4
 		}
 	}
 	public void drawCharacters(Graphics g, Personnage hero) {
@@ -88,11 +85,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		x = hero.getCoordX();
 		y = hero.getCoordY();
 		if (tileMap[x][y] != 1) {
-<<<<<<< HEAD
-=======
 			g.drawImage(heroImage, x, y, null);
 
->>>>>>> 222fc704f6410a118e3c761680f4e450ef54b5a4
 		}
 	}
 
