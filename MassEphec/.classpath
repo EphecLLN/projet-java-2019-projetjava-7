@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+=======
+>>>>>>> 379a65ec537f77c894477b4fee5e53d16d56e3b4
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx">
 		<attributes>
 			<attribute name="module" value="true"/>
