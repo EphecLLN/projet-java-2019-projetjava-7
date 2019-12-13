@@ -8,6 +8,6 @@ import vue.GamePanel;
 public class MapLauncher {
 
 	public static void main (String [] args) {
-		new GamePanel(1280, 720);
+		new GamePanel(1000, 800);
 	}
 }

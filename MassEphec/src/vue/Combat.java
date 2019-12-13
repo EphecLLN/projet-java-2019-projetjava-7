@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.*;
@@ -26,14 +27,14 @@ import model.Hero;
 
 public class Combat extends CombatVue {
 
-	private CombatControllerConsole combat;
+	private CombatControllerGUI combat;
 	
 	private JFrame window;
 	private Container con;
 	private JPanel buttonPanel, textPanel, bossHealth, heroHealth;
 	private JButton atkButton, atkSpeButton, consomButton;
 	private JLabel imageHero, imageBoss, attaque;
-
+	private JScrollPane scroller;
 	private JProgressBar heroHealthBar, bossHealthBar;
 	private JTextArea msgAtk, msgAtkSpe;
 	
@@ -48,9 +49,10 @@ public class Combat extends CombatVue {
 
 
 	
-	public Combat(Hero heroModel, Boss bossModel, CombatControllerConsole combat) {
+	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat) {
 		super(heroModel, bossModel);
 		this.combat = combat;
+		combat.addView(this);
 		window =new JFrame("TestCombat"); 
 		window.setSize(1280,720);    
 		window.setLayout(null);
@@ -70,15 +72,20 @@ public class Combat extends CombatVue {
 		window.add(buttonPanel);
 		
 		textPanel = new JPanel();
-		textPanel.setBounds(80, 450,320,200);
+		textPanel.setBounds(1000, 100, 200, 500);
+		//textPanel.setBackground(Color.blue);
 		window.add(textPanel);
+		
 		
 		msgAtk = new JTextArea();
 		msgAtk.setBounds(80, 450, 320, 200);
 		msgAtk.setLineWrap(true);
 		msgAtk.setEditable(false);
-		msgAtk.setFont(policeNormale);
-		textPanel.add(msgAtk);
+		//msgAtk.setFont(policeNormale);
+		
+		scroller = new JScrollPane(msgAtk);
+		scroller.setPreferredSize(new Dimension(200,320));
+		textPanel.add(scroller);
 		
 		attaque = new JLabel(imgIcon);
 		attaque.setBounds(410, 150, 90, 200); 
@@ -131,7 +138,7 @@ public class Combat extends CombatVue {
 		heroHealth.add(heroHealthBar);
 		
 		bossHealth = new JPanel();
-		bossHealth.setBounds(700, 410, 300, 20);
+		bossHealth.setBounds(680, 410, 300, 20);
 		bossHealth.setBackground(Color.white);
 		window.add(bossHealth); 
 		bossHealthBar = new JProgressBar(0, bossModel.getVie());
@@ -159,16 +166,18 @@ public class Combat extends CombatVue {
 		case "atk":
 			combat.attaqueHero();
 			window.add(attaque);
-			msgAtk.setText("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!");
+			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
+			window.setVisible(false);
+			
 			refresh();
 			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
-			msgAtk.setText("Vous venez de faire votre attaque spéciale sur " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!");
+			msgAtk.append("Vous venez de faire votre attaque spéciale sur " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
 			refresh();
-			window.setVisible(false);
 			break;
 		case "Consommable":
+			combat.consommable();
 			break;
 		}	
 		
@@ -177,6 +186,19 @@ public class Combat extends CombatVue {
 	public void refresh() {
 		heroHealthBar.setValue(heroModel.getVie());
 		bossHealthBar.setValue(bossModel.getVie());
+	}
+	public void bossMort() {
+		unclickable();
+	}
+	
+	public void heroMort() {
+		unclickable();
+	}
+	
+	public void unclickable() {
+		atkButton.setEnabled(false);
+		atkSpeButton.setEnabled(false);
+		consomButton.setEnabled(false);
 	}
 	@Override
 	public void update(Observable o, Object arg) {

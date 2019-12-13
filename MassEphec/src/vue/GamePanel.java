@@ -65,7 +65,7 @@ public class GamePanel extends JFrame{
 					break;
 				}
 			}
-			y += 40;
+			y += 50;
 		}
 		
 		
