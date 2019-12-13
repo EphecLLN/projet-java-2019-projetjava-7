@@ -75,6 +75,8 @@ public class GamePanel extends JFrame implements Observer{
 				}
 			}
 			y += 50;
+<<<<<<< HEAD
+=======
 		}
 	}
 	public void drawCharacters(Graphics g, Personnage hero) {
@@ -84,6 +86,7 @@ public class GamePanel extends JFrame implements Observer{
 		y = hero.getCoordY();
 		if (tileMap[x][y] != 1) {
 			g.drawImage(heroImage, x, y, null);
+>>>>>>> 9a27ad97eb60045103ef4cae16fd79f680ad28f9
 		}
 	}
 

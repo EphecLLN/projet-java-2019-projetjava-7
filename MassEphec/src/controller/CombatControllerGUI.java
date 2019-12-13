@@ -14,6 +14,7 @@ public class CombatControllerGUI {
 	private Hero hero;
 	private Boss boss;
 	private Combat view = null;
+	
 	public CombatControllerGUI(Hero hero, Boss boss) {
 		this.hero = hero;
 		this.boss = boss;
@@ -21,15 +22,19 @@ public class CombatControllerGUI {
 	}
 	
 	public void attaqueHero() {
-		
+		hero.getArme().attaque(boss);
+		attaqueBoss();
+		control();
 	}
 	
-	public void attaqueSpec() {
-		
+	public void attaqueSpe() {
+		hero.getArme().attaqueSpeciale(boss);
+		attaqueBoss();
+		control();
 	}
 	
 	public void attaqueBoss() {
-		
+		boss.attaque(hero);
 	}
 	
 	public void consommable() {
@@ -37,7 +42,14 @@ public class CombatControllerGUI {
 	}
 	
 	public void ajouterCredit() {
-		
+		hero.setCredit(hero.getCredit() + boss.getCredit());
+	}
+	public void control() {
+		if (!boss.enVie()) {
+			view.bossMort();
+		}if(!hero.enVie()) {
+			view.heroMort();
+		}
 	}
 	public void addView(Combat view) {
 		this.view = view;
