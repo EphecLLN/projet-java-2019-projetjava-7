@@ -1,21 +1,29 @@
 package Main;
 
 import model.*;
+
 import controller.*;
 import vue.*;
 import java.util.Scanner;
+import java.awt.*;
+import java.awt.event.*;
 
+import javax.swing.*;
 
 
 public class MainConsole {
 	public MainConsole(String n, String classe) {
+		System.out.println("Bonjour ï¿½toi "+ n +" ï¿½tudiant en "+ classe);
 		Hero h;
 		if(classe.equals("IT")) {
 			h=new IT(n);
+			h.getArme().setHero(h);
 		}else if(classe.equals("Marketing")) {
 			h=new Marketing(n);
+			h.getArme().setHero(h);
 		}else {
 			h=new Comptabilite(n);
+			h.getArme().setHero(h);
 		}System.out.println(h.getArme());
 		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il ï¿½tait... Intï¿½ressant.");
 		CombatControllerConsole c =new CombatControllerConsole(h,prof);
@@ -37,17 +45,22 @@ public class MainConsole {
 			else {
 				System.out.println("Mauvaise entrÃ©e");
 			}
-		}
-		String classes=classe;
-		System.out.println("Bonjour ï¿½toi "+ nom +" ï¿½tudiant en "+ classes);
-		
+		}*/
+		/*Login nn=new Login();
+		nn.setSize(500,400);
+		nn.setVisible(true);
+		String nom=nn.nom;
+		String classe=nn.classe;
+		System.out.println("Bonjour ï¿½toi "+ nom +" ï¿½tudiant en "+ classe);
+		String classes = classe;
+		*/
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
-				new Main(nom,classes);
+				Login nn=new Login();
+				nn.setSize(500,400);
+				nn.setVisible(true);
 			}
-		});¨
-		*/
-		System.out.println("allo");
+		});
 	}
 
 }
