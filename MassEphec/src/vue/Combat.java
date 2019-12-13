@@ -29,11 +29,11 @@ public class Combat extends CombatVue {
 
 	private CombatControllerGUI combat;
 	
-	private JFrame window;
+	private JFrame window ;
 	private Container con;
-	private JPanel buttonPanel, textPanel, bossHealth, heroHealth;
+	private JPanel mainPanel, buttonPanel, textPanel, bossHealth, heroHealth, lastMsgPanel;
 	private JButton atkButton, atkSpeButton, consomButton;
-	private JLabel imageHero, imageBoss, attaque;
+	private JLabel imageHero, imageBoss, attaque, msgGagne, msgPerdu;
 	private JScrollPane scroller;
 	private JProgressBar heroHealthBar, bossHealthBar;
 	private JTextArea msgAtk, msgAtkSpe;
@@ -53,12 +53,21 @@ public class Combat extends CombatVue {
 		super(heroModel, bossModel);
 		this.combat = combat;
 		combat.addView(this);
-		window =new JFrame("TestCombat"); 
+		
+		window =new JFrame("test"); 
 		window.setSize(1280,720);    
 		window.setLayout(null);
 		window.setVisible(true);
 		window.setBackground(Color.white);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		mainPanel =new JPanel(); 
+		mainPanel.setSize(1280,720);    
+		mainPanel.setLayout(null);
+		mainPanel.setVisible(true);
+		mainPanel.setBackground(Color.white);
+		window.add(mainPanel);
+		
 		screenSetup();
 	
 	}
@@ -69,12 +78,19 @@ public class Combat extends CombatVue {
 		buttonPanel.setBounds(410, 460, 320, 200);
 		buttonPanel.setBackground(Color.blue);
 		buttonPanel.setLayout(new GridLayout(3,1));
-		window.add(buttonPanel);
+		mainPanel.add(buttonPanel);
+		
+		lastMsgPanel = new JPanel();
+		lastMsgPanel.setBounds(100, 200, 900, 200);
+		lastMsgPanel.setBackground(Color.blue);
+		lastMsgPanel.setVisible(false);
+		mainPanel.add(lastMsgPanel);
 		
 		textPanel = new JPanel();
 		textPanel.setBounds(1000, 100, 200, 500);
 		//textPanel.setBackground(Color.blue);
-		window.add(textPanel);
+		mainPanel.add(textPanel);
+		textPanel.setBackground(Color.white);
 		
 		
 		msgAtk = new JTextArea();
@@ -85,6 +101,7 @@ public class Combat extends CombatVue {
 		
 		scroller = new JScrollPane(msgAtk);
 		scroller.setPreferredSize(new Dimension(200,320));
+		scroller.setBackground(Color.gray);
 		textPanel.add(scroller);
 		
 		attaque = new JLabel(imgIcon);
@@ -129,7 +146,7 @@ public class Combat extends CombatVue {
 		heroHealth = new JPanel();
 		heroHealth.setBounds(100, 410, 300, 20);
 		heroHealth.setBackground(Color.white);
-		window.add(heroHealth); 
+		mainPanel.add(heroHealth); 
 		heroHealthBar = new JProgressBar(0, heroModel.getVieMax());
 		heroHealthBar.setPreferredSize(new Dimension (300, 20));
 		heroHealthBar.setBackground(Color.red);
@@ -140,7 +157,7 @@ public class Combat extends CombatVue {
 		bossHealth = new JPanel();
 		bossHealth.setBounds(680, 410, 300, 20);
 		bossHealth.setBackground(Color.white);
-		window.add(bossHealth); 
+		mainPanel.add(bossHealth); 
 		bossHealthBar = new JProgressBar(0, bossModel.getVie());
 		bossHealthBar.setPreferredSize(new Dimension (300, 20));
 		bossHealthBar.setBackground(Color.red);
@@ -151,11 +168,11 @@ public class Combat extends CombatVue {
 		
 		imageHero = new JLabel (heros);
 		imageHero.setBounds(100, 100, 300, 300);
-		window.add(imageHero);
+		mainPanel.add(imageHero);
 		
 		imageBoss = new JLabel (boss);
 		imageBoss.setBounds(700, 100, 300, 300);
-		window.add(imageBoss);
+		mainPanel.add(imageBoss);
 		
 		
 	}
@@ -165,7 +182,7 @@ public class Combat extends CombatVue {
 		switch(choix) {
 		case "atk":
 			combat.attaqueHero();
-			window.add(attaque);
+			mainPanel.add(attaque);
 			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
 			refresh();
 			break;
@@ -187,6 +204,11 @@ public class Combat extends CombatVue {
 	}
 	public void bossMort() {
 		unclickable();
+		msgGagne = new JLabel("Vous avez battu " + bossModel.getNom() + ", bien joué! \n Appuyez sur une touche pour continuer.");
+		msgGagne.setPreferredSize(new Dimension(900,200));
+		msgGagne.setVisible(true);
+		msgGagne.setForeground(Color.black);
+		lastMsgPanel.add(msgGagne);
 	}
 	
 	public void heroMort() {
@@ -200,7 +222,7 @@ public class Combat extends CombatVue {
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println(arg);
+	
 	}
 
 	@Override
