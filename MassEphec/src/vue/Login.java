@@ -7,13 +7,14 @@ import Main.*;
   
 public class Login extends JFrame implements ActionListener
  {
-  JButton Soumission;
+  
+	JButton Soumission;
   JPanel panel;
   JLabel label1,label2;
   final JTextField  text1,text2;
   public String nom, classe;
-   public Login()
-   {
+  		
+  		public Login()	{
    label1 = new JLabel();
    label1.setText("Votre nom:");
    text1 = new JTextField(15);

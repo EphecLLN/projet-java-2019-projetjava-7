@@ -167,8 +167,6 @@ public class Combat extends CombatVue {
 			combat.attaqueHero();
 			window.add(attaque);
 			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
-			window.setVisible(false);
-			
 			refresh();
 			break;
 		case "atkSpe" :
