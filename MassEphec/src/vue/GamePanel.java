@@ -1,4 +1,4 @@
-package vue;
+	package vue;
 
 import javax.swing.*;
 
@@ -17,7 +17,7 @@ import java.util.Observer;
 import javax.imageio.ImageIO;
 
 
-public class GamePanel extends JFrame implements Observer{
+public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	Map map;
 	Image grass, mur, heroImage;
@@ -39,6 +39,7 @@ public class GamePanel extends JFrame implements Observer{
 		this.add(new drawMap());
 		this.setVisible(true);
 		this.heroModel = hero;
+		this.addKeyListener(this);
 	}
 
 	
@@ -75,8 +76,7 @@ public class GamePanel extends JFrame implements Observer{
 				}
 			}
 			y += 50;
-<<<<<<< HEAD
-=======
+
 		}
 	}
 	public void drawCharacters(Graphics g, Personnage hero) {
@@ -86,12 +86,28 @@ public class GamePanel extends JFrame implements Observer{
 		y = hero.getCoordY();
 		if (tileMap[x][y] != 1) {
 			g.drawImage(heroImage, x, y, null);
->>>>>>> 9a27ad97eb60045103ef4cae16fd79f680ad28f9
+
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int code = e.getKeyCode();
+		System.out.println(code);
+		
+	}
+	@Override
+	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
