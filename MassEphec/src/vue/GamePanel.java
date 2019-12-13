@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import model.Hero;
 import model.Personnage;
+import controller.MouvementController;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,11 +24,12 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	Image grass, mur, heroImage;
 	
 	Hero heroModel;
+	MouvementController controller;
 	
 	
 	protected int [][] tileMap;
 
-	public GamePanel(int width, int height, Hero hero) {
+	public GamePanel(int width, int height, Hero hero, MouvementController controller) {
 		map = new Map("map.txt");
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
@@ -38,7 +40,11 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(new drawMap());
 		this.setVisible(true);
+		
 		this.heroModel = hero;
+		this.controller = controller;
+		hero.addObserver(this);
+		
 		this.addKeyListener(this);
 	}
 
@@ -66,11 +72,11 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			for (int col = 0; col < 16; col++) {
 				switch(tileMap[row][col]) {
 				case 0 :
-					g.drawImage(grass, x, y,null);
+					g.drawImage(grass, x, y,this);
 					x += 50;
 					break;
 				case 1 : 
-					g.drawImage(mur, x, y, null);
+					g.drawImage(mur, x, y, this);
 					x += 50;
 					break;
 				}
@@ -84,15 +90,15 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		int y;
 		x = hero.getCoordX();
 		y = hero.getCoordY();
-		if (tileMap[x][y] != 1) {
-			g.drawImage(heroImage, x, y, null);
+		if (tileMap[y][x] != 1) {
+			g.drawImage(heroImage, x * 50, y * 50, this);
 
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
+		repaint();
 		
 	}
 	@Override
@@ -104,6 +110,29 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 		System.out.println(code);
+		switch(code) {
+			case 37 : 
+				if (heroModel.getCoordX() > 0) {
+					controller.gauche(tileMap[heroModel.getCoordY()][heroModel.getCoordX() -1]);
+				}
+				break;
+			case 38 : 
+				if(heroModel.getCoordY() > 0) {
+					System.out.println(heroModel.getCoordX());
+					controller.haut(tileMap[heroModel.getCoordY() - 1][heroModel.getCoordX()]);
+				}
+				break;
+			case 39 :
+				if (heroModel.getCoordX() < 15) {
+					controller.droite(tileMap[heroModel.getCoordY()][heroModel.getCoordX() + 1]);
+				}
+				break;
+			case 40 :
+				if (heroModel.getCoordY() < 15) {
+					controller.bas(tileMap[heroModel.getCoordY() + 1][heroModel.getCoordX()]);
+				}
+				break;
+		}
 		
 	}
 	@Override
