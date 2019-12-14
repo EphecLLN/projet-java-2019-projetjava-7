@@ -13,7 +13,7 @@ import javax.swing.*;
 
 public class MainConsole {
 	public MainConsole(String n, String classe) {
-		System.out.println("Bonjour ï¿½toi "+ n +" ï¿½tudiant en "+ classe);
+		System.out.println("Bonjour à toi "+ n +" étudiant en "+ classe);
 		Hero h;
 		if(classe.equals("IT")) {
 			h=new IT(n);

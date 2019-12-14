@@ -8,11 +8,10 @@ import java.util.Observer;
 
 public class MouvementController {
 	private Hero hero;
-	private GamePanel map;
+	private GamePanel view = null;
 		
-	public MouvementController(Hero h, GamePanel m) {
+	public MouvementController(Hero h) {
 		this.hero=h;
-		this.map=m;
 	}
 	 public void haut(int a){
 		 if(a==0) {
@@ -33,6 +32,9 @@ public class MouvementController {
 		 if(a==0) {
 			 hero.bougerGauche();
 		 }
+	 }
+	 public void addView(GamePanel view) {
+		 this.view = view;
 	 }
 	 
 }

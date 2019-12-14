@@ -53,9 +53,8 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers la droite
 	 */
 	public void bougerDroite() {
-		if(this.getCoordX()<15) {
-			this.setCoordX(this.getCoordX()+1);
-		}
+		
+		this.setCoordX(this.getCoordX()+1);
 		setChanged();
 		notifyObservers();
 	}
@@ -63,9 +62,7 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers la gauche
 	 */
 	public void bougerGauche() {
-		if(this.getCoordX()>0) {
-			this.setCoordX(this.getCoordX()-1);
-		}
+		this.setCoordX(this.getCoordX()-1);
 		setChanged();
 		notifyObservers();
 	}
@@ -73,9 +70,7 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers le haut
 	 */
 	public void bougerHaut() {
-		if(this.getCoordY()>0) {
-			this.setCoordY(this.getCoordY()-1);
-		}
+		this.setCoordY(this.getCoordY()-1);
 		setChanged();
 		notifyObservers();
 	}
@@ -83,9 +78,7 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers le bas
 	 */
 	public void bougerBas() {
-		if(this.getCoordY()<15) {
-			this.setCoordY(this.getCoordY()+1);
-		}
+		this.setCoordY(this.getCoordY()+1);
 		setChanged();
 		notifyObservers();
 	}
