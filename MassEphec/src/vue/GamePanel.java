@@ -1,8 +1,14 @@
-	package vue;
+package vue;
 
 import javax.swing.*;
 
+import model.BoostArme;
+import model.BoostVie;
+import model.Boss;
+import model.Consommables;
 import model.Hero;
+import model.Monstre;
+import model.PetitMonstre;
 import model.Personnage;
 import controller.MouvementController;
 
@@ -21,9 +27,13 @@ import javax.imageio.ImageIO;
 public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	Map map;
-	Image grass, mur, heroImage;
+	Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
 	
 	Hero heroModel;
+	Boss boss;
+	Monstre [] monstres = new Monstre[2];
+	BoostArme redbull;
+	BoostVie monsterEnergy;
 	MouvementController controller;
 	
 	
@@ -34,18 +44,27 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
 		heroImage = Toolkit.getDefaultToolkit().createImage("res/HelloKitty.jpg");
+		bossImage = Toolkit.getDefaultToolkit().createImage("res/BossMap.jpg");
+		monstreImage = Toolkit.getDefaultToolkit().createImage("res/MonstreMap.jpg");
+		redbullImage = Toolkit.getDefaultToolkit().createImage("res/RedBullMap.jpg");
+		monsterEnergyImage = Toolkit.getDefaultToolkit().createImage("res/monsterEnergyMap.jpg");
+		
 		
 		this.setSize(new Dimension(width, height));
 		this.setTitle("MassEphec");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(new drawMap());
 		this.setVisible(true);
+		this.addKeyListener(this);
 		
 		this.heroModel = hero;
 		this.controller = controller;
 		hero.addObserver(this);
-		
-		this.addKeyListener(this);
+		boss = new Boss(20, "Delvigne", 100, 6, 14, 10, "Pc arrive");
+		monstres[0] = new PetitMonstre(20, "Os", 100, 6, 10, 5, 20);
+		monstres[1] = new PetitMonstre(20, "Java", 100, 14, 7, 5, 20);
+		redbull = new BoostArme(2 , 5);
+		monsterEnergy = new BoostVie(11 , 1);
 	}
 
 	
@@ -63,7 +82,6 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	public void drawMap(Graphics g) {
 		
-		System.out.println("Drawmap");
 		this.tileMap = map.getTileMap();
 		int x = 0;
 		int y = 0;
@@ -86,18 +104,61 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		}
 	}
 	public void drawCharacters(Graphics g, Personnage hero) {
-		int x;
-		int y;
-		x = hero.getCoordX();
-		y = hero.getCoordY();
-		if (tileMap[y][x] != 1) {
-			g.drawImage(heroImage, x * 50, y * 50, this);
-
+		// Placer héro
+		if (tileMap[hero.getCoordY()][hero.getCoordX()] != 1) {
+			g.drawImage(heroImage, hero.getCoordX() * 50, hero.getCoordY() * 50, this);
+		}
+		// Placer Montres
+		for (int i = 0; i < monstres.length; i++) {
+			if (tileMap[monstres[i].getCoordY()][monstres[i].getCoordX()] != 1 && monstres[i].enVie()) {
+				g.drawImage(monstreImage, monstres[i].getCoordX() * 50, monstres[i].getCoordY() * 50, this);
+			}
+		}
+		// Placer boss
+		if (tileMap[boss.getCoordY()][boss.getCoordX()] != 1 && boss.enVie()) {
+			g.drawImage(bossImage, boss.getCoordX() * 50, boss.getCoordY() * 50, this);
+		}
+		// Placer redbull
+		if (redbull != null && tileMap[redbull.getCoordY()][redbull.getCoordX()] !=1) {
+			g.drawImage(redbullImage, redbull.getCoordX() * 50, redbull.getCoordY() * 50, this);
+		}
+		// Placer monster
+		if (monsterEnergy != null && tileMap[monsterEnergy.getCoordY()][monsterEnergy.getCoordX()] != 1) {
+			g.drawImage(monsterEnergyImage, monsterEnergy.getCoordX() * 50, monsterEnergy.getCoordY() * 50, this);
 		}
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
+		// Si hero rencontre boss
+		int x, y;
+		x = heroModel.getCoordX();
+		y = heroModel.getCoordY();
+		if(x == boss.getCoordX() && y == boss.getCoordY()) {
+			boss.setVie(0);
+			repaint();
+			return;
+		}
+		// Si hero rencontre Monstre
+		for (int i = 0; i < monstres.length; i++) {
+			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
+				monstres[i].setVie(0);
+				repaint();
+				return;
+			}
+		}
+		// Si hero rencontre rebull
+		if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
+			//redbull.donneExp(heroModel);
+			redbull = null;
+			repaint();
+			return;
+		}
+		if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
+			//monsterEnergy = null;
+			repaint();
+			return;
+		}
 		repaint();
 		
 	}
@@ -109,7 +170,6 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
-		System.out.println(code);
 		switch(code) {
 			case 37 : 
 				if (heroModel.getCoordX() > 0) {

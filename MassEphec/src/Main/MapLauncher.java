@@ -1,6 +1,5 @@
 package Main;
-
-import controller.MapController;
+ 
 import controller.MouvementController;
 import model.Hero;
 import model.Pc;
