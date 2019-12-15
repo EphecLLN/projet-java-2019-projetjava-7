@@ -25,7 +25,7 @@ public class MainConsole {
 			h=new Comptabilite(n);
 			h.getArme().setHero(h);
 		}System.out.println(h.getArme());
-		Boss prof= new Boss(5, "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il �tait... Int�ressant.");
+		Boss prof= new Boss(5,"", "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il �tait... Int�ressant.");
 		CombatControllerConsole c =new CombatControllerConsole(h,prof);
 		CombatVueConsole cv = new CombatVueConsole(h, prof, c);
 		c.addView(cv);

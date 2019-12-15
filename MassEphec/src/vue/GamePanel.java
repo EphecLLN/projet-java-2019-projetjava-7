@@ -60,9 +60,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		this.heroModel = hero;
 		this.controller = controller;
 		hero.addObserver(this);
-		boss = new Boss(20, "Delvigne", 100, 6, 14, 10, "Pc arrive");
-		monstres[0] = new PetitMonstre(20, "Os", 100, 6, 10, 5, 20);
-		monstres[1] = new PetitMonstre(20, "Java", 100, 14, 7, 5, 20);
+		boss = new Boss(20, "","Delvigne", 100, 6, 14, 10, "Pc arrive");
+		monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
+		monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
 		redbull = new BoostArme(2 , 5);
 		monsterEnergy = new BoostVie(11 , 1);
 	}
