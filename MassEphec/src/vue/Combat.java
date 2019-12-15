@@ -3,11 +3,14 @@ package vue;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 
@@ -79,12 +82,6 @@ public class Combat extends CombatVue {
 		buttonPanel.setBackground(Color.blue);
 		buttonPanel.setLayout(new GridLayout(3,1));
 		mainPanel.add(buttonPanel);
-		
-		lastMsgPanel = new JPanel();
-		lastMsgPanel.setBounds(100, 200, 900, 200);
-		lastMsgPanel.setBackground(Color.blue);
-		lastMsgPanel.setVisible(false);
-		mainPanel.add(lastMsgPanel);
 		
 		textPanel = new JPanel();
 		textPanel.setBounds(1000, 100, 200, 500);
@@ -165,6 +162,18 @@ public class Combat extends CombatVue {
 		bossHealthBar.setValue(bossModel.getVie());
 		bossHealth.add(bossHealthBar);
 		
+		lastMsgPanel = new JPanel();
+		lastMsgPanel.setBounds(100, 200, 900, 200);
+	//	lastMsgPanel.setBackground(Color.);
+		lastMsgPanel.setVisible(false);
+		mainPanel.add(lastMsgPanel);
+		
+		msgGagne = new JLabel();
+		msgGagne.setPreferredSize(new Dimension(900,200));
+		msgGagne.setVisible(true);
+		msgGagne.setForeground(Color.black);
+		msgGagne.setFont(policeBoutton);
+		lastMsgPanel.add(msgGagne);
 		
 		imageHero = new JLabel (heros);
 		imageHero.setBounds(100, 100, 300, 300);
@@ -204,15 +213,25 @@ public class Combat extends CombatVue {
 	}
 	public void bossMort() {
 		unclickable();
-		msgGagne = new JLabel("Vous avez battu " + bossModel.getNom() + ", bien joué! \n Appuyez sur une touche pour continuer.");
-		msgGagne.setPreferredSize(new Dimension(900,200));
-		msgGagne.setVisible(true);
-		msgGagne.setForeground(Color.black);
-		lastMsgPanel.add(msgGagne);
+		msgGagne.setText("<html>Vous avez battu " + bossModel.getNom() + ", bien joué! <br> Il vous a donné " + bossModel.getCredit() + " crédits durements gagnés.. <br>Appuyez sur une touche pour continuer.</h");
+		lastMsgPanel.setVisible(true);
+		window.addKeyListener(new KeyListener() {
+			  public void keyPressed(KeyEvent e) {                
+		            window.setVisible(false);
+		            System.out.println("v");
+		        }
+			@Override
+			public void keyTyped(KeyEvent e) {}
+			@Override
+			public void keyReleased(KeyEvent e) {}
+		});
+		
 	}
 	
 	public void heroMort() {
 		unclickable();
+		msgGagne.setText("<html>" + bossModel.getNom() + " vous a surmenés de travail... <br>Appuyez sur une touche pour quitter.");
+		lastMsgPanel.setVisible(true);
 	}
 	
 	public void unclickable() {
@@ -234,5 +253,6 @@ public class Combat extends CombatVue {
 	public void disableWarning() {
 		
 	}
+
 
 }
