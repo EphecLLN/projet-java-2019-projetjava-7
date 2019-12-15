@@ -2,6 +2,7 @@ package vue;
 
 import javax.swing.*;
 
+
 import model.BoostArme;
 import model.BoostVie;
 import model.Boss;
@@ -10,6 +11,7 @@ import model.Hero;
 import model.Monstre;
 import model.PetitMonstre;
 import model.Personnage;
+import controller.CombatControllerGUI;
 import controller.MouvementController;
 
 import java.awt.*;
@@ -22,6 +24,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.imageio.ImageIO;
+
 
 
 public class GamePanel extends JFrame implements Observer, KeyListener{
@@ -40,11 +43,21 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	protected int [][] tileMap;
 
 	public GamePanel(int width, int height, Hero hero, MouvementController controller) {
+		
+		this.heroModel = hero;
+		this.controller = controller;
+		boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
+		monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
+		monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+		redbull = new BoostArme(2 , 5);
+		monsterEnergy = new BoostVie(11 , 1);
+		hero.addObserver(this);
+		
 		map = new Map("map.txt");
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
 		heroImage = Toolkit.getDefaultToolkit().createImage("res/HelloKitty.jpg");
-		bossImage = Toolkit.getDefaultToolkit().createImage("res/BossMap.jpg");
+		bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
 		monstreImage = Toolkit.getDefaultToolkit().createImage("res/MonstreMap.jpg");
 		redbullImage = Toolkit.getDefaultToolkit().createImage("res/RedBullMap.jpg");
 		monsterEnergyImage = Toolkit.getDefaultToolkit().createImage("res/monsterEnergyMap.jpg");
@@ -57,14 +70,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		this.setVisible(true);
 		this.addKeyListener(this);
 		
-		this.heroModel = hero;
-		this.controller = controller;
-		hero.addObserver(this);
-		boss = new Boss(20, "","Delvigne", 100, 6, 14, 10, "Pc arrive");
-		monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
-		monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
-		redbull = new BoostArme(2 , 5);
-		monsterEnergy = new BoostVie(11 , 1);
+		
 	}
 
 	
@@ -136,6 +142,10 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		y = heroModel.getCoordY();
 		if(x == boss.getCoordX() && y == boss.getCoordY()) {
 			boss.setVie(0);
+			//JFrame tester = new JFrame(this);
+			//this.setVisible(false);
+			//new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss));
+			//boss.setVie(0);
 			repaint();
 			return;
 		}

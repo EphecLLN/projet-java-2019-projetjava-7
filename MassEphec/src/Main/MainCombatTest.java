@@ -10,7 +10,7 @@ public class MainCombatTest {
 		Hero h = new IT("Georges");
 		//h.setVie(2);
 		Boss b = new Boss(5, "res/Boss.jpg", "Mr Delvigne",100, 0, 0, 20, "Bonsoir messieurs, j'ai vu votre devoir hier il �tait... Int�ressant.");
-		new Combat(h, b, new CombatControllerGUI(h,b));
+		//new Combat(h, b, new CombatControllerGUI(h,b));
 	}
 	
 	public static void main (String [] args) {
