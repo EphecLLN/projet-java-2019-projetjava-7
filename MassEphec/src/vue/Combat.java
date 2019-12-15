@@ -27,8 +27,11 @@ import javax.swing.JTextArea;
 import controller.*;
 import model.Boss;
 import model.Hero;
+import Main.*;
 
-public class Combat extends CombatVue {
+public class Combat extends CombatVue implements KeyListener {
+	
+	private boolean gagne;
 
 	private CombatControllerGUI combat;
 	
@@ -36,17 +39,19 @@ public class Combat extends CombatVue {
 	private Container con;
 	private JPanel mainPanel, buttonPanel, textPanel, bossHealth, heroHealth, lastMsgPanel;
 	private JButton atkButton, atkSpeButton, consomButton;
-	private JLabel imageHero, imageBoss, attaque, msgGagne, msgPerdu;
+	private JLabel imageHero, imageBoss, attaque, msgEnd;
 	private JScrollPane scroller;
 	private JProgressBar heroHealthBar, bossHealthBar;
-	private JTextArea msgAtk, msgAtkSpe;
+	private JTextArea msgAtk;
+	
+	private KeyListener kListener;
 	
 	private Font policeBoutton = new Font ("Times New Roman", Font.PLAIN,30);
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
 	
 	private ImageIcon heros = new ImageIcon("res/heros.png");
-	private ImageIcon boss = new ImageIcon("res/monstre.jpg");
+	private ImageIcon boss = new ImageIcon(bossModel.getPath());
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 
@@ -62,6 +67,7 @@ public class Combat extends CombatVue {
 		window.setLayout(null);
 		window.setVisible(true);
 		window.setBackground(Color.white);
+		window.setFocusable(true);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainPanel =new JPanel(); 
@@ -168,12 +174,12 @@ public class Combat extends CombatVue {
 		lastMsgPanel.setVisible(false);
 		mainPanel.add(lastMsgPanel);
 		
-		msgGagne = new JLabel();
-		msgGagne.setPreferredSize(new Dimension(900,200));
-		msgGagne.setVisible(true);
-		msgGagne.setForeground(Color.black);
-		msgGagne.setFont(policeBoutton);
-		lastMsgPanel.add(msgGagne);
+		msgEnd = new JLabel();
+		msgEnd.setPreferredSize(new Dimension(900,200));
+		msgEnd.setVisible(true);
+		msgEnd.setForeground(Color.black);
+		msgEnd.setFont(policeBoutton);
+		lastMsgPanel.add(msgEnd);
 		
 		imageHero = new JLabel (heros);
 		imageHero.setBounds(100, 100, 300, 300);
@@ -193,12 +199,10 @@ public class Combat extends CombatVue {
 			combat.attaqueHero();
 			mainPanel.add(attaque);
 			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
-			refresh();
 			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
 			msgAtk.append("Vous venez de faire votre attaque spéciale sur " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
-			refresh();
 			break;
 		case "Consommable":
 			combat.consommable();
@@ -207,31 +211,21 @@ public class Combat extends CombatVue {
 		
 	}
 	
-	public void refresh() {
-		heroHealthBar.setValue(heroModel.getVie());
-		bossHealthBar.setValue(bossModel.getVie());
-	}
 	public void bossMort() {
 		unclickable();
-		msgGagne.setText("<html>Vous avez battu " + bossModel.getNom() + ", bien joué! <br> Il vous a donné " + bossModel.getCredit() + " crédits durements gagnés.. <br>Appuyez sur une touche pour continuer.</h");
+		msgEnd.setText("<html>Vous avez battu " + bossModel.getNom() + ", bien joué! <br> Il vous a donné " + bossModel.getCredit() + " crédits durements gagnés.. <br>Appuyez sur une touche pour continuer.</h");
 		lastMsgPanel.setVisible(true);
-		window.addKeyListener(new KeyListener() {
-			  public void keyPressed(KeyEvent e) {                
-		            window.setVisible(false);
-		            System.out.println("v");
-		        }
-			@Override
-			public void keyTyped(KeyEvent e) {}
-			@Override
-			public void keyReleased(KeyEvent e) {}
-		});
+		gagne = true;
+		window.addKeyListener(this);
 		
 	}
 	
 	public void heroMort() {
 		unclickable();
-		msgGagne.setText("<html>" + bossModel.getNom() + " vous a surmenés de travail... <br>Appuyez sur une touche pour quitter.");
+		msgEnd.setText("<html>" + bossModel.getNom() + " vous a surmenés de travail... <br>Appuyez sur une touche pour quitter.");
 		lastMsgPanel.setVisible(true);
+		gagne = false;
+		window.addKeyListener(this);
 	}
 	
 	public void unclickable() {
@@ -241,6 +235,8 @@ public class Combat extends CombatVue {
 	}
 	@Override
 	public void update(Observable o, Object arg) {
+		heroHealthBar.setValue(heroModel.getVie());
+		bossHealthBar.setValue(bossModel.getVie());
 	
 	}
 
@@ -252,6 +248,26 @@ public class Combat extends CombatVue {
 	@Override
 	public void disableWarning() {
 		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if (gagne) {
+			new MapLauncher();
+		}else {
+			window.setVisible(false);
+		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		System.out.println("pressed");
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		System.out.println("released");
 	}
 
 

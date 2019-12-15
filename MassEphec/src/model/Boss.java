@@ -4,8 +4,8 @@ public class Boss extends Monstre {
 	private int credit;
 	private String speech;
 
-	public Boss(int degats, String nom, int vie, int coordX, int coordY, int credit, String speech) {
-		super(degats, nom, vie, coordX, coordY);
+	public Boss(int degats, String path, String nom, int vie, int coordX, int coordY, int credit, String speech) {
+		super(degats, path, nom, vie, coordX, coordY);
 		this.credit = credit;
 		this.speech = speech;
 	}
