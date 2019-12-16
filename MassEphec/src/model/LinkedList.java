@@ -17,7 +17,7 @@ public class LinkedList {
 	public Consommables getLast() {
 		return last.getCons();
 	}
-	public void setNode(Consommables c) {
+	public void setNode(BoostVie c) {
 		Node n= new Node(c);
 		if(size==0) {
 			first=n;
