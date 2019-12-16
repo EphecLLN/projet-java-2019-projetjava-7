@@ -28,5 +28,9 @@ public class CreationHero {
 	public Hero getHero() {
 		return hero;
 	}
+	
+	public void linkDb() {
+		
+	}
 
 }

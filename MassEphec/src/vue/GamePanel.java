@@ -194,6 +194,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 
 	@Override
 	public void update(Observable o, Object arg) {
+<<<<<<< HEAD
 		if (!isFinished()) {
 			int x, y;
 			x = heroModel.getCoordX();
@@ -206,6 +207,25 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 				controller.enterFight(true);
 				new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
 				//boss.setVie(0);
+=======
+		// Si hero rencontre boss
+		int x, y;
+		x = heroModel.getCoordX();
+		y = heroModel.getCoordY();
+		if(x == boss.getCoordX() && y == boss.getCoordY()) {
+			//boss.setVie(0);
+			//JFrame tester = new JFrame(this);
+			mainPanel.setVisible(false);
+			new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
+			//boss.setVie(0);
+			repaint();
+			return;
+		}
+		// Si hero rencontre Monstre
+		for (int i = 0; i < monstres.length; i++) {
+			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
+				monstres[i].setVie(0);
+>>>>>>> 701464cb9a6398ae7cdbbeba4e1d7b32e34b36d1
 				repaint();
 				return;
 				}

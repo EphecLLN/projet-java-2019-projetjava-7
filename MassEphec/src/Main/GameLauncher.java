@@ -1,6 +1,7 @@
 package Main;
 
 import controller.MouvementController;
+import db.Jdbc;
 import model.Hero;
 import vue.Combat;
 import vue.GamePanel;
@@ -23,7 +24,12 @@ public class GameLauncher extends Thread {
 	}
 
 	public static void main(String[] args) {
-		new Login();
+		 try {
+	            Jdbc.main(null);
+	        }catch(Exception e){System.out.println(e);}
+	        finally{
+	            System.out.println("Tables construites.");
+	        }   
+			new Login();
 	}
-
 }
