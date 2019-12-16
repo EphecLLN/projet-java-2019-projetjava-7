@@ -12,6 +12,7 @@ import model.Monstre;
 import model.PetitMonstre;
 import model.Personnage;
 import controller.CombatControllerGUI;
+import controller.CombatControllerPetitMonstre;
 import controller.MouvementController;
 
 import java.awt.*;
@@ -31,13 +32,13 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	private Map map1, map2;
 	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel;
+	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel, titrePanel;
 	private JLabel titre;
 	
 	
 	Hero heroModel;
 	Boss boss;
-	Monstre [] monstres = new Monstre[2];
+	PetitMonstre [] monstres = new PetitMonstre[2];
 	BoostArme redbull;
 	boolean redbullPicked;
 	BoostVie monsterEnergy;
@@ -96,19 +97,20 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		statsPanel.setVisible(true);
 		mainPanel.add(statsPanel);
 		
+		titrePanel = new JPanel();
+		titre.setSize(400, 20);
+		titre.setPreferredSize(new Dimension(400, 20));
+		
+		
 		labelPanel = new JPanel();
-		labelPanel.setSize(140, 290);
-		labelPanel.setPreferredSize(new Dimension(140, 290));
 		labelPanel.setVisible(true);
-		labelPanel.setBounds(10,10,140,290);
+		labelPanel.setBounds(10,10,150,500);
 		labelPanel.setBackground(Color.black);
 		statsPanel.add(labelPanel);
 		
 		valuePanel = new JPanel();
-		valuePanel.setSize(140,290);
-		valuePanel.setPreferredSize(new Dimension(140,290));
 		valuePanel.setVisible(true);
-		valuePanel.setBounds(150, 10, 140, 290);
+		valuePanel.setBounds(150, 10, 150, 290);
 		valuePanel.setBackground(Color.orange);
 		statsPanel.add(valuePanel);
 		
@@ -241,11 +243,15 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		// Si hero rencontre Monstre
 		for (int i = 0; i < monstres.length; i++) {
 			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
-				monstres[i].setVie(0);
-				repaint();
-				return;
+				if (!heroModel.getEnCombat()) {
+					this.setVisible(false);
+					controller.enterFight(true);
+					new CombatPetitMonstre(heroModel, monstres[i], new CombatControllerPetitMonstre(heroModel, monstres[i]), this);
+					repaint();
+					return;
 				}
 			}
+		}
 			// Si hero rencontre Monstre
 			for (int i = 0; i < monstres.length; i++) {
 				if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
