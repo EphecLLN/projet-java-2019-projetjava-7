@@ -32,7 +32,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	private Map map1, map2;
 	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel, titrePanel;
+	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel, titrePanel, expPanel;
 	private JLabel titre;
 	
 	
@@ -100,6 +100,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		titrePanel = new JPanel();
 		titre.setSize(400, 20);
 		titre.setPreferredSize(new Dimension(400, 20));
+		titre.setVisible(true);
+		statsPanel.add(titrePanel);
+		
 		
 		
 		labelPanel = new JPanel();
@@ -118,12 +121,13 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	}
 	
 	public void screenSetup() {
-		/*
+		
 		titre = new JLabel();
 		titre.setText("Perso infos");
 		titre.setHorizontalAlignment(JLabel.CENTER);
+		titre.setVisible(true);
 		statsPanel.add(titre);
-		*/
+		
 	}
 	
 	public void newMap(int mapNum) {
