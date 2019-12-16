@@ -12,23 +12,14 @@ import model.Pc;
 import vue.GamePanel;
 import model.Arme;
 
-public class MapLauncher extends JFrame{
+public class MapLauncher{
 	
-	private static int WIDHT = 1280;
-	private static int HEIGHT = 720;
 	
-	public MapLauncher() {
-		this.setTitle("MassEphec");
-		this.setSize(new Dimension(WIDHT, HEIGHT));
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-	}
-
+	
 	public static void main (String [] args) {
 		Hero hero = new IT("bg");
 		MouvementController controller =  new MouvementController(hero);
-		JFrame frame = new MapLauncher();
-		GamePanel panel = new GamePanel(1280, 720, hero, controller, frame);
+		GamePanel panel = new GamePanel(1280, 720, hero, controller);
 		controller.addView(panel);
 	}
 }

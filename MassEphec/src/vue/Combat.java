@@ -32,6 +32,7 @@ import Main.*;
 public class Combat extends CombatVue implements KeyListener {
 	
 	private boolean gagne;
+	private Hero heroModel;
 
 	private CombatControllerGUI combat;
 	
@@ -54,13 +55,17 @@ public class Combat extends CombatVue implements KeyListener {
 	private ImageIcon boss = new ImageIcon(bossModel.getPath());
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
+	private JFrame oldFrame;
+	
 
 
 	
-	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat) {
+	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame frame ) {
 		super(heroModel, bossModel);
 		this.combat = combat;
 		combat.addView(this);
+		this.heroModel = heroModel;
+		this.oldFrame = frame;
 		
 		window = new JFrame("Combat avec " + bossModel.getNom()); 
 		window.setSize(1280,720);    
@@ -253,7 +258,9 @@ public class Combat extends CombatVue implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		if (gagne) {
-			new MapLauncher();
+			window.setVisible(false);
+			// new GamePanel(1280,720, heroModel, new MouvementController(heroModel));
+			oldFrame.setVisible(true);
 		}else {
 			window.setVisible(false);
 		}

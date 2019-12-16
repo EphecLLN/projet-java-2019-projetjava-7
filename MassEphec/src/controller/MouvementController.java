@@ -44,6 +44,13 @@ public class MouvementController {
 		 hero.getArme().ajouterExp(exp);
 	 }
 	 
+	 public void changeMap() {
+		 hero.setMapNum(hero.getMapNum() + 1);
+	 }
+	 
+	 public void enterFight(boolean enCombat) {
+		 hero.setEnCombat(enCombat);
+	 }
 	 public void addView(GamePanel panel) {
 		 this.view = panel;
 	 }
