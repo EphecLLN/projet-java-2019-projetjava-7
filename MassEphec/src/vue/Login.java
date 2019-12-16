@@ -5,12 +5,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import Main.*;
+import model.Hero;
+
 import java.awt.Graphics;
 import java.awt.Image;
   
 public class Login extends JFrame implements ActionListener
  {
   
+	
+	
 	private JPanel panel, buttonPanel, textPanel;
 	private JButton commencer, reprendre, it, compta, market;
 	private JLabel label1, label2,label3;
@@ -21,8 +25,10 @@ public class Login extends JFrame implements ActionListener
 	private ImageIcon imMarket = new ImageIcon(new ImageIcon("res/Market.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
 	private JTextField  text1;
 	public String nom, classe;
-  		
+  	
   public Login()	{
+	  	setSize(500,400);
+		setVisible(true);
 	  	panel =new JPanel();
 		panel=new JPanel(new GridLayout(5,1));
 		panel.setVisible(true);
@@ -121,11 +127,17 @@ public class Login extends JFrame implements ActionListener
   public void lancement(ActionEvent ae)
    {
    nom=text1.getText();
-   panel.setVisible(false);
-   //clean db
-   new MainConsole(nom,classe);
+   setVisible(false);
+   new GameLauncher(new CreationHero(nom, classe).getHero());
+   
  }
   public void chargerAncien(ActionEvent ae) {
 	  //chargement
   }
+@Override
+
+	public void actionPerformed(ActionEvent e) {
+	// TODO Auto-generated method stub
+	
+}
  }

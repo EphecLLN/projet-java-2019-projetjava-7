@@ -10,7 +10,7 @@ package model;
 public class IT extends Hero {
 
 	public IT(String nom) {
-		super(nom, 1000, 0, 0, new Pc());
+		super(nom, "res/ITHeros.png",1000, 6, 0, new Pc());
 	}
 	
 	

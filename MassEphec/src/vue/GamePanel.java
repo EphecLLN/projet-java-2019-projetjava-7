@@ -59,7 +59,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		map = new Map("map.txt");
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
-		heroImage = Toolkit.getDefaultToolkit().createImage("res/HelloKitty.jpg");
+		heroImage = Toolkit.getDefaultToolkit().createImage(hero.getPath());
 		bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
 		monstreImage = Toolkit.getDefaultToolkit().createImage("res/MonstreMap.jpg");
 		redbullImage = Toolkit.getDefaultToolkit().createImage("res/RedBullMap.jpg");
@@ -158,7 +158,14 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		x = heroModel.getCoordX();
 		y = heroModel.getCoordY();
 		if(x == boss.getCoordX() && y == boss.getCoordY()) {
+<<<<<<< HEAD
 			boss.setVie(0);
+=======
+			//JFrame tester = new JFrame(this);
+			setVisible(false);
+			new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss));
+			//boss.setVie(0);
+>>>>>>> 30d79fd5346665e9a4e121c62f82ab1d1fd69261
 			repaint();
 			return;
 		}

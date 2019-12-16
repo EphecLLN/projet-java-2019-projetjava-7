@@ -12,7 +12,7 @@ public class Marketing extends Hero {
 	
 	
 	public Marketing(String name) {
-		super(name, 100,0,0, new Costard());
+		super(name, "res/Marketing.jpg", 100,6,0, new Costard());
 	}
 
 }

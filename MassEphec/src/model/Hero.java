@@ -6,8 +6,8 @@ public class Hero extends Personnage {
 	private Arme arme;
 	private String classe;// IT compta ou market
 	
-	public Hero(String nom, int vie, int x, int y, Arme arme) {
-		super(nom,vie,x,y);
+	public Hero(String nom, String path,int vie, int x, int y, Arme arme) {
+		super(nom, path,vie,x,y);
 		this.vieMax = vie;
 		this.credit=0;
 		this.arme = arme;
