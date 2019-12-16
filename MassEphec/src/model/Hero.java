@@ -5,12 +5,14 @@ public class Hero extends Personnage {
 	private int credit, vieMax; 
 	private Arme arme;
 	private String classe;// IT compta ou market
+	private int mapNum;
 	
 	public Hero(String nom, String path,int vie, int x, int y, Arme arme) {
 		super(nom, path,vie,x,y);
 		this.vieMax = vie;
 		this.credit=0;
 		this.arme = arme;
+		this.mapNum = 1;
 	}
 	
 	/*
@@ -44,6 +46,14 @@ public class Hero extends Personnage {
 	
 	public void setArme(Arme arm) {
 		this.arme = arm;
+	}
+	
+	public void setMapNum(int mapNum) {
+		this.mapNum = mapNum;
+	}
+	
+	public int getMapNum() {
+		return this.mapNum;
 	}
 	
 	public String toString() {
