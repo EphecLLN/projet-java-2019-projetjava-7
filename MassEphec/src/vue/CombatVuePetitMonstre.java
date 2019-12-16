@@ -13,7 +13,7 @@ public abstract class CombatVuePetitMonstre implements Observer{
 		this.heroModel = heroModel;
 		this.monstre = monstre;
 		heroModel.addObserver(this);
-		this.monstre.addObserver(this);
+		monstre.addObserver(this);
 		
 	}
 	

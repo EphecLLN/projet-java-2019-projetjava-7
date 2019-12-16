@@ -217,7 +217,7 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 		lastMsgPanel.setVisible(true);
 		gagne = true;
 		window.addKeyListener(this);
-		System.out.println("BossMort");
+		System.out.println("MonstreMort");
 		
 		 try {
 	            // connection et préparation de la query
