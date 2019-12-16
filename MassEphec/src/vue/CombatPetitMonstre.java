@@ -40,11 +40,11 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 	
 	private JFrame window ;
 	private Container con;
-	private JPanel mainPanel, buttonPanel, textPanel, bossHealth, heroHealth, lastMsgPanel;
+	private JPanel mainPanel, buttonPanel, textPanel, monstreHealth, heroHealth, lastMsgPanel;
 	private JButton atkButton, atkSpeButton, consomButton;
-	private JLabel imageHero, imageBoss, attaque, msgEnd;
+	private JLabel imageHero, imageMonstre, attaque, msgEnd;
 	private JScrollPane scroller;
-	private JProgressBar heroHealthBar, bossHealthBar;
+	private JProgressBar heroHealthBar, monstreHealthBar;
 	private JTextArea msgAtk;
 	
 	private KeyListener kListener;
@@ -53,7 +53,7 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
 	private ImageIcon heros = new ImageIcon(heroModel.getPath());
-	private ImageIcon boss = new ImageIcon(monstre.getPath());
+	private ImageIcon monstreImage = new ImageIcon(monstre.getPath());
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 	private JFrame oldFrame;
@@ -160,16 +160,17 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 		heroHealthBar.setValue(heroModel.getVie());
 		heroHealth.add(heroHealthBar);
 		
-		bossHealth = new JPanel();
-		bossHealth.setBounds(680, 410, 300, 20);
-		bossHealth.setBackground(Color.white);
-		mainPanel.add(bossHealth); 
-		bossHealthBar = new JProgressBar(0, monstre.getVie());
-		bossHealthBar.setPreferredSize(new Dimension (300, 20));
-		bossHealthBar.setBackground(Color.red);
-		bossHealthBar.setForeground(Color.green);
-		bossHealthBar.setValue(monstre.getVie());
-		bossHealth.add(bossHealthBar);
+		monstreHealth = new JPanel();
+		monstreHealth.setBounds(680, 410, 300, 20);
+		monstreHealth.setBackground(Color.white);
+		mainPanel.add(monstreHealth); 
+		monstreHealthBar = new JProgressBar(0, monstre.getVie());
+		monstreHealthBar.setPreferredSize(new Dimension (300, 20));
+		monstreHealthBar.setBackground(Color.red);
+		monstreHealthBar.setForeground(Color.green);
+		System.out.println(monstre.getVie());
+		monstreHealthBar.setValue(monstre.getVie());
+		monstreHealth.add(monstreHealthBar);
 		
 		lastMsgPanel = new JPanel();
 		lastMsgPanel.setBounds(100, 200, 900, 200);
@@ -188,9 +189,9 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 		imageHero.setBounds(100, 100, 300, 300);
 		mainPanel.add(imageHero);
 		
-		imageBoss = new JLabel (boss);
-		imageBoss.setBounds(700, 100, 300, 300);
-		mainPanel.add(imageBoss);
+		imageMonstre = new JLabel (monstreImage);
+		imageMonstre.setBounds(700, 100, 300, 300);
+		mainPanel.add(imageMonstre);
 		
 		
 	}
@@ -248,7 +249,7 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 	@Override
 	public void update(Observable o, Object arg) {
 		heroHealthBar.setValue(heroModel.getVie());
-		bossHealthBar.setValue(monstre.getVie());
+		monstreHealthBar.setValue(monstre.getVie());
 	
 	}
 

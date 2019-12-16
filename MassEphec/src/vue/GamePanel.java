@@ -231,7 +231,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			int x, y;
 			x = heroModel.getCoordX();
 			y = heroModel.getCoordY();
-			if(x == boss.getCoordX() && y == boss.getCoordY()) {
+			if(x == boss.getCoordX() && y == boss.getCoordY() && boss.enVie()) {
 				if (!heroModel.getEnCombat()) {
 					this.setVisible(false);
 					controller.enterFight(true);
@@ -242,8 +242,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			}
 		// Si hero rencontre Monstre
 		for (int i = 0; i < monstres.length; i++) {
-			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
+			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY() && monstres[i].enVie()) {
 				if (!heroModel.getEnCombat()) {
+					System.out.println(monstres[i].getVie());
 					this.setVisible(false);
 					controller.enterFight(true);
 					new CombatPetitMonstre(heroModel, monstres[i], new CombatControllerPetitMonstre(heroModel, monstres[i]), this);
@@ -252,14 +253,6 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 				}
 			}
 		}
-			// Si hero rencontre Monstre
-			for (int i = 0; i < monstres.length; i++) {
-				if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
-					monstres[i].setVie(0);
-					repaint();
-					return;
-				}
-			}
 			// Si hero rencontre rebull
 			if (!redbullPicked) {
 				if (x == redbull.getCoordX() && y == redbull.getCoordY()) {

@@ -23,17 +23,17 @@ public class CombatControllerPetitMonstre {
 	
 	public void attaqueHero() {
 		hero.getArme().attaque(monstre);
-		attaqueBoss();
+		attaqueMonstre();
 		control();
 	}
 	
 	public void attaqueSpe() {
 		hero.getArme().attaqueSpeciale(monstre);
-		attaqueBoss();
+		attaqueMonstre();
 		control();
 	}
 	
-	public void attaqueBoss() {
+	public void attaqueMonstre() {
 		monstre.attaque(hero);
 	}
 	
