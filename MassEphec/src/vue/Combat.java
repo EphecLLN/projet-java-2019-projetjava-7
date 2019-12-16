@@ -35,7 +35,6 @@ import Main.*;
 public class Combat extends CombatVue implements KeyListener {
 	
 	private boolean gagne;
-	private Hero heroModel;
 
 	private CombatControllerGUI combat;
 	
@@ -63,16 +62,12 @@ public class Combat extends CombatVue implements KeyListener {
 
 
 	
-<<<<<<< HEAD
-	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame frame ) {
-=======
+
 	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame window) {
->>>>>>> 701464cb9a6398ae7cdbbeba4e1d7b32e34b36d1
 		super(heroModel, bossModel);
 		this.combat = combat;
 		combat.addView(this);
-		this.heroModel = heroModel;
-		this.oldFrame = frame;
+		this.oldFrame = window;
 		
 		this.window = window; 
 		//this.window.setSize(1280,720);    
