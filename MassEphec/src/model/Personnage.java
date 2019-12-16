@@ -25,7 +25,11 @@ public class Personnage extends Observable {
 		return vie;
 	}
 	public void setVie(int vie) {
-		this.vie = vie;
+		if (vie < 0) {
+			this.vie = 0;
+		}else {
+			this.vie = vie;
+		}
 		setChanged();
 		notifyObservers(this);
 	}
