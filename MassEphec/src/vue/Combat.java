@@ -52,17 +52,18 @@ public class Combat extends CombatVue implements KeyListener {
 	private Font policeBoutton = new Font ("Times New Roman", Font.PLAIN,30);
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
-	
 	private ImageIcon heros = new ImageIcon(heroModel.getPath());
 	private ImageIcon boss = new ImageIcon(bossModel.getPath());
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 	private JFrame oldFrame;
 	
-
-
 	
-
+	
+	
+	
+	
+	
 	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame frame) {
 		super(heroModel, bossModel);
 		this.combat = combat;
@@ -224,6 +225,7 @@ public class Combat extends CombatVue implements KeyListener {
 		gagne = true;
 		window.addKeyListener(this);
 		System.out.println("BossMort");
+		
 		 try {
 	            // connection et préparation de la query
 	            Connection con = getConnection();
@@ -233,7 +235,7 @@ public class Combat extends CombatVue implements KeyListener {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-	        
+        
 	}
 	
 	public void heroMort() {
