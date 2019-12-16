@@ -143,8 +143,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
 			controller.setX(1);
 			controller.setY(0);
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 2, 4, 5, 20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(5 , 5);
 			monsterEnergy = new BoostVie(14 , 4);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());

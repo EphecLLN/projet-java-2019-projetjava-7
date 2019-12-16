@@ -53,7 +53,7 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
 	private ImageIcon heros = new ImageIcon(heroModel.getPath());
-	private ImageIcon monstreImage = new ImageIcon(monstre.getPath());
+	private ImageIcon monstreImage = new ImageIcon("res/MonstreMap.jpg");
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 	private JFrame oldFrame;
