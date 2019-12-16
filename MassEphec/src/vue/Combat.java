@@ -229,7 +229,7 @@ public class Combat extends CombatVue implements KeyListener {
 		 try {
 	            // connection et préparation de la query
 	            Connection con = getConnection();
-	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '1' , `coordX` = '2' , `coordY` = '23' , `levelArme` = '32' , `expArme` = '3' WHERE `nom` = 'coucou'; ";
+	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `x` = '" +heroModel.getCoordX() + "' , `y` = '"+ heroModel.getCoordY() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+heroModel.getMapNum() + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
 	            PreparedStatement ps = con.prepareStatement(query);
                 ps.executeUpdate();
 	        } catch (Exception e) {

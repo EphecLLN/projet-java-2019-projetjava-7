@@ -19,7 +19,9 @@ public class GameLauncher extends Thread {
 	private GamePanel map;
 	
 	public GameLauncher(Hero hero) {
-			
+		
+		 	this.hero = hero;
+		 	
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
 				map = new GamePanel(1280, 835, hero, new MouvementController(hero));

@@ -25,6 +25,8 @@ public class Login extends JFrame implements ActionListener
 	private ImageIcon imMarket = new ImageIcon(new ImageIcon("res/Market.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
 	private JTextField  text1;
 	public String nom, classe;
+	
+	private CreationHero create = new CreationHero();
   	
   public Login()	{
 	  	setSize(500,400);
@@ -128,7 +130,9 @@ public class Login extends JFrame implements ActionListener
    {
    nom=text1.getText();
    setVisible(false);
-   new GameLauncher(new CreationHero(nom, classe).getHero());
+   new GameLauncher(create.creationHero(nom, classe));
+   create.linkDb(classe);
+   
    
  }
   public void chargerAncien(ActionEvent ae) {
@@ -140,4 +144,5 @@ public class Login extends JFrame implements ActionListener
 	// TODO Auto-generated method stub
 	
 }
+
  }
