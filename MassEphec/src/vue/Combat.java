@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Observable;
 
 import javax.swing.Icon;
@@ -50,25 +53,25 @@ public class Combat extends CombatVue implements KeyListener {
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
 	
-	private ImageIcon heros = new ImageIcon("res/heros.png");
+	private ImageIcon heros = new ImageIcon(heroModel.getPath());
 	private ImageIcon boss = new ImageIcon(bossModel.getPath());
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 
 
 	
-	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat) {
+	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame window) {
 		super(heroModel, bossModel);
 		this.combat = combat;
 		combat.addView(this);
 		
-		window = new JFrame("Combat avec " + bossModel.getNom()); 
-		window.setSize(1280,720);    
-		window.setLayout(null);
-		window.setVisible(true);
-		window.setBackground(Color.white);
-		window.setFocusable(true);
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.window = window; 
+		//this.window.setSize(1280,720);    
+		this.window.setLayout(null);
+		//this.window.setVisible(true);
+		this.window.setBackground(Color.white);
+		this.window.setFocusable(true);
+		this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainPanel =new JPanel(); 
 		mainPanel.setSize(1280,830);    
@@ -207,8 +210,7 @@ public class Combat extends CombatVue implements KeyListener {
 		case "Consommable":
 			combat.consommable();
 			break;
-		}	
-		
+		}
 	}
 	
 	public void bossMort() {
@@ -217,7 +219,15 @@ public class Combat extends CombatVue implements KeyListener {
 		lastMsgPanel.setVisible(true);
 		gagne = true;
 		window.addKeyListener(this);
-		
+		 try {
+	            // connection et préparation de la query
+	            Connection con = getConnection();
+	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '1' , `coordX` = '2' , `coordY` = '23' , `levelArme` = '32' , `expArme` = '3' WHERE `nom` = 'coucou'; ";
+	            PreparedStatement ps = con.prepareStatement(query);
+                ps.executeUpdate();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
 	}
 	
 	public void heroMort() {
@@ -226,6 +236,7 @@ public class Combat extends CombatVue implements KeyListener {
 		lastMsgPanel.setVisible(true);
 		gagne = false;
 		window.addKeyListener(this);
+		
 	}
 	
 	public void unclickable() {
@@ -269,6 +280,26 @@ public class Combat extends CombatVue implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		System.out.println("released");
 	}
+	
+    static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DATABASE = "massephec";
+    static final String URL = "jdbc:mysql://localhost/"+DATABASE+"?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+    static final String USERNAME = "root";
+    static final String PASSWORD = "";
+    static final String TABLE = "heroes";
+
+	
+    public static Connection getConnection() throws Exception {
+        try {
+            Class.forName(DRIVER);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/massephec?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", USERNAME, PASSWORD);
+            System.out.println("Connecté à la base de données");
+            return conn;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
 
 }

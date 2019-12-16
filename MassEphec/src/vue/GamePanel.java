@@ -158,14 +158,11 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		x = heroModel.getCoordX();
 		y = heroModel.getCoordY();
 		if(x == boss.getCoordX() && y == boss.getCoordY()) {
-<<<<<<< HEAD
-			boss.setVie(0);
-=======
-			//JFrame tester = new JFrame(this);
-			setVisible(false);
-			new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss));
 			//boss.setVie(0);
->>>>>>> 30d79fd5346665e9a4e121c62f82ab1d1fd69261
+			//JFrame tester = new JFrame(this);
+			mainPanel.setVisible(false);
+			new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
+			//boss.setVie(0);
 			repaint();
 			return;
 		}
