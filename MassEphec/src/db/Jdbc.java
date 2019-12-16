@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 public class Jdbc {
 
     static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DATABASE = "ui";
+    static final String DATABASE = "massephec";
     static final String URL = "jdbc:mysql://localhost?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
     static final String USERNAME = "root";
     static final String PASSWORD = "";
