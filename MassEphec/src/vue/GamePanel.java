@@ -27,11 +27,11 @@ import javax.imageio.ImageIO;
 
 
 
-public class GamePanel extends JFrame implements Observer, KeyListener{
+public class GamePanel extends JPanel implements Observer, KeyListener{
 	
-	Map map;
+	Map map1, map2;
 	Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	JPanel statsPanel, mainPanel;
+	JPanel statsPanel, mapPanel;
 	
 	Hero heroModel;
 	Boss boss;
@@ -45,48 +45,60 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	protected int [][] tileMap;
 
-	public GamePanel(int width, int height, Hero hero, MouvementController controller) {
+	public GamePanel(int width, int height, Hero hero, MouvementController controller, JFrame frame) {
 		
 		this.heroModel = hero;
 		this.controller = controller;
 		
+		//heroModel.setMapNum(2);
 		hero.addObserver(this);
+		map1 = new Map("map1.txt");
+		map2 = new Map("map2.txt");
 		
-		switch (heroModel.getMapNum()) {
-		case 1 : 
-			map = new Map("map1.txt");
+		switch(heroModel.getMapNum()) {
+		case 1: 
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
+			setImageBoss(boss.getPath());
 			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
 			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(2 , 5);
 			monsterEnergy = new BoostVie(11 , 1);
+			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
 			break;
-		case 2 : 
-			map : new Map("map2.txt");
+		case 2 :
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
+			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
+			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			redbull = new BoostArme(5 , 5);
+			monsterEnergy = new BoostVie(14 , 4);
+			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
 			break;
 		}
-		map = new Map("map1.txt");
+		
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
 		heroImage = Toolkit.getDefaultToolkit().createImage(hero.getPath());
-		bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
 		monstreImage = Toolkit.getDefaultToolkit().createImage("res/MonstreMap.jpg");
 		redbullImage = Toolkit.getDefaultToolkit().createImage("res/RedBullMap.jpg");
 		monsterEnergyImage = Toolkit.getDefaultToolkit().createImage("res/monsterEnergyMap.jpg");
 		
 		
-		this.setSize(new Dimension(width, height));
-		this.setTitle("MassEphec");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.addKeyListener(this);
+		
+		
+		this.setSize(width, height);
+		this.setPreferredSize(new Dimension(width, height));
+		this.setBounds(0,0,width, height);
 		this.setVisible(true);
 		
-		mainPanel = new JPanel();
-		mainPanel.setSize(300,300);
-		mainPanel.setPreferredSize(new Dimension(300,300));
-		mainPanel.add(new drawMap());
-		mainPanel.setVisible(true);
-		this.add(mainPanel);
+		frame.add(this);
+		frame.addKeyListener(this);
+		
+		mapPanel = new JPanel();
+		mapPanel.setSize(800, 800);
+		mapPanel.setPreferredSize(new Dimension(800,800));
+		mapPanel.setVisible(true);
+		mapPanel.add(new drawMap());
+		this.add(mapPanel);
 		
 		statsPanel = new JPanel();
 		statsPanel.setSize(300, 300);
@@ -94,7 +106,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		statsPanel.setBounds(900,0, 300,300);
 		statsPanel.setBackground(Color.black);
 		statsPanel.setVisible(true);
-		mainPanel.add(statsPanel);
+		this.add(statsPanel);
 	}
 
 	
@@ -106,13 +118,21 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			this.setBounds(0, 0, 800, 800);
 			
 			Graphics g2d = (Graphics2D) g;
-			drawMap(g);
+			switch(heroModel.getMapNum()) {
+			case 1 : 
+				drawMap(g , map1);
+				break;
+			case 2 : 
+				drawMap(g , map2);
+				break;
+			}
+			
 			drawCharacters(g, heroModel);
 		}
 	}
 
 	
-	public void drawMap(Graphics g){
+	public void drawMap(Graphics g, Map map){
 		
 		this.tileMap = map.getTileMap();
 		int x = 0;
@@ -201,6 +221,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		repaint();
 		
 	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
@@ -238,5 +259,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public void setImageBoss(String path) {
+		bossImage = Toolkit.getDefaultToolkit().createImage(path);
 	}
 }

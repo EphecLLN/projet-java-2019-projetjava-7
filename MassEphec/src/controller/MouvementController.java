@@ -6,6 +6,8 @@ import controller.*;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JPanel;
+
 public class MouvementController {
 	private Hero hero;
 	private GamePanel view = null;
@@ -42,8 +44,8 @@ public class MouvementController {
 		 hero.getArme().ajouterExp(exp);
 	 }
 	 
-	 public void addView(GamePanel view) {
-		 this.view = view;
+	 public void addView(GamePanel panel) {
+		 this.view = panel;
 	 }
 	 
 }
