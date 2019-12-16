@@ -27,25 +27,24 @@ import javax.imageio.ImageIO;
 
 
 
-public class GamePanel extends JPanel implements Observer, KeyListener{
+public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	Map map1, map2;
 	Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	JPanel statsPanel, mapPanel;
+	JPanel statsPanel, mapPanel, mainPanel;
 	
 	Hero heroModel;
 	Boss boss;
 	Monstre [] monstres = new Monstre[2];
 	BoostArme redbull;
-	boolean redbullPicked = false;
+	boolean redbullPicked;
 	BoostVie monsterEnergy;
-	boolean monsterEnergyPicked = false;
+	boolean monsterEnergyPicked;
 	MouvementController controller;
-	
 	
 	protected int [][] tileMap;
 
-	public GamePanel(int width, int height, Hero hero, MouvementController controller, JFrame frame) {
+	public GamePanel(int width, int height, Hero hero, MouvementController controller) {
 		
 		this.heroModel = hero;
 		this.controller = controller;
@@ -55,25 +54,7 @@ public class GamePanel extends JPanel implements Observer, KeyListener{
 		map1 = new Map("map1.txt");
 		map2 = new Map("map2.txt");
 		
-		switch(heroModel.getMapNum()) {
-		case 1: 
-			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
-			setImageBoss(boss.getPath());
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
-			redbull = new BoostArme(2 , 5);
-			monsterEnergy = new BoostVie(11 , 1);
-			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
-			break;
-		case 2 :
-			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
-			redbull = new BoostArme(5 , 5);
-			monsterEnergy = new BoostVie(14 , 4);
-			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
-			break;
-		}
+		newMap(heroModel.getMapNum());
 		
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
@@ -84,21 +65,26 @@ public class GamePanel extends JPanel implements Observer, KeyListener{
 		
 		
 		
-		
+		this.setTitle("MassEphec");
 		this.setSize(width, height);
 		this.setPreferredSize(new Dimension(width, height));
 		this.setBounds(0,0,width, height);
 		this.setVisible(true);
+		this.addKeyListener(this);
 		
-		frame.add(this);
-		frame.addKeyListener(this);
+		mainPanel = new JPanel();
+		mainPanel.setSize(800,800);
+		mainPanel.setBounds(0, 0, width, height);
+		mainPanel.setVisible(true);
+		this.add(mainPanel);
+		
 		
 		mapPanel = new JPanel();
 		mapPanel.setSize(800, 800);
 		mapPanel.setPreferredSize(new Dimension(800,800));
 		mapPanel.setVisible(true);
 		mapPanel.add(new drawMap());
-		this.add(mapPanel);
+		mainPanel.add(mapPanel);
 		
 		statsPanel = new JPanel();
 		statsPanel.setSize(300, 300);
@@ -106,7 +92,33 @@ public class GamePanel extends JPanel implements Observer, KeyListener{
 		statsPanel.setBounds(900,0, 300,300);
 		statsPanel.setBackground(Color.black);
 		statsPanel.setVisible(true);
-		this.add(statsPanel);
+		mainPanel.add(statsPanel);
+	}
+	
+	public void newMap(int mapNum) {
+		switch (mapNum) {
+		case 1 :
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
+			setImageBoss(boss.getPath());
+			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
+			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			redbull = new BoostArme(2 , 5);
+			monsterEnergy = new BoostVie(11 , 1);
+			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
+			monsterEnergyPicked = false;
+			redbullPicked = false;
+			break;
+		case 2 :
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
+			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
+			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			redbull = new BoostArme(5 , 5);
+			monsterEnergy = new BoostVie(14 , 4);
+			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
+			monsterEnergyPicked = false;
+			redbullPicked = false;
+			break;
+		}
 	}
 
 	
@@ -182,6 +194,20 @@ public class GamePanel extends JPanel implements Observer, KeyListener{
 
 	@Override
 	public void update(Observable o, Object arg) {
+<<<<<<< HEAD
+		if (!isFinished()) {
+			int x, y;
+			x = heroModel.getCoordX();
+			y = heroModel.getCoordY();
+			// Si hero rencontre boss
+			if(x == boss.getCoordX() && y == boss.getCoordY()) {
+				//JFrame tester = new JFrame(this);
+				if (!heroModel.getEnCombat()) {
+				setVisible(false);
+				controller.enterFight(true);
+				new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
+				//boss.setVie(0);
+=======
 		// Si hero rencontre boss
 		int x, y;
 		x = heroModel.getCoordX();
@@ -199,28 +225,41 @@ public class GamePanel extends JPanel implements Observer, KeyListener{
 		for (int i = 0; i < monstres.length; i++) {
 			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
 				monstres[i].setVie(0);
+>>>>>>> 701464cb9a6398ae7cdbbeba4e1d7b32e34b36d1
 				repaint();
 				return;
+				}
 			}
-		}
-		// Si hero rencontre rebull
-		if (!redbullPicked) {
-			if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
-				redbull.donneExp(heroModel);
-				redbullPicked = true;
-				repaint();
-				return;
+			// Si hero rencontre Monstre
+			for (int i = 0; i < monstres.length; i++) {
+				if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
+					monstres[i].setVie(0);
+					repaint();
+					return;
+				}
 			}
-		}
-		if (!monsterEnergyPicked) {
-			if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
-				monsterEnergyPicked = true;
-				repaint();
-				return;
+			// Si hero rencontre rebull
+			if (!redbullPicked) {
+				if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
+					redbull.donneExp(heroModel);
+					redbullPicked = true;
+					repaint();
+					return;
+				}
 			}
+			if (!monsterEnergyPicked) {
+				if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
+					monsterEnergyPicked = true;
+					repaint();
+					return;
+				}
+			}
+			repaint();
 		}
-		repaint();
-		
+		else {
+			controller.changeMap();
+			newMap(heroModel.getMapNum());
+		}
 	}
 	
 	@Override
@@ -260,6 +299,10 @@ public class GamePanel extends JPanel implements Observer, KeyListener{
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean isFinished () {
+		return (!boss.enVie() && redbullPicked && monsterEnergyPicked && !monstres[0].enVie() && !monstres[1].enVie());
 	}
 	
 	public void setImageBoss(String path) {

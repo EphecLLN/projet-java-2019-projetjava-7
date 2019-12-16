@@ -6,6 +6,7 @@ public class Hero extends Personnage {
 	private Arme arme;
 	private String classe;// IT compta ou market
 	private int mapNum;
+	private boolean enCombat;
 	
 	public Hero(String nom, String path,int vie, int x, int y, Arme arme) {
 		super(nom, path,vie,x,y);
@@ -50,6 +51,8 @@ public class Hero extends Personnage {
 	
 	public void setMapNum(int mapNum) {
 		this.mapNum = mapNum;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public int getMapNum() {
@@ -92,6 +95,21 @@ public class Hero extends Personnage {
 		setChanged();
 		notifyObservers();
 	}
+	
+	public void setEnCombat (boolean enCombat) {
+		if(enCombat) {
+			this.enCombat = true;
+		}
+		else {
+			this.enCombat = false;
+		}
+	}
+	
+	public boolean getEnCombat() {
+		return this.enCombat;
+	}
+	
+	
 	/*
 	 * attaque un monstre en lui enlevant de la vie;
 	 * @param{Monstre} le monstre a attaquer
