@@ -49,14 +49,23 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		
 		this.heroModel = hero;
 		this.controller = controller;
-		boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
-		monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
-		monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
-		redbull = new BoostArme(2 , 5);
-		monsterEnergy = new BoostVie(11 , 1);
+		
 		hero.addObserver(this);
 		
-		map = new Map("map.txt");
+		switch (heroModel.getMapNum()) {
+		case 1 : 
+			map = new Map("map1.txt");
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
+			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
+			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			redbull = new BoostArme(2 , 5);
+			monsterEnergy = new BoostVie(11 , 1);
+			break;
+		case 2 : 
+			map : new Map("map2.txt");
+			break;
+		}
+		map = new Map("map1.txt");
 		grass = Toolkit.getDefaultToolkit().createImage("res/grass.jpg");
 		mur = Toolkit.getDefaultToolkit().createImage("res/mur.jpg");
 		heroImage = Toolkit.getDefaultToolkit().createImage(hero.getPath());
@@ -103,7 +112,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	}
 
 	
-	public void drawMap(Graphics g) {
+	public void drawMap(Graphics g){
 		
 		this.tileMap = map.getTileMap();
 		int x = 0;
@@ -158,14 +167,10 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		x = heroModel.getCoordX();
 		y = heroModel.getCoordY();
 		if(x == boss.getCoordX() && y == boss.getCoordY()) {
-<<<<<<< HEAD
-			boss.setVie(0);
-=======
 			//JFrame tester = new JFrame(this);
 			setVisible(false);
 			new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss));
 			//boss.setVie(0);
->>>>>>> 30d79fd5346665e9a4e121c62f82ab1d1fd69261
 			repaint();
 			return;
 		}
