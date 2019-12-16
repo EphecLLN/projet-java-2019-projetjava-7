@@ -31,12 +31,15 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	Map map;
 	Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
+	JPanel statsPanel, mainPanel;
 	
 	Hero heroModel;
 	Boss boss;
 	Monstre [] monstres = new Monstre[2];
 	BoostArme redbull;
+	boolean redbullPicked = false;
 	BoostVie monsterEnergy;
+	boolean monsterEnergyPicked = false;
 	MouvementController controller;
 	
 	
@@ -66,18 +69,32 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		this.setSize(new Dimension(width, height));
 		this.setTitle("MassEphec");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.add(new drawMap());
-		this.setVisible(true);
 		this.addKeyListener(this);
+		this.setVisible(true);
 		
+		mainPanel = new JPanel();
+		mainPanel.setSize(300,300);
+		mainPanel.setPreferredSize(new Dimension(300,300));
+		mainPanel.add(new drawMap());
+		mainPanel.setVisible(true);
+		this.add(mainPanel);
 		
+		statsPanel = new JPanel();
+		statsPanel.setSize(300, 300);
+		statsPanel.setPreferredSize(new Dimension(300,300));
+		statsPanel.setBounds(900,0, 300,300);
+		statsPanel.setBackground(Color.black);
+		statsPanel.setVisible(true);
+		mainPanel.add(statsPanel);
 	}
 
 	
-	protected class drawMap extends JComponent {
+	protected class drawMap extends JPanel {
 		
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
+			
+			this.setBounds(0, 0, 800, 800);
 			
 			Graphics g2d = (Graphics2D) g;
 			drawMap(g);
@@ -125,11 +142,11 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			g.drawImage(bossImage, boss.getCoordX() * 50, boss.getCoordY() * 50, this);
 		}
 		// Placer redbull
-		if (redbull != null && tileMap[redbull.getCoordY()][redbull.getCoordX()] !=1) {
+		if (redbullPicked != true && tileMap[redbull.getCoordY()][redbull.getCoordX()] !=1) {
 			g.drawImage(redbullImage, redbull.getCoordX() * 50, redbull.getCoordY() * 50, this);
 		}
 		// Placer monster
-		if (monsterEnergy != null && tileMap[monsterEnergy.getCoordY()][monsterEnergy.getCoordX()] != 1) {
+		if (monsterEnergyPicked != true && tileMap[monsterEnergy.getCoordY()][monsterEnergy.getCoordX()] != 1) {
 			g.drawImage(monsterEnergyImage, monsterEnergy.getCoordX() * 50, monsterEnergy.getCoordY() * 50, this);
 		}
 	}
@@ -142,10 +159,6 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		y = heroModel.getCoordY();
 		if(x == boss.getCoordX() && y == boss.getCoordY()) {
 			boss.setVie(0);
-			//JFrame tester = new JFrame(this);
-			//this.setVisible(false);
-			//new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss));
-			//boss.setVie(0);
 			repaint();
 			return;
 		}
@@ -158,16 +171,20 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			}
 		}
 		// Si hero rencontre rebull
-		if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
-			//redbull.donneExp(heroModel);
-			redbull = null;
-			repaint();
-			return;
+		if (!redbullPicked) {
+			if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
+				redbull.donneExp(heroModel);
+				redbullPicked = true;
+				repaint();
+				return;
+			}
 		}
-		if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
-			//monsterEnergy = null;
-			repaint();
-			return;
+		if (!monsterEnergyPicked) {
+			if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
+				monsterEnergyPicked = true;
+				repaint();
+				return;
+			}
 		}
 		repaint();
 		

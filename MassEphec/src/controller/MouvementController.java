@@ -13,26 +13,35 @@ public class MouvementController {
 	public MouvementController(Hero h) {
 		this.hero=h;
 	}
+	
 	 public void haut(int a){
 		 if(a==0) {
 			 hero.bougerHaut();
 		 }
 	 }
+	 
 	 public void bas(int a) {
 		 if(a==0) {
 			 hero.bougerBas();
 		 }
 	 }
+	 
 	 public void droite(int a) {
 		 if(a==0) {
 			 hero.bougerDroite();
 		 }
 	 }
+	 
 	 public void gauche(int a) {
 		 if(a==0) {
 			 hero.bougerGauche();
 		 }
 	 }
+	 
+	 public void ajouterExpArme(int exp) {
+		 hero.getArme().ajouterExp(exp);
+	 }
+	 
 	 public void addView(GamePanel view) {
 		 this.view = view;
 	 }
