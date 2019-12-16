@@ -136,7 +136,8 @@ public class Login extends JFrame implements ActionListener
    
  }
   public void chargerAncien(ActionEvent ae) {
-	  //chargement
+	  setVisible(false);
+	  new GameLauncher(create.reloadHero(text1.getText()));
   }
 @Override
 

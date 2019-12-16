@@ -20,6 +20,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -110,8 +113,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			break;
 		case 2 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
-			controller.setX(1);
-			controller.setY(0);
+			//controller.setX(1);
+			//controller.setY(0);
 			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
 			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(5 , 5);
@@ -297,4 +300,5 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	public void setImageBoss(String path) {
 		bossImage = Toolkit.getDefaultToolkit().createImage(path);
 	}
+
 }

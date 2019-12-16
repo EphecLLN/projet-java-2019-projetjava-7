@@ -3,8 +3,9 @@ package Main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.sql.Statement;
 
 import model.Comptabilite;
 import model.Hero;
@@ -72,6 +73,43 @@ public class CreationHero {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+	}
+	
+	public Hero reloadHero(String name) {
+		Connection con;
+		try {
+			con = getConnection();
+			Statement statement = con.createStatement();
+			String query = "SELECT * FROM "+ TABLE + " WHERE `nom` = '"+ name + "'";
+			ResultSet result = statement.executeQuery(query);
+			while(result.next()){
+			String nom = result.getString("nom");
+			switch (result.getString("classe")) {
+			case "IT" :
+				hero = new IT(nom);
+				hero.getArme().setHero(hero);
+				break;
+			case "Marketing":
+				hero = new Marketing(nom);
+				hero.getArme().setHero(hero);
+				break;
+			case "Comptabilite":
+				hero = new Comptabilite(nom);
+				hero.getArme().setHero(hero);
+				break;
+			}
+			hero.setVie(result.getInt("vie"));
+			hero.setCoordX(result.getInt("x"));
+			hero.setCoordY(result.getInt("y"));
+			hero.getArme().setNiveau(result.getInt("armeExperience"));
+			hero.getArme().setExperience(result.getInt("armeLevel"));
+			hero.setMapNum(result.getInt("mapLevel"));	
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hero;		
 	}
 	
     public static Connection getConnection() throws Exception{
