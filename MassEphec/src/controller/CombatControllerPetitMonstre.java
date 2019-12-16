@@ -38,7 +38,10 @@ public class CombatControllerPetitMonstre {
 	}
 	
 	public void consommable() {
-		
+		if(hero.getList().getFirst()!=null) {
+			hero.getList().getLast().donneVie(hero);
+			hero.getList().removeLast();
+		}
 	}
 	
 	public void ajouterExp() {

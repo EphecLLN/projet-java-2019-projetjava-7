@@ -1,5 +1,6 @@
 package model;
 
+
 public class Hero extends Personnage {
 	
 	private int credit, vieMax; 
@@ -7,6 +8,7 @@ public class Hero extends Personnage {
 	private String classe;// IT compta ou market
 	public int mapNum;
 	private boolean enCombat;
+	private LinkedList listVie= new LinkedList();
 	
 	public Hero(String nom, String path,int vie, int x, int y, Arme arme) {
 		super(nom, path,vie,x,y);
@@ -109,6 +111,9 @@ public class Hero extends Personnage {
 		return this.enCombat;
 	}
 	
+	public LinkedList getList() {
+		return this.listVie;
+	}
 	
 	/*
 	 * attaque un monstre en lui enlevant de la vie;
