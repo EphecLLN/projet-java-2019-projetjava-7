@@ -58,12 +58,6 @@ public class Combat extends CombatVue implements KeyListener {
 	
 	private JFrame oldFrame;
 	
-	
-	
-	
-	
-	
-	
 	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame frame) {
 		super(heroModel, bossModel);
 		this.combat = combat;

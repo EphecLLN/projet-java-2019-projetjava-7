@@ -29,9 +29,11 @@ import javax.imageio.ImageIO;
 
 public class GamePanel extends JFrame implements Observer, KeyListener{
 	
-	Map map1, map2;
-	Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	JPanel statsPanel, mapPanel, mainPanel;
+	private Map map1, map2;
+	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
+	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel;
+	private JLabel titre;
+	
 	
 	Hero heroModel;
 	Boss boss;
@@ -82,17 +84,44 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		mapPanel = new JPanel();
 		mapPanel.setSize(800, 800);
 		mapPanel.setPreferredSize(new Dimension(800,800));
+		mapPanel.setBounds(0, 0, 800, 800);
 		mapPanel.setVisible(true);
 		mapPanel.add(new drawMap());
 		mainPanel.add(mapPanel);
 		
 		statsPanel = new JPanel();
 		statsPanel.setSize(300, 300);
-		statsPanel.setPreferredSize(new Dimension(300,300));
+		statsPanel.setPreferredSize(new Dimension(400,600));
 		statsPanel.setBounds(900,0, 300,300);
-		statsPanel.setBackground(Color.black);
 		statsPanel.setVisible(true);
 		mainPanel.add(statsPanel);
+		
+		labelPanel = new JPanel();
+		labelPanel.setSize(140, 290);
+		labelPanel.setPreferredSize(new Dimension(140, 290));
+		labelPanel.setVisible(true);
+		labelPanel.setBounds(10,10,140,290);
+		labelPanel.setBackground(Color.black);
+		statsPanel.add(labelPanel);
+		
+		valuePanel = new JPanel();
+		valuePanel.setSize(140,290);
+		valuePanel.setPreferredSize(new Dimension(140,290));
+		valuePanel.setVisible(true);
+		valuePanel.setBounds(150, 10, 140, 290);
+		valuePanel.setBackground(Color.orange);
+		statsPanel.add(valuePanel);
+		
+		screenSetup();
+	}
+	
+	public void screenSetup() {
+		/*
+		titre = new JLabel();
+		titre.setText("Perso infos");
+		titre.setHorizontalAlignment(JLabel.CENTER);
+		statsPanel.add(titre);
+		*/
 	}
 	
 	public void newMap(int mapNum) {
