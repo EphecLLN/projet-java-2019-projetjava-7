@@ -7,17 +7,19 @@ public class Personnage extends Observable {
 	private int coordX;
 	private int coordY;
 	private String nom;
+	private String path;
 	/**
 	 * @param vie
 	 * @param coordX
 	 * @param coordY
 	 * @param nom
 	 */
-	public Personnage(String nom, int vie, int coordX, int coordY) {
+	public Personnage(String nom, String path,  int vie, int coordX, int coordY) {
 		this.nom = nom;
 		this.vie = vie;
 		this.coordX = coordX;
 		this.coordY = coordY;
+		this.path = path;
 	}
 	public int getVie() {
 		return vie;
@@ -45,6 +47,9 @@ public class Personnage extends Observable {
 	}
 	public String getNom() {
 		return nom;
+	}
+	public String getPath() {
+		return this.path;
 	}
 	
 	public boolean enVie() {

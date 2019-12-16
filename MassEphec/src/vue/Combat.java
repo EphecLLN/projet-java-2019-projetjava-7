@@ -57,21 +57,21 @@ public class Combat extends CombatVue implements KeyListener {
 
 
 	
-	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame window) {
+	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat) {
 		super(heroModel, bossModel);
 		this.combat = combat;
 		combat.addView(this);
 		
-		this.window = window; 
-		this.window.setSize(1280,720);    
-		this.window.setLayout(null);
-		this.window.setVisible(true);
-		this.window.setBackground(Color.white);
-		this.window.setFocusable(true);
-		this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window = new JFrame("Combat avec " + bossModel.getNom()); 
+		window.setSize(1280,720);    
+		window.setLayout(null);
+		window.setVisible(true);
+		window.setBackground(Color.white);
+		window.setFocusable(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mainPanel =new JPanel(); 
-		mainPanel.setSize(1280,720);    
+		mainPanel.setSize(1280,830);    
 		mainPanel.setLayout(null);
 		mainPanel.setVisible(true);
 		mainPanel.setBackground(Color.white);
