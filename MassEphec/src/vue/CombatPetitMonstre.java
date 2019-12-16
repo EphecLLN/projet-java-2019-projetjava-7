@@ -28,23 +28,23 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.*;
-import model.Boss;
+import model.PetitMonstre;
 import model.Hero;
 import Main.*;
 
-public class Combat extends CombatVue implements KeyListener {
+public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyListener {
 	
 	private boolean gagne;
 
-	private CombatControllerGUI combat;
+	private CombatControllerPetitMonstre combat;
 	
 	private JFrame window ;
 	private Container con;
-	private JPanel mainPanel, buttonPanel, textPanel, bossHealth, heroHealth, lastMsgPanel;
+	private JPanel mainPanel, buttonPanel, textPanel, monstreHealth, heroHealth, lastMsgPanel;
 	private JButton atkButton, atkSpeButton, consomButton;
-	private JLabel imageHero, imageBoss, attaque, msgEnd;
+	private JLabel imageHero, imageMonstre, attaque, msgEnd;
 	private JScrollPane scroller;
-	private JProgressBar heroHealthBar, bossHealthBar;
+	private JProgressBar heroHealthBar, monstreHealthBar;
 	private JTextArea msgAtk;
 	
 	private KeyListener kListener;
@@ -53,13 +53,19 @@ public class Combat extends CombatVue implements KeyListener {
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
 	private ImageIcon heros = new ImageIcon(heroModel.getPath());
-	private ImageIcon boss = new ImageIcon(bossModel.getPath());
+	private ImageIcon monstreImage = new ImageIcon("res/MonstreMap.jpg");
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 	private JFrame oldFrame;
 	
-	public Combat(Hero heroModel, Boss bossModel, CombatControllerGUI combat, JFrame frame) {
-		super(heroModel, bossModel);
+	
+	
+	
+	
+	
+	
+	public CombatPetitMonstre(Hero heroModel, PetitMonstre monstre, CombatControllerPetitMonstre combat, JFrame frame) {
+		super(heroModel, monstre);
 		this.combat = combat;
 		combat.addView(this);
 		this.oldFrame = frame;
@@ -98,11 +104,6 @@ public class Combat extends CombatVue implements KeyListener {
 		textPanel.setBackground(Color.white);
 		
 		
-		msgAtk = new JTextArea();
-		msgAtk.setBounds(80, 450, 320, 200);
-		msgAtk.setLineWrap(true);
-		msgAtk.setEditable(false);
-		//msgAtk.setFont(policeNormale);
 		
 		scroller = new JScrollPane(msgAtk);
 		scroller.setPreferredSize(new Dimension(200,320));
@@ -159,16 +160,17 @@ public class Combat extends CombatVue implements KeyListener {
 		heroHealthBar.setValue(heroModel.getVie());
 		heroHealth.add(heroHealthBar);
 		
-		bossHealth = new JPanel();
-		bossHealth.setBounds(680, 410, 300, 20);
-		bossHealth.setBackground(Color.white);
-		mainPanel.add(bossHealth); 
-		bossHealthBar = new JProgressBar(0, bossModel.getVie());
-		bossHealthBar.setPreferredSize(new Dimension (300, 20));
-		bossHealthBar.setBackground(Color.red);
-		bossHealthBar.setForeground(Color.green);
-		bossHealthBar.setValue(bossModel.getVie());
-		bossHealth.add(bossHealthBar);
+		monstreHealth = new JPanel();
+		monstreHealth.setBounds(680, 410, 300, 20);
+		monstreHealth.setBackground(Color.white);
+		mainPanel.add(monstreHealth); 
+		monstreHealthBar = new JProgressBar(0, monstre.getVie());
+		monstreHealthBar.setPreferredSize(new Dimension (300, 20));
+		monstreHealthBar.setBackground(Color.red);
+		monstreHealthBar.setForeground(Color.green);
+		System.out.println(monstre.getVie());
+		monstreHealthBar.setValue(monstre.getVie());
+		monstreHealth.add(monstreHealthBar);
 		
 		lastMsgPanel = new JPanel();
 		lastMsgPanel.setBounds(100, 200, 900, 200);
@@ -187,9 +189,9 @@ public class Combat extends CombatVue implements KeyListener {
 		imageHero.setBounds(100, 100, 300, 300);
 		mainPanel.add(imageHero);
 		
-		imageBoss = new JLabel (boss);
-		imageBoss.setBounds(700, 100, 300, 300);
-		mainPanel.add(imageBoss);
+		imageMonstre = new JLabel (monstreImage);
+		imageMonstre.setBounds(700, 100, 300, 300);
+		mainPanel.add(imageMonstre);
 		
 		
 	}
@@ -200,11 +202,9 @@ public class Combat extends CombatVue implements KeyListener {
 		case "atk":
 			combat.attaqueHero();
 			mainPanel.add(attaque);
-			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
 			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
-			msgAtk.append("Vous venez de faire votre attaque spéciale sur " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
 			break;
 		case "Consommable":
 			combat.consommable();
@@ -214,26 +214,27 @@ public class Combat extends CombatVue implements KeyListener {
 	
 	public void bossMort() {
 		unclickable();
-		msgEnd.setText("<html>Vous avez battu " + bossModel.getNom() + ", bien joué! <br> Il vous a donné " + bossModel.getCredit() + " crédits durements gagnés.. <br>Appuyez sur une touche pour continuer.</h");
+		msgEnd.setText("<html>Vous avez battu " + monstre.getNom() + ", bien joué! <br> Il vous a donné " + monstre.getExperience() + " experience durements gagnés.. <br>Appuyez sur une touche pour continuer.</h");
 		lastMsgPanel.setVisible(true);
 		gagne = true;
 		window.addKeyListener(this);
-		System.out.println("BossMort");
+		System.out.println("MonstreMort");
 		
 		 try {
 	            // connection et prÃ©paration de la query
 	            Connection con = getConnection();
-	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `x` = '" +heroModel.getCoordX() + "' , `y` = '"+ heroModel.getCoordY() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+(heroModel.getMapNum()+1) + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
+	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `x` = '" +heroModel.getCoordX() + "' , `y` = '"+ heroModel.getCoordY() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+heroModel.getMapNum() + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
 	            PreparedStatement ps = con.prepareStatement(query);
-             ps.executeUpdate();
+                ps.executeUpdate();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
+        
 	}
 	
 	public void heroMort() {
 		unclickable();
-		msgEnd.setText("<html>" + bossModel.getNom() + " vous a surmenés de travail... <br>Appuyez sur une touche pour quitter.");
+		msgEnd.setText("<html>" + monstre.getNom() + " vous a surmenés de travail... <br>Appuyez sur une touche pour quitter.");
 		lastMsgPanel.setVisible(true);
 		gagne = false;
 		window.addKeyListener(this);
@@ -248,7 +249,7 @@ public class Combat extends CombatVue implements KeyListener {
 	@Override
 	public void update(Observable o, Object arg) {
 		heroHealthBar.setValue(heroModel.getVie());
-		bossHealthBar.setValue(bossModel.getVie());
+		monstreHealthBar.setValue(monstre.getVie());
 	
 	}
 
@@ -286,25 +287,25 @@ public class Combat extends CombatVue implements KeyListener {
 		System.out.println("released");
 	}
 	
+    static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DATABASE = "massephec";
+    static final String URL = "jdbc:mysql://localhost/"+DATABASE+"?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+    static final String USERNAME = "root";
+    static final String PASSWORD = "";
+    static final String TABLE = "heroes";
 
-	static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	    static final String DATABASE = "massephec";
-	    static final String URL = "jdbc:mysql://localhost/"+DATABASE+"?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-	    static final String USERNAME = "root";
-	    static final String PASSWORD = "";
-	    static final String TABLE = "heroes";
-
-		
-	    public static Connection getConnection() throws Exception {
-	        try {
-	            Class.forName(DRIVER);
-	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/massephec?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", USERNAME, PASSWORD);
-	            System.out.println("ConnectÃ© Ã  la base de donnÃ©es");
-	            return conn;
-	        } catch (Exception e) {
-	            System.out.println(e);
-	        }
-	        return null;
-	    }
-
+	
+    public static Connection getConnection() throws Exception {
+        try {
+            Class.forName(DRIVER);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/massephec?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", USERNAME, PASSWORD);
+            System.out.println("ConnectÃ© Ã  la base de donnÃ©es");
+            return conn;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 }
+
+

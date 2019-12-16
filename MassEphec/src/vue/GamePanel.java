@@ -12,6 +12,7 @@ import model.Monstre;
 import model.PetitMonstre;
 import model.Personnage;
 import controller.CombatControllerGUI;
+import controller.CombatControllerPetitMonstre;
 import controller.MouvementController;
 
 import java.awt.*;
@@ -32,13 +33,15 @@ import javax.imageio.ImageIO;
 
 public class GamePanel extends JFrame implements Observer, KeyListener{
 	
-	Map map1, map2;
-	Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	JPanel statsPanel, mapPanel, mainPanel;
+	private Map map1, map2;
+	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
+	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel, titrePanel;
+	private JLabel titre;
+	
 	
 	Hero heroModel;
 	Boss boss;
-	Monstre [] monstres = new Monstre[2];
+	PetitMonstre [] monstres = new PetitMonstre[2];
 	BoostArme redbull;
 	boolean redbullPicked;
 	BoostVie monsterEnergy;
@@ -85,17 +88,45 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		mapPanel = new JPanel();
 		mapPanel.setSize(800, 800);
 		mapPanel.setPreferredSize(new Dimension(800,800));
+		mapPanel.setBounds(0, 0, 800, 800);
 		mapPanel.setVisible(true);
 		mapPanel.add(new drawMap());
 		mainPanel.add(mapPanel);
 		
 		statsPanel = new JPanel();
 		statsPanel.setSize(300, 300);
-		statsPanel.setPreferredSize(new Dimension(300,300));
+		statsPanel.setPreferredSize(new Dimension(400,600));
 		statsPanel.setBounds(900,0, 300,300);
-		statsPanel.setBackground(Color.black);
 		statsPanel.setVisible(true);
 		mainPanel.add(statsPanel);
+		
+		titrePanel = new JPanel();
+		titre.setSize(400, 20);
+		titre.setPreferredSize(new Dimension(400, 20));
+		
+		
+		labelPanel = new JPanel();
+		labelPanel.setVisible(true);
+		labelPanel.setBounds(10,10,150,500);
+		labelPanel.setBackground(Color.black);
+		statsPanel.add(labelPanel);
+		
+		valuePanel = new JPanel();
+		valuePanel.setVisible(true);
+		valuePanel.setBounds(150, 10, 150, 290);
+		valuePanel.setBackground(Color.orange);
+		statsPanel.add(valuePanel);
+		
+		screenSetup();
+	}
+	
+	public void screenSetup() {
+		/*
+		titre = new JLabel();
+		titre.setText("Perso infos");
+		titre.setHorizontalAlignment(JLabel.CENTER);
+		statsPanel.add(titre);
+		*/
 	}
 	
 	public void newMap(int mapNum) {
@@ -103,8 +134,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		case 1 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
 			setImageBoss(boss.getPath());
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 6, 10, 5, 20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(2 , 5);
 			monsterEnergy = new BoostVie(11 , 1);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -113,10 +144,10 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			break;
 		case 2 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
-			//controller.setX(1);
-			//controller.setY(0);
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			controller.setX(1);
+			controller.setY(0);
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 2, 4, 5, 20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(5 , 5);
 			monsterEnergy = new BoostVie(14 , 4);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -203,7 +234,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			int x, y;
 			x = heroModel.getCoordX();
 			y = heroModel.getCoordY();
-			if(x == boss.getCoordX() && y == boss.getCoordY()) {
+			if(x == boss.getCoordX() && y == boss.getCoordY() && boss.enVie()) {
 				if (!heroModel.getEnCombat()) {
 					this.setVisible(false);
 					controller.enterFight(true);
@@ -214,20 +245,17 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			}
 		// Si hero rencontre Monstre
 		for (int i = 0; i < monstres.length; i++) {
-			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
-				monstres[i].setVie(0);
-				repaint();
-				return;
-				}
-			}
-			// Si hero rencontre Monstre
-			for (int i = 0; i < monstres.length; i++) {
-				if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY()) {
-					monstres[i].setVie(0);
+			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY() && monstres[i].enVie()) {
+				if (!heroModel.getEnCombat()) {
+					System.out.println(monstres[i].getVie());
+					this.setVisible(false);
+					controller.enterFight(true);
+					new CombatPetitMonstre(heroModel, monstres[i], new CombatControllerPetitMonstre(heroModel, monstres[i]), this);
 					repaint();
 					return;
 				}
 			}
+		}
 			// Si hero rencontre rebull
 			if (!redbullPicked) {
 				if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
@@ -240,6 +268,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			if (!monsterEnergyPicked) {
 				if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
 					monsterEnergyPicked = true;
+					heroModel.getList().setNode(monsterEnergy);
 					repaint();
 					return;
 				}
