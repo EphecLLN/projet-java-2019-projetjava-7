@@ -110,6 +110,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			break;
 		case 2 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
+			controller.setX(1);
+			controller.setY(0);
 			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
 			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(5 , 5);
@@ -194,18 +196,18 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (!isFinished()) {
+		if (!isFinished() ) {
 			int x, y;
 			x = heroModel.getCoordX();
 			y = heroModel.getCoordY();
 			if(x == boss.getCoordX() && y == boss.getCoordY()) {
-				//boss.setVie(0);
-				//JFrame tester = new JFrame(this);
-				mainPanel.setVisible(false);
-				new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
-				//boss.setVie(0);
-				repaint();
-				return;
+				if (!heroModel.getEnCombat()) {
+					this.setVisible(false);
+					controller.enterFight(true);
+					new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
+					repaint();
+					return;
+				}
 			}
 		// Si hero rencontre Monstre
 		for (int i = 0; i < monstres.length; i++) {
@@ -241,9 +243,11 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			}
 			repaint();
 		}
-		else {
-			controller.changeMap();
+		if (isFinished() && !heroModel.getEnCombat()) {
+			System.out.println("la");
+			heroModel.mapNum++;
 			newMap(heroModel.getMapNum());
+			repaint();
 		}
 	}
 	
