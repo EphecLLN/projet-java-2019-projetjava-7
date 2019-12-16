@@ -2,12 +2,14 @@ package model;
 
 import model.*;
 public class Node {
-	private Consommables cons;
+	private BoostVie boost;
 	private Node previous;
 	private Node next;
 	
-	public Node(Consommables c) {
-		cons=c;
+	public Node(BoostVie c) {
+		boost=c;
+		previous=null;
+		next=null;
 	}
 	
 	public Node getPrevious() {
@@ -16,8 +18,8 @@ public class Node {
 	public Node getNext() {
 		return next;
 	}
-	public Consommables getCons(){
-		return cons;
+	public BoostVie getCons(){
+		return boost;
 	}
 	public void setPrevious(Node n) {
 		previous=n;

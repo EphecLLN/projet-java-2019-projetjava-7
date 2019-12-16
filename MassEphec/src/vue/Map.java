@@ -17,7 +17,6 @@ public class Map {
 	
 	
 	public Map (String mapFile){
-		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(mapFile));
 			tileMap = new int[16][16];
@@ -35,6 +34,7 @@ public class Map {
 		}
 		
 	}
+	
 	
 	public int [][] getTileMap() {
 		return this.tileMap;
