@@ -8,6 +8,8 @@ public class Node {
 	
 	public Node(BoostVie c) {
 		boost=c;
+		previous=null;
+		next=null;
 	}
 	
 	public Node getPrevious() {

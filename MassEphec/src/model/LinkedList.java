@@ -11,10 +11,10 @@ public class LinkedList {
 		first=null;
 		last=null;
 	}
-	public Consommables getFirst() {
+	public BoostVie getFirst() {
 		return first.getCons();
 	}
-	public Consommables getLast() {
+	public BoostVie getLast() {
 		return last.getCons();
 	}
 	public void setNode(BoostVie c) {
@@ -35,5 +35,18 @@ public class LinkedList {
 			n.setPrevious(buffer);
 		}
 		size++;
+	}
+	public void removeLast() {
+		if(last!=null) {
+			if(size==1) {
+				first=null;
+				last=null;
+				size--;
+			}else {
+				last=last.getPrevious();
+				last.setNext(null);
+				size--;
+			}
+		}
 	}
 }
