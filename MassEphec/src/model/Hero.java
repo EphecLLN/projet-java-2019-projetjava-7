@@ -5,7 +5,7 @@ public class Hero extends Personnage {
 	private int credit, vieMax; 
 	private Arme arme;
 	private String classe;// IT compta ou market
-	private int mapNum;
+	public int mapNum;
 	private boolean enCombat;
 	
 	public Hero(String nom, String path,int vie, int x, int y, Arme arme) {

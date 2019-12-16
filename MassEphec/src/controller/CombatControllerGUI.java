@@ -47,6 +47,7 @@ public class CombatControllerGUI {
 	public void control() {
 		if (!boss.enVie()) {
 			ajouterCredit();
+			hero.setEnCombat(false);
 			view.bossMort();
 		}if(!hero.enVie()) {
 			view.heroMort();

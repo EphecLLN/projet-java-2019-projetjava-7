@@ -16,6 +16,14 @@ public class MouvementController {
 		this.hero=h;
 	}
 	
+	public void setX(int x) {
+		hero.setCoordX(x);
+	}
+	
+	public void setY(int y) {
+		hero.setCoordY(y);
+	}
+	
 	 public void haut(int a){
 		 if(a==0) {
 			 hero.bougerHaut();
