@@ -21,6 +21,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -135,8 +138,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		case 1 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
 			setImageBoss(boss.getPath());
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 6, 10, 5, 20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(2 , 5);
 			monsterEnergy = new BoostVie(11 , 1);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -147,8 +150,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
 			controller.setX(1);
 			controller.setY(0);
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 2, 4, 5, 20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(5 , 5);
 			monsterEnergy = new BoostVie(14 , 4);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -269,6 +272,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			if (!monsterEnergyPicked) {
 				if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
 					monsterEnergyPicked = true;
+					heroModel.getList().setNode(monsterEnergy);
 					repaint();
 					return;
 				}
@@ -329,4 +333,5 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	public void setImageBoss(String path) {
 		bossImage = Toolkit.getDefaultToolkit().createImage(path);
 	}
+
 }

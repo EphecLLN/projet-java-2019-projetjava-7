@@ -223,13 +223,12 @@ public class Combat extends CombatVue implements KeyListener {
 		 try {
 	            // connection et préparation de la query
 	            Connection con = getConnection();
-	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `x` = '" +heroModel.getCoordX() + "' , `y` = '"+ heroModel.getCoordY() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+heroModel.getMapNum() + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
+	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `x` = '" +heroModel.getCoordX() + "' , `y` = '"+ heroModel.getCoordY() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+(heroModel.getMapNum()+1) + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
 	            PreparedStatement ps = con.prepareStatement(query);
-                ps.executeUpdate();
+             ps.executeUpdate();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
-        
 	}
 	
 	public void heroMort() {
@@ -287,25 +286,25 @@ public class Combat extends CombatVue implements KeyListener {
 		System.out.println("released");
 	}
 	
-    static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DATABASE = "massephec";
-    static final String URL = "jdbc:mysql://localhost/"+DATABASE+"?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
-    static final String USERNAME = "root";
-    static final String PASSWORD = "";
-    static final String TABLE = "heroes";
 
-	
-    public static Connection getConnection() throws Exception {
-        try {
-            Class.forName(DRIVER);
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/massephec?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", USERNAME, PASSWORD);
-            System.out.println("Connecté à la base de données");
-            return conn;
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return null;
-    }
+	static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+	    static final String DATABASE = "massephec";
+	    static final String URL = "jdbc:mysql://localhost/"+DATABASE+"?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+	    static final String USERNAME = "root";
+	    static final String PASSWORD = "";
+	    static final String TABLE = "heroes";
 
+		
+	    public static Connection getConnection() throws Exception {
+	        try {
+	            Class.forName(DRIVER);
+	            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/massephec?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", USERNAME, PASSWORD);
+	            System.out.println("Connecté à la base de données");
+	            return conn;
+	        } catch (Exception e) {
+	            System.out.println(e);
+	        }
+	        return null;
+	    }
 
 }
