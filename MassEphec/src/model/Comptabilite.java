@@ -12,6 +12,6 @@ public class Comptabilite extends Hero{
 
 	
 	public Comptabilite(String n) {
-		super(n, 100, 0,0, new Calculette());
+		super(n, "res/compta.jpg", 100, 6,0, new Calculette());
 	}
 }

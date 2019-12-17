@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Scanner;
 
-import controller.CombatController;
+import controller.CombatControllerConsole;
 import model.*;
 import controller.*;
 
@@ -12,10 +12,12 @@ public class CombatVueConsole extends CombatVue implements Observer {
 	
 	private boolean fin = false;
 	protected Scanner sc;
+	private CombatControllerConsole controller;
 	
 	
-	public CombatVueConsole(Hero modelHero, Boss modelBoss, CombatController controller) {
-		super(modelHero, modelBoss, controller);
+	public CombatVueConsole(Hero modelHero, Boss modelBoss, CombatControllerConsole controller) {
+		super(modelHero, modelBoss);
+		this.controller = controller;
 		sc = new Scanner(System.in);
 		new Thread (new ReadInput()).start();
 	}
@@ -41,10 +43,10 @@ public class CombatVueConsole extends CombatVue implements Observer {
 				System.out.println("Ecrivez Attaque ou AttaqueSpe !");
 					switch (sc.nextLine().toLowerCase()) {
 						case "attaque" :  
-							combat.attaqueBoss();
+							controller.attaqueBoss();
 							break;
 						case "attaquespe" :
-							combat.attaqueSpe();
+							controller.attaqueSpe();
 							break;
 						default :
 							System.out.println("Donnée entrée incorrecte, veuillez réessayer");

@@ -1,15 +1,21 @@
 package model;
 
+
 public class Hero extends Personnage {
 	
-	private int credit; 
+	private int credit, vieMax; 
 	private Arme arme;
 	private String classe;// IT compta ou market
+	public int mapNum;
+	private boolean enCombat;
+	private LinkedList listVie= new LinkedList();
 	
-	public Hero(String nom, int vie, int x, int y, Arme arme) {
-		super(nom,vie,x,y);
+	public Hero(String nom, String path,int vie, int x, int y, Arme arme) {
+		super(nom, path,vie,x,y);
+		this.vieMax = vie;
 		this.credit=0;
 		this.arme = arme;
+		this.mapNum = 1;
 	}
 	
 	/*
@@ -18,6 +24,9 @@ public class Hero extends Personnage {
 	 */
 	public int getCredit() {
 		return this.credit;
+	}
+	public int getVieMax() {
+		return this.vieMax;
 	}
 	/*
 	 * Modifie le nombre de credits que l'etudiant possede
@@ -42,6 +51,16 @@ public class Hero extends Personnage {
 		this.arme = arm;
 	}
 	
+	public void setMapNum(int mapNum) {
+		this.mapNum = mapNum;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public int getMapNum() {
+		return this.mapNum;
+	}
+	
 	public String toString() {
 		return this.getNom() + " vous avez encore " + this.getVie() + " points de vies.";
 	}
@@ -49,9 +68,8 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers la droite
 	 */
 	public void bougerDroite() {
-		if(this.getCoordX()<15) {
-			this.setCoordX(this.getCoordX()+1);
-		}
+		
+		this.setCoordX(this.getCoordX()+1);
 		setChanged();
 		notifyObservers();
 	}
@@ -59,9 +77,7 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers la gauche
 	 */
 	public void bougerGauche() {
-		if(this.getCoordX()>0) {
-			this.setCoordX(this.getCoordX()-1);
-		}
+		this.setCoordX(this.getCoordX()-1);
 		setChanged();
 		notifyObservers();
 	}
@@ -69,9 +85,7 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers le haut
 	 */
 	public void bougerHaut() {
-		if(this.getCoordY()>0) {
-			this.setCoordY(this.getCoordY()-1);
-		}
+		this.setCoordY(this.getCoordY()-1);
 		setChanged();
 		notifyObservers();
 	}
@@ -79,12 +93,28 @@ public class Hero extends Personnage {
 	 * Fait bouger l'etudiant d'une case vers le bas
 	 */
 	public void bougerBas() {
-		if(this.getCoordY()<15) {
-			this.setCoordY(this.getCoordY()+1);
-		}
+		this.setCoordY(this.getCoordY()+1);
 		setChanged();
 		notifyObservers();
 	}
+	
+	public void setEnCombat (boolean enCombat) {
+		if(enCombat) {
+			this.enCombat = true;
+		}
+		else {
+			this.enCombat = false;
+		}
+	}
+	
+	public boolean getEnCombat() {
+		return this.enCombat;
+	}
+	
+	public LinkedList getList() {
+		return this.listVie;
+	}
+	
 	/*
 	 * attaque un monstre en lui enlevant de la vie;
 	 * @param{Monstre} le monstre a attaquer
