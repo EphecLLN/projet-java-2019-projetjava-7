@@ -38,7 +38,11 @@ public class CombatControllerGUI {
 	}
 	
 	public void consommable() {
-		
+		if(hero.getList().getFirst()!=null) {
+			BoostVie buff=hero.getList().getLast() ;
+			hero.getList().removeLast();
+			buff.donneVie(hero);
+		}
 	}
 	
 	public void ajouterCredit() {

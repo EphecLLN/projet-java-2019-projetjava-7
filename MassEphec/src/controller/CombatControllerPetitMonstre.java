@@ -39,8 +39,9 @@ public class CombatControllerPetitMonstre {
 	
 	public void consommable() {
 		if(hero.getList().getFirst()!=null) {
-			hero.getList().getLast().donneVie(hero);
+			BoostVie buff=hero.getList().getLast() ;
 			hero.getList().removeLast();
+			buff.donneVie(hero);
 		}
 	}
 	

@@ -11,8 +11,8 @@ public class LinkedList {
 		first=null;
 		last=null;
 	}
-	public BoostVie getFirst() {
-		return first.getCons();
+	public Node getFirst() {
+		return first;
 	}
 	public BoostVie getLast() {
 		return last.getCons();
