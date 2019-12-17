@@ -59,6 +59,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		map1 = new Map("map1.txt");
 		map2 = new Map("map2.txt");
 		map3 = new Map("map3.txt");
+	
 		
 		newMap(heroModel.getMapNum());
 		
@@ -148,10 +149,10 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	public void newMap(int mapNum) {
 		switch (mapNum) {
 		case 1 :
-			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 20, "Pc arrive");
 			setImageBoss(boss.getPath());
-			monstres[0] = new PetitMonstre(10, "","Os", 100, 6, 10, 5, 20);
-			monstres[1] = new PetitMonstre(10, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(10, "","Os", 100, 6, 10, 20);
+			monstres[1] = new PetitMonstre(10, "", "Java", 100, 14, 7, 20);
 			redbull = new BoostArme(2 , 5);
 			monsterEnergy = new BoostVie(11 , 1);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -159,9 +160,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			redbullPicked = false;
 			break;
 		case 2 :
-			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
-			monstres[0] = new PetitMonstre(10, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(10, "", "Java", 100, 14, 7, 5, 20);
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 20, "Pc arrive");
+			monstres[0] = new PetitMonstre(10, "","Os", 100, 2, 4, 20);
+			monstres[1] = new PetitMonstre(10, "", "Java", 100, 14, 7, 20);
 			redbull = new BoostArme(5 , 5);
 			monsterEnergy = new BoostVie(14 , 4);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -172,9 +173,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			
 			break;
 		case 3 : 
-			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 12, 14, 10, "Pc arrive");
-			monstres[0] = new PetitMonstre(5, "","Os", 100, 12, 10, 5, 20);
-			monstres[1] = new PetitMonstre(5, "", "Java", 100, 5, 9, 5, 20);
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 12, 14, 20, "Pc arrive");
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 12, 10,  20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 5, 9, 20);
 			redbull = new BoostArme(14 , 9);
 			monsterEnergy = new BoostVie(5 , 13);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -262,61 +263,56 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (heroModel.getCredit() < 60 ) {
-			if (!isFinished() ) {
-				int x, y;
-				x = heroModel.getCoordX();
-				y = heroModel.getCoordY();
-				if(x == boss.getCoordX() && y == boss.getCoordY() && boss.enVie()) {
-					if (!heroModel.getEnCombat()) {
-						this.setVisible(false);
-						controller.enterFight(true);
-						new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
-						repaint();
-						return;
-					}
-				}
-			// Si hero rencontre Monstre
-			for (int i = 0; i < monstres.length; i++) {
-				if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY() && monstres[i].enVie()) {
-					if (!heroModel.getEnCombat()) {
-						System.out.println(monstres[i].getVie());
-						this.setVisible(false);
-						controller.enterFight(true);
-						new CombatPetitMonstre(heroModel, monstres[i], new CombatControllerPetitMonstre(heroModel, monstres[i]), this);
-						repaint();
-						return;
-					}
+		if (!isFinished() ) {
+			int x, y;
+			x = heroModel.getCoordX();
+			y = heroModel.getCoordY();
+			if(x == boss.getCoordX() && y == boss.getCoordY() && boss.enVie()) {
+				if (!heroModel.getEnCombat()) {
+					this.setVisible(false);
+					controller.enterFight(true);
+					new Combat(heroModel, boss, new CombatControllerGUI(heroModel, boss), this);
+					repaint();
+					return;
 				}
 			}
-				// Si hero rencontre rebull
-				if (!redbullPicked) {
-					if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
-						redbull.donneExp(heroModel);
-						redbullPicked = true;
-						repaint();
-						return;
-					}
+		// Si hero rencontre Monstre
+		for (int i = 0; i < monstres.length; i++) {
+			if (x == monstres[i].getCoordX() && y == monstres[i].getCoordY() && monstres[i].enVie()) {
+				if (!heroModel.getEnCombat()) {
+					System.out.println(monstres[i].getVie());
+					this.setVisible(false);
+					controller.enterFight(true);
+					new CombatPetitMonstre(heroModel, monstres[i], new CombatControllerPetitMonstre(heroModel, monstres[i]), this);
+					repaint();
+					return;
 				}
-				if (!monsterEnergyPicked) {
-					if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
-						monsterEnergyPicked = true;
-						heroModel.getList().setNode(monsterEnergy);
-						repaint();
-						return;
-					}
-				}
-				repaint();
-			}
-			if (isFinished() && !heroModel.getEnCombat()) {
-				System.out.println("la");
-				heroModel.mapNum++;
-				newMap(heroModel.getMapNum());
-				repaint();
 			}
 		}
-		else {
-			System.out.println("La game a fini");
+			// Si hero rencontre rebull
+			if (!redbullPicked) {
+				if (x == redbull.getCoordX() && y == redbull.getCoordY()) {
+					redbull.donneExp(heroModel);
+					redbullPicked = true;
+					repaint();
+					return;
+				}
+			}
+			if (!monsterEnergyPicked) {
+				if (x == monsterEnergy.getCoordX() && y == monsterEnergy.getCoordY()) {
+					monsterEnergyPicked = true;
+					heroModel.getList().setNode(monsterEnergy);
+					repaint();
+					return;
+				}
+			}
+			repaint();
+		}
+		if (isFinished() && !heroModel.getEnCombat()) {
+			System.out.println("la");
+			heroModel.mapNum++;
+			newMap(heroModel.getMapNum());
+			repaint();
 		}
 	}
 	

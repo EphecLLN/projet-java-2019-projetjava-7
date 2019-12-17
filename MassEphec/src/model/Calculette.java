@@ -24,8 +24,16 @@ public class Calculette extends Arme {
 		this.setDegat((int)(this.getDegat() + this.getDegat() * 0.1));
 		ennemi.setVie(ennemi.getVie() - totalDegat);
 	}
+	
 	public String toString() {
-		return "Vous avez choisi la classe Compta et vous maniez la calculette! Vos dégats sont de " + this.getDegat()
-	+ "!\nEt votre attaque spéciale permet d'augmenter vos dégats de 10%"; 
+		return "Vous avez choisi la classe Comptabilite et vous maniez la calculette! Vos dégats sont de " + this.getDegat() + "!\n";
+	}
+	
+	public String msgAttSpe() {
+		return "Votre attaque spéciale permet d'augmenter vos dégats de 10% et un multiplicateur de dégat de 125%!"; 
+	}
+	
+	public String attSpeDegat() {
+		return "Votre attaque spéciale a fait " + (int) this.getDegat() * 1.25 + " dégats!";
 	}
 }

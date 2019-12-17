@@ -141,4 +141,9 @@ public abstract class Arme extends Observable{
 	
 	public abstract void attaqueSpeciale(Monstre ennemi);
 	
+	public abstract String msgAttSpe();	
+	
+	public abstract String attSpeDegat();
+	
+	
 }
