@@ -35,7 +35,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	
 	private Map map1, map2;
 	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
-	private JPanel statsPanel, mapPanel, mainPanel, labelPanel, valuePanel, titrePanel, expPanel;
+	private JPanel statsPanel, mapPanel, mainPanel,layoutPanel ,labelPanel, valuePanel, titrePanel, expPanel;
 	private JLabel titre;
 	
 	
@@ -74,13 +74,12 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		this.setTitle("MassEphec");
 		this.setSize(width, height);
 		this.setPreferredSize(new Dimension(width, height));
-		this.setBounds(0,0,width, height);
 		this.setVisible(true);
 		this.addKeyListener(this);
 		
 		mainPanel = new JPanel();
 		mainPanel.setSize(800,800);
-		mainPanel.setBounds(0, 0, width, height);
+		mainPanel.setBounds(0, 0, 800, 800);
 		mainPanel.setVisible(true);
 		this.add(mainPanel);
 		
@@ -97,39 +96,52 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		statsPanel.setSize(300, 300);
 		statsPanel.setPreferredSize(new Dimension(400,600));
 		statsPanel.setBounds(900,0, 300,300);
+		statsPanel.setBackground(Color.cyan);
 		statsPanel.setVisible(true);
+		statsPanel.setLayout(new 	BoxLayout(statsPanel, BoxLayout.PAGE_AXIS));
 		mainPanel.add(statsPanel);
 		
+		/*
 		titrePanel = new JPanel();
-		titre.setSize(400, 20);
-		titre.setPreferredSize(new Dimension(400, 20));
+		titre.setPreferredSize(new Dimension(350, 20));
+		titre.setBackground(Color.BLACK);
 		titre.setVisible(true);
 		statsPanel.add(titrePanel);
+		*/
+		titre = new JLabel();
+		titre.setText("Infos Perso");
+		titre.setSize(400,20);
+		titre.setPreferredSize(new Dimension(400,20));
+		titre.setBounds(0, 0, 100, 20);
+		titre.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		statsPanel.add(titre);
 		
-		
+		layoutPanel = new JPanel();
+		layoutPanel.setSize(400, 500);
+		layoutPanel.setPreferredSize(new Dimension(200, 500));
+		layoutPanel.setLayout(new GridLayout(0, 2));
+		layoutPanel.setVisible(true);
+		statsPanel.add(layoutPanel);
 		
 		labelPanel = new JPanel();
 		labelPanel.setVisible(true);
+		labelPanel.setPreferredSize(new Dimension(200,500));
 		labelPanel.setBounds(10,10,150,500);
 		labelPanel.setBackground(Color.black);
-		statsPanel.add(labelPanel);
+		layoutPanel.add(labelPanel);
 		
 		valuePanel = new JPanel();
 		valuePanel.setVisible(true);
-		valuePanel.setBounds(150, 10, 150, 290);
+		labelPanel.setPreferredSize(new Dimension());
 		valuePanel.setBackground(Color.orange);
-		statsPanel.add(valuePanel);
+		layoutPanel.add(valuePanel);
 		
 		screenSetup();
+		
 	}
 	
 	public void screenSetup() {
 		
-		titre = new JLabel();
-		titre.setText("Perso infos");
-		titre.setHorizontalAlignment(JLabel.CENTER);
-		titre.setVisible(true);
-		statsPanel.add(titre);
 		
 	}
 	
