@@ -36,8 +36,13 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 	private Map map1, map2, map3;
 	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
 	private JPanel statsPanel, mapPanel, mainPanel,layoutPanel ,labelPanel, valuePanel, titrePanel, expPanel;
-	private JLabel titre;
+	private JLabel titre, dynamicStats, imageClasse, heroNom;
 	
+	private ImageIcon imgIt = new ImageIcon(new ImageIcon("res/IT.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+	private ImageIcon imgCompta = new ImageIcon(new ImageIcon("res/Compta.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+	private ImageIcon imgMarket = new ImageIcon(new ImageIcon("res/Market.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
+	
+	//private JTextField dynamicStats;	
 	
 	Hero heroModel;
 	Boss boss;
@@ -129,7 +134,7 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		labelPanel = new JPanel();
 		labelPanel.setVisible(true);
 		labelPanel.setPreferredSize(new Dimension(200,500));
-		labelPanel.setBounds(10,10,150,500);
+		//labelPanel.setBounds(10,10,150,500);
 		labelPanel.setBackground(Color.black);
 		layoutPanel.add(labelPanel);
 		
@@ -139,12 +144,38 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		valuePanel.setBackground(Color.orange);
 		layoutPanel.add(valuePanel);
 		
-		screenSetup();
+		imageClasse = new JLabel();
+		switch (heroModel.classe) {
+		case "IT" :
+			imageClasse.setIcon(imgIt);
+			break;
+		case "Marketing":
+			imageClasse.setIcon(imgMarket);
+			break;
+		case "Comptabilite":
+			imageClasse.setIcon(imgCompta);
+			break;
+		}
+		imageClasse.setPreferredSize(new Dimension (75, 75));
+		imageClasse.setAlignmentY(JLabel.CENTER_ALIGNMENT);
+		labelPanel.add(imageClasse);
 		
+		heroNom = new JLabel(heroModel.getNom());
+		heroNom.setForeground(Color.orange);
+		labelPanel.add(heroNom);
+		
+		dynamicStats = new JLabel();
+		//dynamicStats.setLineWrap(true);
+		//dynamicStats.setEditable(false);
+		dynamicStats.setPreferredSize(new Dimension (200, 500));
+		dynamicStats.setVisible(true);
+		valuePanel.add(dynamicStats);
+		screenSetup();
 	}
 	
 	public void screenSetup() {
-		
+		dynamicStats.setText("<html>Vie: " + heroModel.getVie() + "<br>Niveau de l'arme: " + heroModel.getArme().getNiveau() +  "<br>Experience de l'arme: " + heroModel.getArme().getExperience()+ "<br>Nombre de crédits: " + heroModel.getCredit()  
+							+ "<br>Coordonnées X: " + heroModel.getCoordX() + "<br>CoordonéesY: " + heroModel.getCoordY() + "<br>Numéro de map: " + heroModel.getMapNum() + "</html>");
 		
 	}
 	
@@ -320,6 +351,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		}
 		else {
 			System.out.println("La game a fini");
+		}
+		if (!boss.enVie() || redbullPicked || monsterEnergyPicked || !monstres[0].enVie() || !monstres[1].enVie()) {
+			screenSetup();
 		}
 	}
 	

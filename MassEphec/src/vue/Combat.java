@@ -203,7 +203,7 @@ public class Combat extends CombatVue implements KeyListener {
 			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
 			break;
 		case "atkSpe" :
-			combat.attaqueSpe();
+			combat.attaqueSpe();			
 			String test =((Calculette) heroModel.getArme()).atkSpe();
 			msgAtk.append(test);
 			break;
@@ -224,7 +224,7 @@ public class Combat extends CombatVue implements KeyListener {
 		 try {
 	            // connection et prÃ©paration de la query
 	            Connection con = getConnection();
-	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `x` = '" +heroModel.getCoordX() + "' , `y` = '"+ heroModel.getCoordY() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+(heroModel.getMapNum()+1) + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
+	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+(heroModel.getMapNum()+1) + "' , `credit` = '" + heroModel.getCredit() + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
 	            PreparedStatement ps = con.prepareStatement(query);
              ps.executeUpdate();
 	        } catch (Exception e) {

@@ -20,11 +20,12 @@ public class Login extends JFrame implements ActionListener
 	private JLabel label1, label2,label3;
 	private Font police = new Font ("Times New Roman", Font.PLAIN,20);
 	private Font policeIn = new Font ("Times New Roman", Font.PLAIN,50);
+	private JTextField  text1;
+	public String nom, classe;
+	
 	private ImageIcon imgIt = new ImageIcon(new ImageIcon("res/IT.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
 	private ImageIcon imCompta = new ImageIcon(new ImageIcon("res/Compta.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
 	private ImageIcon imMarket = new ImageIcon(new ImageIcon("res/Market.png").getImage().getScaledInstance(75, 75, Image.SCALE_DEFAULT));
-	private JTextField  text1;
-	public String nom, classe;
 	
 	private CreationHero create = new CreationHero();
   	
@@ -97,6 +98,7 @@ public class Login extends JFrame implements ActionListener
 		commencer = new JButton("Lancer");
 		commencer.setForeground(Color.black);
 		commencer.setFont(police);
+		commencer.setEnabled(false);
 		commencer.addActionListener(new ActionListener(){  
 			public void actionPerformed(ActionEvent e){  
 		             lancement(e);
@@ -125,6 +127,7 @@ public class Login extends JFrame implements ActionListener
 	  }else {
 		  classe="Comptabilite";
 	  }
+	  commencer.setEnabled(true);
   }
   public void lancement(ActionEvent ae)
    {

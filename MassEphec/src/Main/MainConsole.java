@@ -45,27 +45,14 @@ public class MainConsole {
 			else {
 				System.out.println("Mauvaise entrée");
 			}
-		}*/
-		/*Login nn=new Login();
-		nn.setSize(500,400);
-		nn.setVisible(true);
-		String nom=nn.nom;
-		String classe=nn.classe;
-		System.out.println("Bonjour �toi "+ nom +" �tudiant en "+ classe);
-		String classes = classe;
-		*/
+		}
+
+		String classee = classe;
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
-				Login nn=new Login();
-				nn.setSize(500,400);
-				nn.setVisible(true);
+				new MainConsole (nom, classee);
 			}
 		});
-<<<<<<< HEAD:MassEphec/src/Main/Main.java
-		
-		
-=======
->>>>>>> 7be701f4a3fada80e21256e0e6237aa63e2515f8:MassEphec/src/Main/MainConsole.java
 	}
 
 }

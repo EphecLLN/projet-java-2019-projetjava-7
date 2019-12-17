@@ -42,7 +42,7 @@ public class Jdbc {
             useTable.executeUpdate();
           //  PreparedStatement create = con.prepareStatement("CREATE TABLE IF NOT EXISTS "+TABLE1+"(`degats` INT, `path` VARCHAR(255), `nom` VARCHAR(255) NOT NULL, `vie` INT, `coordX` INT, `coordY` INT, `credit` INT, `speech` VARCHAR(255), `experience` INT, `heros` VARCHAR(255) NOT NULL, PRIMARY KEY (`nom`, `heros`) )ENGINE=InnoDB");
            // create.executeUpdate();
-            PreparedStatement create = con.prepareStatement("CREATE TABLE IF NOT EXISTS "+TABLE2+"(`nom` VARCHAR(255) NOT NULL, `path` VARCHAR(255), `vie` INT, `x` INT, `y` INT, `armeLevel` INT, `armeExperience` INT, `mapLevel` INT, `classe` VARCHAR(255), PRIMARY KEY (`nom`) )ENGINE=InnoDB"); 
+            PreparedStatement create = con.prepareStatement("CREATE TABLE IF NOT EXISTS "+TABLE2+"(`nom` VARCHAR(255) NOT NULL, `path` VARCHAR(255), `vie` INT, `armeLevel` INT, `armeExperience` INT, `mapLevel` INT, `classe` VARCHAR(255), `credit` INT, PRIMARY KEY (`nom`) )ENGINE=InnoDB"); 
             create.executeUpdate();
         }catch(Exception e){System.out.println(e);}
         finally{

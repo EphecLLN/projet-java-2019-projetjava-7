@@ -11,12 +11,24 @@ public class LinkedList {
 		first=null;
 		last=null;
 	}
+	/*
+	 * retourne le premier noeud
+	 * @return {Node}
+	 */
 	public Node getFirst() {
 		return first;
 	}
+	/*
+	 * retourne le consommable du dernier noeud
+	 * @return {BoostVie}
+	 */
 	public BoostVie getLast() {
 		return last.getCons();
 	}
+	/*
+	 * rplace un noeud en derniere position
+	 * @param {BoostVie}
+	 */
 	public void setNode(BoostVie c) {
 		Node n= new Node(c);
 		if(size==0) {
@@ -36,6 +48,9 @@ public class LinkedList {
 		}
 		size++;
 	}
+	/*
+	 * retire le dernier noeud
+	 */
 	public void removeLast() {
 		if(last!=null) {
 			if(size==1) {

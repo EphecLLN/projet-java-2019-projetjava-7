@@ -45,8 +45,12 @@ public abstract class Arme extends Observable{
 	 */
 	
 	public void setExperience (int experience) {
-		if (experience >= 0 && experience < experienceMax) {
-			this.experience = experience;
+		if (experience >= 0) {
+			this.experience = this.experience+ experience;
+			if(this.experience>experienceMax) {
+				niveau++;
+				this.experience= this.experience-experienceMax;
+			}
 		}
 	}
 	

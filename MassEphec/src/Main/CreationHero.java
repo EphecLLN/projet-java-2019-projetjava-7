@@ -54,18 +54,17 @@ public class CreationHero {
 		 try {
 	            // connection et préparation de la query
 	            Connection con = getConnection();
-	            String query = "insert into " + TABLE + " values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	            String query = "insert into " + TABLE + " values (?, ?, ?, ?, ?, ?, ?, ?)";
 	            PreparedStatement ps = con.prepareStatement(query);
                 try {
-                    ps.setString(1, hero.getNom());
-                    ps.setString(2, hero.getPath());
-                    ps.setInt(3, hero.getVie());
-                    ps.setInt(4, hero.getCoordX());
-                    ps.setInt(5, hero.getCoordY());
-                    ps.setInt(6, 1);
-                    ps.setInt(7, 0);
-                    ps.setInt(8, 1);
-                    ps.setString(9, classe);
+                	  ps.setString(1, hero.getNom());
+                      ps.setString(2, hero.getPath());
+                      ps.setInt(3, hero.getVie());
+                      ps.setInt(4, 1);
+                      ps.setInt(5, 0);
+                      ps.setInt(6, 1);
+                      ps.setString(7, classe);
+                      ps.setInt(8, 0);
                     ps.executeUpdate();
                 } catch (SQLException ex) {
                     
@@ -99,11 +98,10 @@ public class CreationHero {
 				break;
 			}
 			hero.setVie(result.getInt("vie"));
-			hero.setCoordX(result.getInt("x"));
-			hero.setCoordY(result.getInt("y"));
-			hero.getArme().setNiveau(result.getInt("armeExperience"));
-			hero.getArme().setExperience(result.getInt("armeLevel"));
+			hero.getArme().setNiveau(result.getInt("armeLevel"));
+			hero.getArme().setExperience(result.getInt("armeExperience"));
 			hero.setMapNum(result.getInt("mapLevel"));	
+			hero.setCredit(result.getInt("credit"));
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

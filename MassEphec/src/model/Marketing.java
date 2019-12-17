@@ -13,6 +13,7 @@ public class Marketing extends Hero {
 	
 	public Marketing(String name) {
 		super(name, "res/Marketing.jpg", 100,6,0, new Costard());
+		this.classe = "Marketing";
 	}
 
 }

@@ -5,7 +5,7 @@ public class Hero extends Personnage {
 	
 	private int credit, vieMax; 
 	private Arme arme;
-	private String classe;// IT compta ou market
+	public String classe;// IT compta ou market
 	public int mapNum;
 	private boolean enCombat;
 	private LinkedList listVie= new LinkedList();
@@ -115,11 +115,4 @@ public class Hero extends Personnage {
 		return this.listVie;
 	}
 	
-	/*
-	 * attaque un monstre en lui enlevant de la vie;
-	 * @param{Monstre} le monstre a attaquer
-	 */
-	/*public void attaque(Monstre m) {
-		this.arme.attaqueDeBase(m);
-	}*/
 }
