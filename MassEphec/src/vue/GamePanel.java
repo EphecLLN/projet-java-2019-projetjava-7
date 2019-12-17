@@ -101,9 +101,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		mainPanel.add(statsPanel);
 		
 		titrePanel = new JPanel();
-		titre.setSize(400, 20);
-		titre.setPreferredSize(new Dimension(400, 20));
-		titre.setVisible(true);
+		titrePanel.setSize(400, 20);
+		titrePanel.setPreferredSize(new Dimension(400, 20));
+		titrePanel.setVisible(true);
 		statsPanel.add(titrePanel);
 		
 		

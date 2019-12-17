@@ -28,8 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.*;
-import model.Boss;
-import model.Hero;
+import model.*;
 import Main.*;
 
 public class Combat extends CombatVue implements KeyListener {
@@ -103,6 +102,7 @@ public class Combat extends CombatVue implements KeyListener {
 		msgAtk.setLineWrap(true);
 		msgAtk.setEditable(false);
 		//msgAtk.setFont(policeNormale);
+		msgAtk.append(bossModel.getNom() + " : \""+bossModel.getSpeech() + "\"\n");
 		
 		scroller = new JScrollPane(msgAtk);
 		scroller.setPreferredSize(new Dimension(200,320));
@@ -204,7 +204,8 @@ public class Combat extends CombatVue implements KeyListener {
 			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
-			msgAtk.append("Vous venez de faire votre attaque spéciale sur " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
+			String test =((Calculette) heroModel.getArme()).atkSpe();
+			msgAtk.append(test);
 			break;
 		case "Consommable":
 			combat.consommable();
@@ -272,6 +273,15 @@ public class Combat extends CombatVue implements KeyListener {
 			oldFrame.setVisible(true);
 		}else {
 			window.setVisible(false);
+			 try {
+		            // connection et prÃ©paration de la query
+		            Connection con = getConnection();
+		            String query = "DELETE FROM `massephec`.`heroes` WHERE `nom` = '"+ heroModel.getNom() + "';";
+		            PreparedStatement ps = con.prepareStatement(query);
+		            ps.executeUpdate();
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		        }
 		}
 	}
 
