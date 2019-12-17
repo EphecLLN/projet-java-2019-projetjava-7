@@ -207,8 +207,6 @@ public class Combat extends CombatVue implements KeyListener {
 		case "atkSpe" :
 			combat.attaqueSpe();
 			msgAtk.append(heroModel.getArme().attSpeDegat());
-			String test =((Calculette) heroModel.getArme()).atkSpe();
-			msgAtk.append(test);
 			break;
 		case "Consommable":
 			combat.consommable();
@@ -229,7 +227,7 @@ public class Combat extends CombatVue implements KeyListener {
 	            Connection con = getConnection();
 	            String query = "UPDATE " + DATABASE + "." + TABLE + " SET `vie` = '"+ heroModel.getVie() + "' , `armeLevel` = '"+heroModel.getArme().getNiveau() + "' , `armeExperience` = '" + heroModel.getArme().getExperience() +"', `mapLevel` = '"+(heroModel.getMapNum()+1) + "' , `credit` = '" + heroModel.getCredit() + "' WHERE `nom` = '"+ heroModel.getNom() + "'; ";
 	            PreparedStatement ps = con.prepareStatement(query);
-             ps.executeUpdate();
+	            ps.executeUpdate();
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -294,23 +292,22 @@ public class Combat extends CombatVue implements KeyListener {
 				System.out.println("la");
 				oldFrame.setVisible(true);
 				
-			}
-			else {
+			}else {
 				window.setVisible(false);
+				 try {
+			            // connection et préparation de la query
+			            Connection con = getConnection();
+			            String query = "DELETE FROM `massephec`.`heroes` WHERE `nom` = '"+ heroModel.getNom() + "';";
+			            PreparedStatement ps = con.prepareStatement(query);
+			            ps.executeUpdate();
+			        } catch (Exception ex) {
+			            ex.printStackTrace();
+			        }
 			}
 		}
 		else {
 			setVictory();
 		}
-			 try {
-		            // connection et préparation de la query
-		            Connection con = getConnection();
-		            String query = "DELETE FROM `massephec`.`heroes` WHERE `nom` = '"+ heroModel.getNom() + "';";
-		            PreparedStatement ps = con.prepareStatement(query);
-		            ps.executeUpdate();
-		        } catch (Exception ex) {
-		            ex.printStackTrace();
-		        }
 	}
 
 	@Override
