@@ -28,4 +28,9 @@ public class Calculette extends Arme {
 		return "Vous avez choisi la classe Compta et vous maniez la calculette! Vos dégats sont de " + this.getDegat()
 	+ "!\nEt votre attaque spéciale permet d'augmenter vos dégats de 10%"; 
 	}
+	public String atkSpe() {
+		return "Vous vous acharnez sur les calculs et mettez 125% de degats à votre ennemi.\n"
+				+ "Pour un total de " + this.getDegat() * 1.25
+				+ "\nTout en augmentant vos degats de 10% ";
+	}
 }
