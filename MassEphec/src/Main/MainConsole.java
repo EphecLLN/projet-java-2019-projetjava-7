@@ -45,7 +45,7 @@ public class MainConsole {
 			else {
 				System.out.println("Mauvaise entrée");
 			}
-		}*/
+		}
 		/*Login nn=new Login();
 		nn.setSize(500,400);
 		nn.setVisible(true);
@@ -61,11 +61,6 @@ public class MainConsole {
 				nn.setVisible(true);
 			}
 		});
-<<<<<<< HEAD:MassEphec/src/Main/Main.java
-		
-		
-=======
->>>>>>> 7be701f4a3fada80e21256e0e6237aa63e2515f8:MassEphec/src/Main/MainConsole.java
 	}
 
 }

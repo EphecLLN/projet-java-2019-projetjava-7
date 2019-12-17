@@ -52,7 +52,7 @@ public class Combat extends CombatVue implements KeyListener {
 	private Font policeBoutton = new Font ("Times New Roman", Font.PLAIN,30);
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
-	private ImageIcon heros = new ImageIcon(heroModel.getPath());
+	private ImageIcon heros = new ImageIcon(new ImageIcon(heroModel.getPath()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
 	private ImageIcon boss = new ImageIcon(bossModel.getPath());
 	private ImageIcon victoryImage = new ImageIcon("res/VictoireScreen.png");
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
@@ -206,12 +206,9 @@ public class Combat extends CombatVue implements KeyListener {
 			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
-<<<<<<< HEAD
 			msgAtk.append(heroModel.getArme().attSpeDegat());
-=======
 			String test =((Calculette) heroModel.getArme()).atkSpe();
 			msgAtk.append(test);
->>>>>>> d5b61d731005b4b564b444d98d857298f77f50f5
 			break;
 		case "Consommable":
 			combat.consommable();
@@ -291,7 +288,6 @@ public class Combat extends CombatVue implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-<<<<<<< HEAD
 		if (heroModel.getCredit() < 60) {
 			if (gagne) {
 				window.setVisible(false);
@@ -305,15 +301,7 @@ public class Combat extends CombatVue implements KeyListener {
 		}
 		else {
 			setVictory();
-=======
-		if (gagne) {
-			window.setVisible(false);
-			System.out.println("la");
-		
-			// new GamePanel(1280,720, heroModel, new MouvementController(heroModel));
-			oldFrame.setVisible(true);
-		}else {
-			window.setVisible(false);
+		}
 			 try {
 		            // connection et préparation de la query
 		            Connection con = getConnection();
@@ -323,8 +311,6 @@ public class Combat extends CombatVue implements KeyListener {
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
->>>>>>> d5b61d731005b4b564b444d98d857298f77f50f5
-		}
 	}
 
 	@Override
