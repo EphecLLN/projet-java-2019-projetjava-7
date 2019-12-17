@@ -23,7 +23,7 @@ public class Main {
 		c.addView(cv);
 	}
 	public static void main(String args[]) {
-		/*Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez moi votre nom");
 		String nom=sc.nextLine();
 		String classe="";
@@ -45,8 +45,8 @@ public class Main {
 			public void run() {
 				new Main(nom,classes);
 			}
-		});¨
-		*/
+		});
+		
 		
 	}
 
