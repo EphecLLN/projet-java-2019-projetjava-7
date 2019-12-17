@@ -48,6 +48,7 @@ public class MainConsole {
 		}
 
 		String classee = classe;
+
 		javax.swing.SwingUtilities.invokeLater(new Runnable(){
 			public void run() {
 				new MainConsole (nom, classee);

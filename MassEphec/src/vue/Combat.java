@@ -17,6 +17,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.Observable;
 
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -37,11 +38,11 @@ public class Combat extends CombatVue implements KeyListener {
 
 	private CombatControllerGUI combat;
 	
-	private JFrame window ;
+	private JFrame window;
 	private Container con;
-	private JPanel mainPanel, buttonPanel, textPanel, bossHealth, heroHealth, lastMsgPanel;
+	private JPanel mainPanel, buttonPanel, textPanel, bossHealth, heroHealth, lastMsgPanel, victoryFrame;
 	private JButton atkButton, atkSpeButton, consomButton;
-	private JLabel imageHero, imageBoss, attaque, msgEnd;
+	private JLabel imageHero, imageBoss, attaque, msgEnd, titreVictoire, imageVictoire;
 	private JScrollPane scroller;
 	private JProgressBar heroHealthBar, bossHealthBar;
 	private JTextArea msgAtk;
@@ -51,8 +52,9 @@ public class Combat extends CombatVue implements KeyListener {
 	private Font policeBoutton = new Font ("Times New Roman", Font.PLAIN,30);
 	private Font policeNormale = new Font ("Times New Roman", Font.PLAIN,20);
 	
-	private ImageIcon heros = new ImageIcon(heroModel.getPath());
+	private ImageIcon heros = new ImageIcon(new ImageIcon(heroModel.getPath()).getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
 	private ImageIcon boss = new ImageIcon(bossModel.getPath());
+	private ImageIcon victoryImage = new ImageIcon("res/VictoireScreen.png");
 	private Icon imgIcon = new ImageIcon("res/attaque.gif");
 	
 	private JFrame oldFrame;
@@ -190,7 +192,7 @@ public class Combat extends CombatVue implements KeyListener {
 		imageBoss = new JLabel (boss);
 		imageBoss.setBounds(700, 100, 300, 300);
 		mainPanel.add(imageBoss);
-		
+		msgAtk.append(heroModel.getArme().msgAttSpe());
 		
 	}
 	
@@ -203,7 +205,8 @@ public class Combat extends CombatVue implements KeyListener {
 			msgAtk.append("Vous venez d'attaquer " + bossModel.getNom() + " pour un total de " + heroModel.getArme().getDegat() +" dégats!\n");
 			break;
 		case "atkSpe" :
-			combat.attaqueSpe();			
+			combat.attaqueSpe();
+			msgAtk.append(heroModel.getArme().attSpeDegat());
 			String test =((Calculette) heroModel.getArme()).atkSpe();
 			msgAtk.append(test);
 			break;
@@ -252,6 +255,26 @@ public class Combat extends CombatVue implements KeyListener {
 		bossHealthBar.setValue(bossModel.getVie());
 	
 	}
+	
+	public void setVictory() {
+		victoryFrame = new JPanel();
+		victoryFrame.setSize(new Dimension(1280, 720));
+		victoryFrame .setLayout((new BoxLayout(victoryFrame, BoxLayout.PAGE_AXIS)));
+		titreVictoire = new JLabel();
+		titreVictoire.setSize(1280, 120);
+		titreVictoire.setText("Vous avez eu les 60 crédits ! A l'année prochaine !");
+		titreVictoire.setPreferredSize(new Dimension(1280, 120));
+		titreVictoire.setVisible(true);
+		victoryFrame.add(titreVictoire);
+		imageVictoire = new JLabel (victoryImage);
+		imageVictoire.setSize(1280, 600);
+		imageVictoire.setVisible(true);
+		imageVictoire.setPreferredSize(new Dimension(1280, 600));
+		victoryFrame.add(imageVictoire);
+		victoryFrame.setVisible(true);
+		window.setContentPane(victoryFrame);
+		window.setTitle("Victoire");
+	}
 
 	@Override
 	public void enableWarning() {
@@ -265,14 +288,20 @@ public class Combat extends CombatVue implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if (gagne) {
-			window.setVisible(false);
-			System.out.println("la");
-		
-			// new GamePanel(1280,720, heroModel, new MouvementController(heroModel));
-			oldFrame.setVisible(true);
-		}else {
-			window.setVisible(false);
+		if (heroModel.getCredit() < 60) {
+			if (gagne) {
+				window.setVisible(false);
+				System.out.println("la");
+				oldFrame.setVisible(true);
+				
+			}
+			else {
+				window.setVisible(false);
+			}
+		}
+		else {
+			setVictory();
+		}
 			 try {
 		            // connection et prÃ©paration de la query
 		            Connection con = getConnection();
@@ -282,7 +311,6 @@ public class Combat extends CombatVue implements KeyListener {
 		        } catch (Exception ex) {
 		            ex.printStackTrace();
 		        }
-		}
 	}
 
 	@Override

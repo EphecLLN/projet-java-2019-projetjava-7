@@ -48,17 +48,19 @@ public class MouvementController {
 		 }
 	 }
 	 
+	 public void checkMap() {
+		 if (view.isFinished()) {
+			 hero.setMapNum(hero.getMapNum() + 1);
+		 }
+	 }
 	 public void ajouterExpArme(int exp) {
 		 hero.getArme().ajouterExp(exp);
-	 }
-	 
-	 public void changeMap() {
-		 hero.setMapNum(hero.getMapNum() + 1);
 	 }
 	 
 	 public void enterFight(boolean enCombat) {
 		 hero.setEnCombat(enCombat);
 	 }
+	 
 	 public void addView(GamePanel panel) {
 		 this.view = panel;
 	 }

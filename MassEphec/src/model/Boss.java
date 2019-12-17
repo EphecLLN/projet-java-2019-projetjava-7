@@ -22,8 +22,5 @@ public class Boss extends Monstre {
 	public void donneCreditJoueur(Hero joueur) {
 		joueur.setCredit(joueur.getCredit()+this.credit);
 	}
-	public void mauvaiseNote(Hero joueur) {
-		joueur.setVie(joueur.getVie() - getDegats());
-	}
 	
 }
