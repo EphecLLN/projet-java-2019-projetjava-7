@@ -31,7 +31,7 @@ public class MainConsole {
 		c.addView(cv);
 	}
 	public static void main(String args[]) {
-		/*Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		System.out.println("Donnez moi votre nom");
 		String nom=sc.nextLine();
 		String classe="";
@@ -61,6 +61,11 @@ public class MainConsole {
 				nn.setVisible(true);
 			}
 		});
+<<<<<<< HEAD:MassEphec/src/Main/Main.java
+		
+		
+=======
+>>>>>>> 7be701f4a3fada80e21256e0e6237aa63e2515f8:MassEphec/src/Main/MainConsole.java
 	}
 
 }

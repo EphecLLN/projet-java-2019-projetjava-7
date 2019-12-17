@@ -29,8 +29,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import controller.*;
-import model.Boss;
-import model.Hero;
+import model.*;
 import Main.*;
 
 public class Combat extends CombatVue implements KeyListener {
@@ -105,6 +104,7 @@ public class Combat extends CombatVue implements KeyListener {
 		msgAtk.setLineWrap(true);
 		msgAtk.setEditable(false);
 		//msgAtk.setFont(policeNormale);
+		msgAtk.append(bossModel.getNom() + " : \""+bossModel.getSpeech() + "\"\n");
 		
 		scroller = new JScrollPane(msgAtk);
 		scroller.setPreferredSize(new Dimension(200,320));
@@ -206,7 +206,12 @@ public class Combat extends CombatVue implements KeyListener {
 			break;
 		case "atkSpe" :
 			combat.attaqueSpe();
+<<<<<<< HEAD
 			msgAtk.append(heroModel.getArme().attSpeDegat());
+=======
+			String test =((Calculette) heroModel.getArme()).atkSpe();
+			msgAtk.append(test);
+>>>>>>> d5b61d731005b4b564b444d98d857298f77f50f5
 			break;
 		case "Consommable":
 			combat.consommable();
@@ -286,6 +291,7 @@ public class Combat extends CombatVue implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
+<<<<<<< HEAD
 		if (heroModel.getCredit() < 60) {
 			if (gagne) {
 				window.setVisible(false);
@@ -299,6 +305,25 @@ public class Combat extends CombatVue implements KeyListener {
 		}
 		else {
 			setVictory();
+=======
+		if (gagne) {
+			window.setVisible(false);
+			System.out.println("la");
+		
+			// new GamePanel(1280,720, heroModel, new MouvementController(heroModel));
+			oldFrame.setVisible(true);
+		}else {
+			window.setVisible(false);
+			 try {
+		            // connection et préparation de la query
+		            Connection con = getConnection();
+		            String query = "DELETE FROM `massephec`.`heroes` WHERE `nom` = '"+ heroModel.getNom() + "';";
+		            PreparedStatement ps = con.prepareStatement(query);
+		            ps.executeUpdate();
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		        }
+>>>>>>> d5b61d731005b4b564b444d98d857298f77f50f5
 		}
 	}
 

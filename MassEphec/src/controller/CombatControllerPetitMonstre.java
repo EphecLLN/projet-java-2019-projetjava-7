@@ -52,7 +52,7 @@ public class CombatControllerPetitMonstre {
 		if (!monstre.enVie()) {
 			ajouterExp();
 			hero.setEnCombat(false);
-			view.bossMort();
+			view.monstreMort();
 		}if(!hero.enVie()) {
 			view.heroMort();
 		}

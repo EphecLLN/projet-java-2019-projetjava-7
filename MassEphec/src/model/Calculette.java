@@ -36,4 +36,9 @@ public class Calculette extends Arme {
 	public String attSpeDegat() {
 		return "Votre attaque spéciale a fait " + (int) this.getDegat() * 1.25 + " dégats!";
 	}
+	public String atkSpe() {
+		return "Vous vous acharnez sur les calculs et mettez 125% de degats à votre ennemi.\n"
+				+ "Pour un total de " + this.getDegat() * 1.25
+				+ "\nTout en augmentant vos degats de 10% ";
+	}
 }

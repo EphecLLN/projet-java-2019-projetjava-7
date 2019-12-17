@@ -33,4 +33,7 @@ public class Pc extends Arme {
 	public String attSpeDegat() {
 		return "Votre attaque spéciale a fait " + (int) this.getDegat() * 1.5 + " dégats!\n";
 	}
+	public String atkSpe() {
+		return "";
+	}
 }

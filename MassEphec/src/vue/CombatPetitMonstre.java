@@ -212,7 +212,7 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 		}
 	}
 	
-	public void bossMort() {
+	public void monstreMort() {
 		unclickable();
 		msgEnd.setText("<html>Vous avez battu " + monstre.getNom() + ", bien joué! <br> Il vous a donné " + monstre.getExperience() + " experience durements gagnés.. <br>Appuyez sur une touche pour continuer.</h");
 		lastMsgPanel.setVisible(true);
@@ -263,7 +263,17 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 			oldFrame.setVisible(true);
 		}else {
 			window.setVisible(false);
-		}
+			 try {
+		            // connection et prÃ©paration de la query
+		            Connection con = getConnection();
+		            String query = "DELETE FROM `massephec`.`heroes` WHERE `nom` = '"+ heroModel.getNom() + "';";
+		            PreparedStatement ps = con.prepareStatement(query);
+	             ps.executeUpdate();
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+			
+		        }
+			 }
 	}
 
 	@Override
@@ -276,6 +286,26 @@ public class CombatPetitMonstre extends CombatVuePetitMonstre implements KeyList
 	public void keyReleased(KeyEvent e) {
 		System.out.println("released");
 	}
+	static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    static final String DATABASE = "massephec";
+    static final String URL = "jdbc:mysql://localhost/"+DATABASE+"?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC";
+    static final String USERNAME = "root";
+    static final String PASSWORD = "";
+    static final String TABLE = "heroes";
+
+	
+    public static Connection getConnection() throws Exception {
+        try {
+            Class.forName(DRIVER);
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/massephec?zeroDateTimeBehavior=CONVERT_TO_NULL&serverTimezone=UTC", USERNAME, PASSWORD);
+            System.out.println("ConnectÃ© Ã  la base de donnÃ©es");
+            return conn;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
 	
 }
 
