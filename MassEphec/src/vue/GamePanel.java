@@ -33,7 +33,7 @@ import javax.imageio.ImageIO;
 
 public class GamePanel extends JFrame implements Observer, KeyListener{
 	
-	private Map map1, map2;
+	private Map map1, map2, map3;
 	private Image grass, mur, heroImage, bossImage, monstreImage, redbullImage, monsterEnergyImage;
 	private JPanel statsPanel, mapPanel, mainPanel,layoutPanel ,labelPanel, valuePanel, titrePanel, expPanel;
 	private JLabel titre;
@@ -55,10 +55,10 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		this.heroModel = hero;
 		this.controller = controller;
 		
-		//heroModel.setMapNum(2);
 		hero.addObserver(this);
 		map1 = new Map("map1.txt");
 		map2 = new Map("map2.txt");
+		map3 = new Map("map3.txt");
 		
 		newMap(heroModel.getMapNum());
 		
@@ -150,8 +150,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 		case 1 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 6, 14, 10, "Pc arrive");
 			setImageBoss(boss.getPath());
-			monstres[0] = new PetitMonstre(20, "","Os", 100, 6, 10, 5, 20);
-			monstres[1] = new PetitMonstre(20, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(10, "","Os", 100, 6, 10, 5, 20);
+			monstres[1] = new PetitMonstre(10, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(2 , 5);
 			monsterEnergy = new BoostVie(11 , 1);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -160,8 +160,8 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			break;
 		case 2 :
 			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
-			monstres[0] = new PetitMonstre(5, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
+			monstres[0] = new PetitMonstre(10, "","Os", 100, 2, 4, 5, 20);
+			monstres[1] = new PetitMonstre(10, "", "Java", 100, 14, 7, 5, 20);
 			redbull = new BoostArme(5 , 5);
 			monsterEnergy = new BoostVie(14 , 4);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
@@ -172,11 +172,11 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			
 			break;
 		case 3 : 
-			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 15, 15, 10, "Pc arrive");
-			monstres[0] = new PetitMonstre(5, "","Os", 100, 2, 4, 5, 20);
-			monstres[1] = new PetitMonstre(5, "", "Java", 100, 14, 7, 5, 20);
-			redbull = new BoostArme(5 , 5);
-			monsterEnergy = new BoostVie(14 , 4);
+			boss = new Boss(20, "res/BossMap.jpg","Delvigne", 100, 12, 14, 10, "Pc arrive");
+			monstres[0] = new PetitMonstre(5, "","Os", 100, 12, 10, 5, 20);
+			monstres[1] = new PetitMonstre(5, "", "Java", 100, 5, 9, 5, 20);
+			redbull = new BoostArme(14 , 9);
+			monsterEnergy = new BoostVie(5 , 13);
 			bossImage = Toolkit.getDefaultToolkit().createImage(boss.getPath());
 			monsterEnergyPicked = false;
 			redbullPicked = false;
@@ -202,6 +202,9 @@ public class GamePanel extends JFrame implements Observer, KeyListener{
 			case 2 : 
 				drawMap(g , map2);
 				break;
+			case 3 : 
+				drawMap(g, map3);
+				
 			}
 			
 			drawCharacters(g, heroModel);
